@@ -19,7 +19,12 @@ namespace QuizApp.UI
 
         private void categoriaList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+        }
 
+        private void botonIniciarQuiz_Click(object sender, EventArgs e)
+        {
+            new UI.SesionQuiz().Show();
         }
     }
 }

@@ -31,7 +31,7 @@
             ComboBox categoriaList;
             ComboBox dificultadList;
             cantidadPreguntas = new NumericUpDown();
-            botonIniciarTrivia = new Button();
+            botonIniciarQuiz = new Button();
             categoriaList = new ComboBox();
             dificultadList = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)cantidadPreguntas).BeginInit();
@@ -67,21 +67,22 @@
             cantidadPreguntas.TabIndex = 2;
             cantidadPreguntas.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
-            // botonIniciarTrivia
+            // botonIniciarQuiz
             // 
-            botonIniciarTrivia.Location = new Point(332, 288);
-            botonIniciarTrivia.Name = "botonIniciarTrivia";
-            botonIniciarTrivia.Size = new Size(75, 23);
-            botonIniciarTrivia.TabIndex = 3;
-            botonIniciarTrivia.Text = "Comenzar";
-            botonIniciarTrivia.UseVisualStyleBackColor = true;
+            botonIniciarQuiz.Location = new Point(332, 288);
+            botonIniciarQuiz.Name = "botonIniciarQuiz";
+            botonIniciarQuiz.Size = new Size(75, 23);
+            botonIniciarQuiz.TabIndex = 3;
+            botonIniciarQuiz.Text = "Comenzar";
+            botonIniciarQuiz.UseVisualStyleBackColor = true;
+            botonIniciarQuiz.Click += botonIniciarQuiz_Click;
             // 
             // MenuQuiz
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(botonIniciarTrivia);
+            Controls.Add(botonIniciarQuiz);
             Controls.Add(cantidadPreguntas);
             Controls.Add(dificultadList);
             Controls.Add(categoriaList);
@@ -94,6 +95,6 @@
         #endregion
 
         private NumericUpDown cantidadPreguntas;
-        private Button botonIniciarTrivia;
+        private Button botonIniciarQuiz;
     }
 }
