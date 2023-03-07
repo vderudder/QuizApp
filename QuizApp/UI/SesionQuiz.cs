@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace QuizApp.UI
 {
@@ -16,16 +17,46 @@ namespace QuizApp.UI
         {
             InitializeComponent();
 
-            labelPregunta.Text = "Cuanto es 2+2?";
-            groupBox1.Controls.Add(radioButton1);
-            groupBox1.Controls.Add(radioButton2);
-            groupBox1.Controls.Add(radioButton3);
+            var preguntaFacade = new Facade.PreguntaFacade();
+            var preguntas = preguntaFacade.getPreguntas();
+            for (int i = 0; i < preguntas.Length; i++)
+            {
+                var label = new Label();
+                label.Location = new Point(300, i * 100);
+                label.Text = preguntas[i];
+                this.Controls.Add(label);
 
-            Controls.Add(groupBox1);
+                var groupBox = new System.Windows.Forms.GroupBox();
+                groupBox.Location = new Point(300, i * 120);
+                groupBox.AutoSize = true;
+                groupBox.Text = "";
 
-            radioButton1.Text = "Soy la correcta";
-            radioButton2.Text = "Soy la incorrecta 1";
-            radioButton3.Text = "Soy la incorrecta 2";
+                var radioButton1 = new System.Windows.Forms.RadioButton();
+                radioButton1.Text = "Soy la correcta";
+                radioButton1.Top = 50;
+                radioButton1.Left = 50;
+
+                var radioButton2 = new System.Windows.Forms.RadioButton();
+                radioButton2.Text = "Soy la incorrecta 1";
+                radioButton2.Top = 100;
+                radioButton2.Left = 50;
+
+                var radioButton3 = new System.Windows.Forms.RadioButton();
+                radioButton3.Text = "Soy la incorrecta 2";
+                radioButton3.Top = 150;
+                radioButton3.Left = 50;
+
+
+                groupBox.Controls.Add(radioButton1);
+                groupBox.Controls.Add(radioButton2);
+                groupBox.Controls.Add(radioButton3);
+
+                Controls.Add(groupBox);
+
+
+            }
+
+
         }
     }
 }
