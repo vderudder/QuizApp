@@ -11,5 +11,10 @@ namespace QuizApp
         {
             new UI.MenuQuiz().Show();
         }
+
+        private void botonAdministrar_Click(object sender, EventArgs e)
+        {
+            new UI.AdministrarQuiz().Show();
+        }
     }
 }

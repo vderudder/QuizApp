@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace QuizApp.UI
@@ -21,15 +22,15 @@ namespace QuizApp.UI
             var preguntas = preguntaFacade.getPreguntas();
             for (int i = 0; i < preguntas.Length; i++)
             {
-                var label = new Label();
-                label.Location = new Point(300, i * 100);
-                label.Text = preguntas[i];
-                this.Controls.Add(label);
+                var pregunta = new Label();
+                pregunta.Location = new Point(300, i * 100);
+                pregunta.Text = preguntas[i];
+                Controls.Add(pregunta);
 
-                var groupBox = new System.Windows.Forms.GroupBox();
-                groupBox.Location = new Point(300, i * 120);
-                groupBox.AutoSize = true;
-                groupBox.Text = "";
+                var grupoRespuestas = new System.Windows.Forms.GroupBox();
+                grupoRespuestas.Location = new Point(300, i * 120);
+                grupoRespuestas.AutoSize = true;
+                grupoRespuestas.Text = "";
 
                 var radioButton1 = new System.Windows.Forms.RadioButton();
                 radioButton1.Text = "Soy la correcta";
@@ -47,15 +48,27 @@ namespace QuizApp.UI
                 radioButton3.Left = 50;
 
 
-                groupBox.Controls.Add(radioButton1);
-                groupBox.Controls.Add(radioButton2);
-                groupBox.Controls.Add(radioButton3);
+                grupoRespuestas.Controls.Add(radioButton1);
+                grupoRespuestas.Controls.Add(radioButton2);
+                grupoRespuestas.Controls.Add(radioButton3);
 
-                Controls.Add(groupBox);
+                Controls.Add(grupoRespuestas);
+
 
 
             }
 
+            var botonFinalizar = new System.Windows.Forms.Button();
+            botonFinalizar.Text = "Finalizar";
+            Controls.Add(botonFinalizar);
+            botonFinalizar.Click += botonFinalizar_Click;
+            
+
+        }
+
+        private void botonFinalizar_Click(object? sender, EventArgs e)
+        {
+            new UI.PuntajeQuiz().Show();
 
         }
     }

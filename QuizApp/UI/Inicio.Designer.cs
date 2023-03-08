@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             botonJugar = new Button();
-            button2 = new Button();
+            botonAdministrar = new Button();
             SuspendLayout();
             // 
             // botonJugar
@@ -42,23 +42,24 @@
             botonJugar.UseVisualStyleBackColor = true;
             botonJugar.Click += botonJugar_Click;
             // 
-            // button2
+            // botonAdministrar
             // 
-            button2.Location = new Point(301, 168);
-            button2.Name = "button2";
-            button2.Size = new Size(112, 23);
-            button2.TabIndex = 1;
-            button2.Text = "ADMINISTRAR";
-            button2.UseVisualStyleBackColor = true;
+            botonAdministrar.Location = new Point(301, 168);
+            botonAdministrar.Name = "botonAdministrar";
+            botonAdministrar.Size = new Size(112, 23);
+            botonAdministrar.TabIndex = 1;
+            botonAdministrar.Text = "ADMINISTRAR";
+            botonAdministrar.UseVisualStyleBackColor = true;
+            botonAdministrar.Click += botonAdministrar_Click;
             // 
-            // Form1
+            // Inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button2);
+            Controls.Add(botonAdministrar);
             Controls.Add(botonJugar);
-            Name = "Form1";
+            Name = "Inicio";
             Text = "Form1";
             ResumeLayout(false);
         }
@@ -66,6 +67,6 @@
         #endregion
 
         private Button botonJugar;
-        private Button button2;
+        private Button botonAdministrar;
     }
 }
