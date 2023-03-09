@@ -12,14 +12,17 @@ namespace QuizApp.Dominio
     internal class TipoPregunta
     {
         // Atributos
+        private string iId;
         private string iNombre;
 
         //Propiedades
+        public string Id => iId;
         public string Nombre => iNombre;
 
         // Constructor
-        public TipoPregunta(string pNombre)
+        public TipoPregunta(string pId, string pNombre)
         {
+            iId = pId;
             iNombre = pNombre;
         }
     }

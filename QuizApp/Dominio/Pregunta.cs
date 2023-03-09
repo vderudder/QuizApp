@@ -16,19 +16,19 @@ namespace QuizApp.Dominio
         private Categoria iCategoria;
         private Dificultad iDificultad;
         private TipoPregunta iTipo;
-        private Respuesta iCorrecta;
-        private IList<Respuesta> iIncorrecta;
+        private string iCorrecta;
+        private IList<string> iIncorrecta;
 
         //Propiedades
-        public string Name => iNombre;
+        public string Nombre => iNombre;
         public Categoria Categoria => iCategoria;
         public Dificultad Dificultad => iDificultad;
         public TipoPregunta Tipo => iTipo;
-        public Respuesta Correcta => iCorrecta;
-        public IList<Respuesta> Incorrecta => iIncorrecta;
+        public string Correcta => iCorrecta;
+        public IList<string> Incorrecta => iIncorrecta;
 
         // Constructor
-        public Pregunta(string pNombre, Categoria pCategoria, Dificultad pDificultad, TipoPregunta pTipoPregunta, Respuesta pCorrecta, List<Respuesta> pIncorrecta)
+        public Pregunta(string pNombre, Categoria pCategoria, Dificultad pDificultad, TipoPregunta pTipoPregunta, string pCorrecta, List<string> pIncorrecta)
         {
             iNombre = pNombre;
             iCategoria = pCategoria;
@@ -40,7 +40,7 @@ namespace QuizApp.Dominio
 
         // Metodos
 
-        public bool EsRespuestaCorrecta(Respuesta pRespuesta)
+        public bool EsRespuestaCorrecta(string pRespuesta)
         {
             return iCorrecta == pRespuesta;
         }

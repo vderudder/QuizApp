@@ -13,12 +13,12 @@ namespace QuizApp.Dominio
     {
         // Atributos
         private string iId;
-        private Respuesta iRespuesta;
+        private string iRespuesta;
         private Pregunta iPregunta;
 
         // Propiedades
         public string Id => iId;
-        public Respuesta Respuesta
+        public string Respuesta
         {
             get { return iRespuesta; }
             set { iRespuesta = value; }
@@ -40,7 +40,7 @@ namespace QuizApp.Dominio
             return iPregunta.EsRespuestaCorrecta(iRespuesta);
         }
 
-        public void ResponderPregunta(Respuesta pRespuesta)
+        public void ResponderPregunta(string pRespuesta)
         {
             iRespuesta = pRespuesta;
         }
