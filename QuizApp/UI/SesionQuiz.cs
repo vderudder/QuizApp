@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+﻿using System.Data;
+using System.Diagnostics;
 
 namespace QuizApp.UI
 {
     public partial class SesionQuiz : Form
     {
+        private Stopwatch iStopwatch = new Stopwatch();
         public SesionQuiz()
         {
             InitializeComponent();
 
+            // Comienza el cronometro
+            iStopwatch.Start();
+
             var preguntaFacade = new Facade.PreguntaFacade();
             var preguntas = preguntaFacade.getPreguntas();
-            for (int i = 0; i < preguntas.Length; i++)
+            for (int i = 0; i < preguntas.Count; i++)
             {
+                var preg = preguntas[i];
+
                 var pregunta = new Label();
                 pregunta.Location = new Point(300, i * 100);
-                pregunta.Text = preguntas[i];
+                pregunta.Text = preguntas[i].Nombre;
                 Controls.Add(pregunta);
 
                 var grupoRespuestas = new System.Windows.Forms.GroupBox();
@@ -32,25 +29,18 @@ namespace QuizApp.UI
                 grupoRespuestas.AutoSize = true;
                 grupoRespuestas.Text = "";
 
-                var radioButton1 = new System.Windows.Forms.RadioButton();
-                radioButton1.Text = "Soy la correcta";
-                radioButton1.Top = 50;
-                radioButton1.Left = 50;
+                Random random = new Random();
+                var respuestasDesordenadas = preg.Incorrecta.Append(preg.Correcta).OrderBy(x => random.Next()).ToArray();
 
-                var radioButton2 = new System.Windows.Forms.RadioButton();
-                radioButton2.Text = "Soy la incorrecta 1";
-                radioButton2.Top = 100;
-                radioButton2.Left = 50;
+                for (int j = 0; j < respuestasDesordenadas.Length; j++)
+                {
+                    var radioButton = new System.Windows.Forms.RadioButton();
+                    radioButton.Text = respuestasDesordenadas[j];
+                    radioButton.Top = 50 * (j + 1);
+                    radioButton.Left = 50;
 
-                var radioButton3 = new System.Windows.Forms.RadioButton();
-                radioButton3.Text = "Soy la incorrecta 2";
-                radioButton3.Top = 150;
-                radioButton3.Left = 50;
-
-
-                grupoRespuestas.Controls.Add(radioButton1);
-                grupoRespuestas.Controls.Add(radioButton2);
-                grupoRespuestas.Controls.Add(radioButton3);
+                    grupoRespuestas.Controls.Add(radioButton);
+                }
 
                 Controls.Add(grupoRespuestas);
 
@@ -62,13 +52,28 @@ namespace QuizApp.UI
             botonFinalizar.Text = "Finalizar";
             Controls.Add(botonFinalizar);
             botonFinalizar.Click += botonFinalizar_Click;
-            
+
 
         }
 
         private void botonFinalizar_Click(object? sender, EventArgs e)
         {
             new UI.PuntajeQuiz().Show();
+            // Detiene el cronometro
+            iStopwatch.Stop();
+
+            Debug.WriteLine("tiempo: " + iStopwatch.Elapsed.TotalSeconds);
+
+
+        }
+        /// <summary>
+        /// Muestra el cronometro de tiempo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sesionTimer_Tick(object sender, EventArgs e)
+        {
+            this.labelTiempo.Text = iStopwatch.Elapsed.ToString("mm\\:ss\\.ff");
 
         }
     }
