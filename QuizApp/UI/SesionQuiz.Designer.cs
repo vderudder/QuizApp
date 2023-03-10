@@ -52,6 +52,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             ClientSize = new Size(800, 450);
             Controls.Add(labelTiempo);
             Name = "SesionQuiz";

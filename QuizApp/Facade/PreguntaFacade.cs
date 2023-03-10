@@ -10,6 +10,10 @@ namespace QuizApp.Facade
 {
     internal class PreguntaFacade
     {
+        /// <summary>
+        /// Obtiene la lista de preguntas seleccionada
+        /// </summary>
+        /// <returns></returns>
         public List<Pregunta> getPreguntas()
         {
             var storage = new PreguntaStorage();
@@ -25,6 +29,34 @@ namespace QuizApp.Facade
                                                 ).ToList();
 
             return preguntas;
+        }
+
+        /// <summary>
+        /// Obtiene la lista de categorias existente
+        /// </summary>
+        /// <returns></returns>
+        public List<Categoria> getCategorias()
+        {
+            var storage = new PreguntaStorage();
+            var categoriaDTOs = storage.getCategorias();
+
+            var categorias = categoriaDTOs.Select(dto => new Categoria(dto.iId, dto.iCategoria)).ToList();
+
+            return categorias;
+        }
+
+        /// <summary>
+        /// Obtiene la lista de dificultades existente
+        /// </summary>
+        /// <returns></returns>
+        public List<Dificultad> getDificultades()
+        {
+            var storage = new PreguntaStorage();
+            var dificultadDTOs = storage.getDificultades();
+
+            var dificultades = dificultadDTOs.Select(dto => new Dificultad(dto.iId, dto.iDificultad)).ToList();
+
+            return dificultades;
         }
 
         private Categoria getCategoriaById(string pId)

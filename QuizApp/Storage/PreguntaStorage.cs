@@ -10,7 +10,7 @@ namespace QuizApp.Storage
     internal class PreguntaStorage
     {
         /// <summary>
-        /// Obtiene el DTO de las preguntas con el filtro correspondiente
+        /// Obtiene los DTO de las preguntas con el filtro correspondiente
         /// </summary>
         /// <param name="pFiltro"></param>
         /// <returns></returns>
@@ -28,6 +28,28 @@ namespace QuizApp.Storage
                 );
 
             return new PreguntaDTO[] { pregunta1 };
+        }
+
+        /// <summary>
+        /// Obtiene los DTO de las categorias 
+        /// </summary>
+        /// <returns></returns>
+        public CategoriaDTO[] getCategorias()
+        {
+            var categoria1 = new CategoriaDTO("1", "Matematicas");
+
+            return new CategoriaDTO[] { categoria1 };   
+        }
+
+        /// <summary>
+        /// Obtiene los DTO de las dificultades 
+        /// </summary>
+        /// <returns></returns>
+        public DificultadDTO[] getDificultades()
+        {
+            var dificultad1 = new DificultadDTO("1", "Facil");
+
+            return new DificultadDTO[] { dificultad1 };
         }
     }
 
@@ -64,6 +86,32 @@ namespace QuizApp.Storage
             this.iTipoPreguntaId = pTipoPreguntaId;
             this.iCorrecta = pCorrecta;
             this.iIncorrectaList = pIncorrectaList;
+        }
+    }
+
+    internal class CategoriaDTO
+    {
+        // Atributos
+        public string iId;
+        public string iCategoria;
+
+        public CategoriaDTO(string pId, string pCategoria)
+        {
+            this.iId = pId;
+            this.iCategoria = pCategoria;
+        }
+    }
+
+    internal class DificultadDTO
+    {
+        // Atributos
+        public string iId;
+        public string iDificultad;
+
+        public DificultadDTO(string pId, string pDificultad)
+        {
+            this.iId = pId;
+            this.iDificultad = pDificultad;
         }
     }
 }

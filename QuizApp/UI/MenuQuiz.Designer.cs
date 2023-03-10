@@ -28,39 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ComboBox categoriaList;
-            ComboBox dificultadList;
+            dificultadList = new ComboBox();
+            categoriaList = new ComboBox();
             cantidadPreguntas = new NumericUpDown();
             botonIniciarQuiz = new Button();
-            categoriaList = new ComboBox();
-            dificultadList = new ComboBox();
+            usuarioInput = new TextBox();
             ((System.ComponentModel.ISupportInitialize)cantidadPreguntas).BeginInit();
             SuspendLayout();
-            // 
-            // categoriaList
-            // 
-            categoriaList.FormattingEnabled = true;
-            categoriaList.Items.AddRange(new object[] { "Animales", "Deporte" });
-            categoriaList.Location = new Point(292, 109);
-            categoriaList.Name = "categoriaList";
-            categoriaList.Size = new Size(159, 23);
-            categoriaList.TabIndex = 0;
-            categoriaList.Text = "Seleccione una categoria";
-            categoriaList.SelectedIndexChanged += categoriaList_SelectedIndexChanged;
             // 
             // dificultadList
             // 
             dificultadList.FormattingEnabled = true;
-            dificultadList.Items.AddRange(new object[] { "Facil", "Intermedio", "Dificil" });
             dificultadList.Location = new Point(292, 161);
             dificultadList.Name = "dificultadList";
             dificultadList.Size = new Size(159, 23);
             dificultadList.TabIndex = 1;
             dificultadList.Text = "Seleccione una dificultad";
             // 
+            // categoriaList
+            // 
+            categoriaList.FormattingEnabled = true;
+            categoriaList.Location = new Point(292, 112);
+            categoriaList.Name = "categoriaList";
+            categoriaList.Size = new Size(159, 23);
+            categoriaList.TabIndex = 0;
+            categoriaList.Text = "Seleccione una categoría";
+            // 
             // cantidadPreguntas
             // 
             cantidadPreguntas.Location = new Point(292, 218);
+            cantidadPreguntas.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
             cantidadPreguntas.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             cantidadPreguntas.Name = "cantidadPreguntas";
             cantidadPreguntas.Size = new Size(159, 23);
@@ -77,11 +74,20 @@
             botonIniciarQuiz.UseVisualStyleBackColor = true;
             botonIniciarQuiz.Click += botonIniciarQuiz_Click;
             // 
+            // usuarioInput
+            // 
+            usuarioInput.Location = new Point(292, 64);
+            usuarioInput.Name = "usuarioInput";
+            usuarioInput.PlaceholderText = "Escribe tu usuario";
+            usuarioInput.Size = new Size(159, 23);
+            usuarioInput.TabIndex = 4;
+            // 
             // MenuQuiz
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(usuarioInput);
             Controls.Add(botonIniciarQuiz);
             Controls.Add(cantidadPreguntas);
             Controls.Add(dificultadList);
@@ -90,11 +96,15 @@
             Text = "MenuQuiz";
             ((System.ComponentModel.ISupportInitialize)cantidadPreguntas).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private NumericUpDown cantidadPreguntas;
         private Button botonIniciarQuiz;
+        private TextBox usuarioInput;
+        private ComboBox categoriaList;
+        private ComboBox dificultadList;
     }
 }
