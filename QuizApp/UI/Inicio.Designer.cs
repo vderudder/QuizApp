@@ -30,6 +30,7 @@
         {
             botonJugar = new Button();
             botonAdministrar = new Button();
+            botonRanking = new Button();
             SuspendLayout();
             // 
             // botonJugar
@@ -44,7 +45,7 @@
             // 
             // botonAdministrar
             // 
-            botonAdministrar.Location = new Point(301, 168);
+            botonAdministrar.Location = new Point(304, 331);
             botonAdministrar.Name = "botonAdministrar";
             botonAdministrar.Size = new Size(112, 23);
             botonAdministrar.TabIndex = 1;
@@ -52,12 +53,23 @@
             botonAdministrar.UseVisualStyleBackColor = true;
             botonAdministrar.Click += botonAdministrar_Click;
             // 
+            // botonRanking
+            // 
+            botonRanking.Location = new Point(319, 161);
+            botonRanking.Name = "botonRanking";
+            botonRanking.Size = new Size(75, 23);
+            botonRanking.TabIndex = 2;
+            botonRanking.Text = "RANKING";
+            botonRanking.UseVisualStyleBackColor = true;
+            botonRanking.Click += botonRanking_Click;
+            // 
             // Inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             ClientSize = new Size(800, 450);
+            Controls.Add(botonRanking);
             Controls.Add(botonAdministrar);
             Controls.Add(botonJugar);
             Name = "Inicio";
@@ -69,5 +81,6 @@
 
         private Button botonJugar;
         private Button botonAdministrar;
+        private Button botonRanking;
     }
 }

@@ -16,5 +16,9 @@ namespace QuizApp
         {
             new UI.AdministrarQuiz().Show();
         }
+
+        private void botonRanking_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
