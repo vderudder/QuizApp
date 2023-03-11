@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic.ApplicationServices;
+using QuizApp.Dominio.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,77 +11,52 @@ namespace QuizApp.Dominio
     internal class Sesion
     {
         // Atributos
-        private string iId;
+        private string? iId;
         private DateTime iFecha;
         private int iTiempo;
         private int iPuntaje;
         private Usuario iUsuario;
-        private IList<RespuestaUsuario> iRespuestasUsuario;
+        private List<PreguntaYRespuesta> iEleccionesUsuario;
 
         // Propiedades
-        public string Id => iId;
-        public DateTime Fecha
-        {
-            get { return iFecha; }
-            set { iFecha = value; }
-        }
-
-        public int Tiempo
-        {
-            get { return iTiempo; }
-            set { iTiempo = value; }
-        }
-
+        public string? Id => iId;
+        public DateTime Fecha => iFecha;
         public int Puntaje
         {
             get { return iPuntaje; }
             set { iPuntaje = value; }
 
         }
+        public int Tiempo => iTiempo;
         public Usuario Usuario => iUsuario;
-        public IList<RespuestaUsuario> RespuestasUsuario => iRespuestasUsuario;
 
         // Constructor
-        public Sesion(string pId, List<RespuestaUsuario> pRespuestasUsuario, Usuario pUsuario)
+        public Sesion(int pTiempo, List<PreguntaYRespuesta> pEleccionesUsuario, Usuario pUsuario)
         {
-            iId = pId;
-
-            iRespuestasUsuario = pRespuestasUsuario;
-
+            iTiempo = pTiempo;
+            iEleccionesUsuario = pEleccionesUsuario;
             iUsuario = pUsuario;
         }
 
         // Metodos
 
         /// <summary>
-        /// Comienza la sesion de juego
+        /// Termina la sesion de juego, calculando el puntaje
         /// </summary>
-        public void Comenzar()
+        public void finalizar()
         {
-            iFecha = DateTime.Now;
-        }
-
-        /// <summary>
-        /// Termina la sesion de juego
-        /// </summary>
-        public void Finalizar()
-        {
-            int numCorrectas = 0;
-            int numPreguntas = iRespuestasUsuario.Count();
-            //Se hizo asi para mantener el modelo relacional en una forma normal donde no haya dependencia transitiva de sus atributos
-            int factorDificultad = iRespuestasUsuario[0].Pregunta.Dificultad.Factor;
-            DateTime fechaFin = DateTime.Now;
-            double tiempoTranscurrido = (fechaFin - iFecha).TotalSeconds;
-            iTiempo = ((int)Math.Round(tiempoTranscurrido, 2));
-            int tiempo = iTiempo / numPreguntas;
+            int cantCorrectas = 0;
+            int cantPreguntas = iEleccionesUsuario.Count();
+            int factorDificultad = iEleccionesUsuario[0].iPregunta.Dificultad.Factor;
+            int tiempo = iTiempo / cantPreguntas;
             int factorTiempo = 0;
 
             // Se fija cuales son las respuestas correctas
-            foreach (var res in iRespuestasUsuario)
+            foreach (var eleccion in iEleccionesUsuario)
             {
-                if (res.EsCorrecta())
+                if (eleccion.iPregunta.EsRespuestaCorrecta(eleccion.iRespuesta))
                 {
-                    numCorrectas++;
+                    cantCorrectas++;
                 }
             }
 
@@ -99,9 +75,7 @@ namespace QuizApp.Dominio
             }
 
             // Puntaje = cant de respuestas correctas / cant de preguntas * factor dificultad * factor tiempo
-            iPuntaje = numCorrectas / numPreguntas * factorDificultad * factorTiempo;
-
-
+            iPuntaje = cantCorrectas / cantPreguntas * factorDificultad * factorTiempo;
         }
     }
 }
