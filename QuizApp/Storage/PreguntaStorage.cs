@@ -27,7 +27,29 @@ namespace QuizApp.Storage
                 new List<string> {"5", "2", "20"}
                 );
 
-            return new PreguntaDTO[] { pregunta1 };
+            var pregunta2 = new PreguntaDTO(
+                "Cuanto es 2*5?",
+                "1",
+                "1",
+                "1",
+                // respuesta correcta
+                "10",
+                //respuestas incorrectas
+                new List<string> { "5", "2", "15" }
+                );
+
+            var pregunta3 = new PreguntaDTO(
+                "Cuanto es 10+10?",
+                "1",
+                "1",
+                "1",
+                // respuesta correcta
+                "20",
+                //respuestas incorrectas
+                new List<string> { "10", "100", "200" }
+                );
+
+            return new PreguntaDTO[] { pregunta1, pregunta2, pregunta3};
         }
 
         /// <summary>

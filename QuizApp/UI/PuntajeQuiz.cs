@@ -15,11 +15,18 @@ namespace QuizApp.UI
         public PuntajeQuiz()
         {
             InitializeComponent();
+
+            var sesion = SesionQuiz.iSesionActual;
+
+            puntajeLabel.Text = "Puntaje: " + sesion.iPuntaje.ToString();
+            tiempoLabel.Text = "Tiempo: " + sesion.iTiempo.ToString();
+            fechaLabel.Text = "Fecha: " + sesion.iFecha.ToString();
         }
 
         private void volverMenuButton_Click(object sender, EventArgs e)
         {
             this.Close();
+            SesionQuiz.ActiveForm.Close();
         }
     }
 }

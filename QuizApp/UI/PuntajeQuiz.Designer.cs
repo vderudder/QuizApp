@@ -32,6 +32,7 @@
             puntajeLabel = new Label();
             tiempoLabel = new Label();
             volverMenuButton = new Button();
+            fechaLabel = new Label();
             SuspendLayout();
             // 
             // resultadosLabel
@@ -46,7 +47,7 @@
             // puntajeLabel
             // 
             puntajeLabel.AutoSize = true;
-            puntajeLabel.Location = new Point(275, 104);
+            puntajeLabel.Location = new Point(277, 134);
             puntajeLabel.Name = "puntajeLabel";
             puntajeLabel.Size = new Size(53, 15);
             puntajeLabel.TabIndex = 1;
@@ -55,7 +56,7 @@
             // tiempoLabel
             // 
             tiempoLabel.AutoSize = true;
-            tiempoLabel.Location = new Point(275, 143);
+            tiempoLabel.Location = new Point(277, 173);
             tiempoLabel.Name = "tiempoLabel";
             tiempoLabel.Size = new Size(106, 15);
             tiempoLabel.TabIndex = 2;
@@ -71,11 +72,21 @@
             volverMenuButton.UseVisualStyleBackColor = true;
             volverMenuButton.Click += volverMenuButton_Click;
             // 
+            // fechaLabel
+            // 
+            fechaLabel.AutoSize = true;
+            fechaLabel.Location = new Point(277, 95);
+            fechaLabel.Name = "fechaLabel";
+            fechaLabel.Size = new Size(44, 15);
+            fechaLabel.TabIndex = 4;
+            fechaLabel.Text = "Fecha: ";
+            // 
             // PuntajeQuiz
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(fechaLabel);
             Controls.Add(volverMenuButton);
             Controls.Add(tiempoLabel);
             Controls.Add(puntajeLabel);
@@ -92,5 +103,6 @@
         private Label puntajeLabel;
         private Label tiempoLabel;
         private Button volverMenuButton;
+        private Label fechaLabel;
     }
 }
