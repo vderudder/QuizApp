@@ -32,7 +32,7 @@
             categoriaList = new ComboBox();
             cantidadPreguntas = new NumericUpDown();
             botonIniciarQuiz = new Button();
-            usuarioInput = new TextBox();
+            usuarioList = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)cantidadPreguntas).BeginInit();
             SuspendLayout();
             // 
@@ -74,20 +74,23 @@
             botonIniciarQuiz.UseVisualStyleBackColor = true;
             botonIniciarQuiz.Click += botonIniciarQuiz_Click;
             // 
-            // usuarioInput
+            // usuarioList
             // 
-            usuarioInput.Location = new Point(292, 64);
-            usuarioInput.Name = "usuarioInput";
-            usuarioInput.PlaceholderText = "Escribe tu usuario";
-            usuarioInput.Size = new Size(159, 23);
-            usuarioInput.TabIndex = 4;
+            usuarioList.FormattingEnabled = true;
+            usuarioList.Items.AddRange(new object[] { "Crear nuevo usuario" });
+            usuarioList.Location = new Point(292, 57);
+            usuarioList.Name = "usuarioList";
+            usuarioList.Size = new Size(159, 23);
+            usuarioList.TabIndex = 4;
+            usuarioList.Text = "Seleccione su usuario";
+            usuarioList.SelectionChangeCommitted += usuarioList_SelectionChangeCommitted;
             // 
             // MenuQuiz
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(usuarioInput);
+            Controls.Add(usuarioList);
             Controls.Add(botonIniciarQuiz);
             Controls.Add(cantidadPreguntas);
             Controls.Add(dificultadList);
@@ -96,15 +99,14 @@
             Text = "MenuQuiz";
             ((System.ComponentModel.ISupportInitialize)cantidadPreguntas).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private NumericUpDown cantidadPreguntas;
         private Button botonIniciarQuiz;
-        private TextBox usuarioInput;
         private ComboBox categoriaList;
         private ComboBox dificultadList;
+        private ComboBox usuarioList;
     }
 }

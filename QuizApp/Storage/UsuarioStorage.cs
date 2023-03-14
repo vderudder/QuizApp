@@ -36,6 +36,17 @@ namespace QuizApp.Storage
             iUsuariosEnMemoria.Add(usuario);
             return usuario;
         }
+
+        public List<UsuarioDTO> getUsuarios()
+        {
+            return iUsuariosEnMemoria;
+        }
+
+        public UsuarioDTO? getUsuarioById(string pId)
+        {
+            return iUsuariosEnMemoria.Find((u) => u.iId == pId);
+
+        }
     }
 
     internal class UsuarioDTO
