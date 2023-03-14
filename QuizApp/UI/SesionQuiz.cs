@@ -14,7 +14,7 @@ namespace QuizApp.UI
 
         private Stopwatch iStopwatch = new Stopwatch();
 
-        private string iNombreUsuario = string.Empty;
+        private string iNombreUsuario;
         private Dictionary<Pregunta, GroupBox> iGrupoPregRes;
 
         public static SesionDTO iSesionActual;
@@ -28,7 +28,7 @@ namespace QuizApp.UI
             int pregBoxMaxHeight = 220;
 
             var preguntas = iPreguntaFacade.getPreguntas();
-            var iGrupoPregRes = new Dictionary<Pregunta, GroupBox>();
+            iGrupoPregRes = new Dictionary<Pregunta, GroupBox>();
 
             for (int i = 0; i < preguntas.Count; i++)
             {
@@ -71,9 +71,10 @@ namespace QuizApp.UI
 
         private void botonFinalizar_Click(object? sender, EventArgs e)
         {
+            iNombreUsuario = MenuQuiz.iNombreUsuario;
             List<PreguntaYRespuesta> pregResElegidas = new List<PreguntaYRespuesta>();
 
-            for (int i = 0; i < iGrupoPregRes.Count; i++)
+            for (int i = 0; i < this.iGrupoPregRes.Count; i++)
             {
                 var checkedRadio = iGrupoPregRes.ElementAt(i).Value.Controls.OfType<RadioButton>().FirstOrDefault((r) => r.Checked);
 
@@ -92,7 +93,7 @@ namespace QuizApp.UI
             // Detiene el cronometro
             iStopwatch.Stop();
             // Obtiene el tiempo insumido en la sesion
-            var tiempo = (int)iStopwatch.Elapsed.TotalSeconds;
+            var tiempo = iStopwatch.Elapsed.TotalSeconds;
 
             // usar facade para calcular el puntaje
             iSesionActual = iSesionFacade.finalizarSesion(iNombreUsuario, tiempo, pregResElegidas);

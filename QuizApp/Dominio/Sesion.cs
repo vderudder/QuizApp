@@ -13,25 +13,25 @@ namespace QuizApp.Dominio
         // Atributos
         private string? iId;
         private DateTime iFecha;
-        private int iTiempo;
-        private int iPuntaje;
+        private double iTiempo;
+        private double iPuntaje;
         private Usuario iUsuario;
         private List<PreguntaYRespuesta> iEleccionesUsuario;
 
         // Propiedades
         public string? Id => iId;
         public DateTime Fecha => iFecha;
-        public int Puntaje
+        public double Puntaje
         {
             get { return iPuntaje; }
             set { iPuntaje = value; }
 
         }
-        public int Tiempo => iTiempo;
+        public double Tiempo => iTiempo;
         public Usuario Usuario => iUsuario;
 
         // Constructor
-        public Sesion(int pTiempo, List<PreguntaYRespuesta> pEleccionesUsuario, Usuario pUsuario)
+        public Sesion(double pTiempo, List<PreguntaYRespuesta> pEleccionesUsuario, Usuario pUsuario)
         {
             iTiempo = pTiempo;
             iEleccionesUsuario = pEleccionesUsuario;
@@ -48,7 +48,7 @@ namespace QuizApp.Dominio
             int cantCorrectas = 0;
             int cantPreguntas = iEleccionesUsuario.Count();
             int factorDificultad = iEleccionesUsuario[0].iPregunta.Dificultad.Factor;
-            int tiempo = iTiempo / cantPreguntas;
+            double tiempo = iTiempo / cantPreguntas;
             int factorTiempo = 0;
 
             // Se fija cuales son las respuestas correctas
@@ -75,7 +75,7 @@ namespace QuizApp.Dominio
             }
 
             // Puntaje = cant de respuestas correctas / cant de preguntas * factor dificultad * factor tiempo
-            iPuntaje = cantCorrectas / cantPreguntas * factorDificultad * factorTiempo;
+            iPuntaje = ((double)cantCorrectas / cantPreguntas) * factorDificultad * factorTiempo;
         }
     }
 }
