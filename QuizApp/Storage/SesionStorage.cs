@@ -23,23 +23,31 @@ namespace QuizApp.Storage
         /// <param name="pTiempo">El tiempo insumido de la sesion</param>
         /// <param name="pFecha">La fecha que se realizo la sesion</param>
         /// <returns></returns>
-        public SesionDTO createSesion(string pUsuarioId, int pPuntaje, int pTiempo, DateTime pFecha)
+        public SesionDTO createSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
         {
             var sesion = new SesionDTO(Guid.NewGuid().ToString(), pUsuarioId, pPuntaje, pTiempo, pFecha);
             iSesionesEnMemoria.Add(sesion);
             return sesion;
         }
+
+        public List<SesionDTO> getSesionesByPuntaje()
+        {
+            var list = iSesionesEnMemoria.OrderByDescending(ses => ses.iPuntaje).ToList();
+
+            return list.Take(20).ToList();
+        }
+             
     }
 
     public class SesionDTO
     {
         public string iId;
         public string iUsuarioId;
-        public int iPuntaje;
-        public int iTiempo;
+        public double iPuntaje;
+        public double iTiempo;
         public DateTime iFecha;
 
-        public SesionDTO(string iId, string iUsuarioId, int iPuntaje, int iTiempo, DateTime iFecha)
+        public SesionDTO(string iId, string iUsuarioId, double iPuntaje, double iTiempo, DateTime iFecha)
         {
             this.iId = iId;
             this.iUsuarioId = iUsuarioId;

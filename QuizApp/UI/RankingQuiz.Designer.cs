@@ -29,26 +29,132 @@
         private void InitializeComponent()
         {
             tituloLabel = new Label();
+            rankingTable = new TableLayoutPanel();
+            fechaHeader = new Label();
+            tiempoHeader = new Label();
+            puntajeHeader = new Label();
+            usuarioHeader = new Label();
+            puestoHeader = new Label();
+            rankingTable.SuspendLayout();
             SuspendLayout();
             // 
             // tituloLabel
             // 
             tituloLabel.AutoSize = true;
-            tituloLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tituloLabel.Location = new Point(306, 27);
+            tituloLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            tituloLabel.Location = new Point(394, 37);
             tituloLabel.Name = "tituloLabel";
-            tituloLabel.Size = new Size(132, 21);
+            tituloLabel.Size = new Size(139, 21);
             tituloLabel.TabIndex = 0;
             tituloLabel.Text = "RANKING TOP 20";
+            // 
+            // rankingTable
+            // 
+            rankingTable.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
+            rankingTable.ColumnCount = 5;
+            rankingTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.7824688F));
+            rankingTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 36.82182F));
+            rankingTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.9954147F));
+            rankingTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.40029F));
+            rankingTable.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 110F));
+            rankingTable.Controls.Add(fechaHeader, 4, 0);
+            rankingTable.Controls.Add(tiempoHeader, 3, 0);
+            rankingTable.Controls.Add(puntajeHeader, 2, 0);
+            rankingTable.Controls.Add(usuarioHeader, 1, 0);
+            rankingTable.Controls.Add(puestoHeader, 0, 0);
+            rankingTable.Location = new Point(142, 94);
+            rankingTable.Name = "rankingTable";
+            rankingTable.RowCount = 21;
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            rankingTable.Size = new Size(619, 444);
+            rankingTable.TabIndex = 1;
+            // 
+            // fechaHeader
+            // 
+            fechaHeader.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            fechaHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            fechaHeader.Location = new Point(509, 1);
+            fechaHeader.Name = "fechaHeader";
+            fechaHeader.Size = new Size(106, 20);
+            fechaHeader.TabIndex = 3;
+            fechaHeader.Text = "Fecha";
+            fechaHeader.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tiempoHeader
+            // 
+            tiempoHeader.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tiempoHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            tiempoHeader.Location = new Point(386, 1);
+            tiempoHeader.Name = "tiempoHeader";
+            tiempoHeader.Size = new Size(116, 20);
+            tiempoHeader.TabIndex = 2;
+            tiempoHeader.Text = "Tiempo";
+            tiempoHeader.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // puntajeHeader
+            // 
+            puntajeHeader.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            puntajeHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            puntajeHeader.Location = new Point(260, 1);
+            puntajeHeader.Name = "puntajeHeader";
+            puntajeHeader.Size = new Size(119, 20);
+            puntajeHeader.TabIndex = 1;
+            puntajeHeader.Text = "Puntaje";
+            puntajeHeader.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // usuarioHeader
+            // 
+            usuarioHeader.Anchor = AnchorStyles.None;
+            usuarioHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            usuarioHeader.Location = new Point(74, 1);
+            usuarioHeader.Name = "usuarioHeader";
+            usuarioHeader.Size = new Size(179, 20);
+            usuarioHeader.TabIndex = 0;
+            usuarioHeader.Text = "Usuario";
+            usuarioHeader.TextAlign = ContentAlignment.MiddleCenter;
+            usuarioHeader.UseMnemonic = false;
+            // 
+            // puestoHeader
+            // 
+            puestoHeader.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            puestoHeader.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            puestoHeader.Location = new Point(4, 1);
+            puestoHeader.Name = "puestoHeader";
+            puestoHeader.Size = new Size(63, 20);
+            puestoHeader.TabIndex = 4;
+            puestoHeader.Text = "Puesto";
+            puestoHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // RankingQuiz
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(969, 605);
+            Controls.Add(rankingTable);
             Controls.Add(tituloLabel);
             Name = "RankingQuiz";
             Text = "RankingQuiz";
+            rankingTable.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -56,5 +162,11 @@
         #endregion
 
         private Label tituloLabel;
+        private TableLayoutPanel rankingTable;
+        private Label usuarioHeader;
+        private Label puntajeHeader;
+        private Label tiempoHeader;
+        private Label fechaHeader;
+        private Label puestoHeader;
     }
 }
