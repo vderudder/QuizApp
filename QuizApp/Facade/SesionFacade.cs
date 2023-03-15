@@ -32,6 +32,10 @@ namespace QuizApp.Facade
             return iSesionStorage.createSesion(usuario.Id, sesion.Puntaje, sesion.Tiempo, DateTime.Now);
         }
 
+        /// <summary>
+        /// Obtiene la lista de sesiones que entran en el ranking top 20
+        /// </summary>
+        /// <returns></returns>
         public List<SesionDTO> getRanking()
         {
             var list = iSesionStorage.getSesionesByPuntaje();

@@ -37,11 +37,20 @@ namespace QuizApp.Storage
             return usuario;
         }
 
+        /// <summary>
+        /// Obtiene todos los usuarios
+        /// </summary>
+        /// <returns></returns>
         public List<UsuarioDTO> getUsuarios()
         {
             return iUsuariosEnMemoria;
         }
 
+        /// <summary>
+        /// Obtiene el usuario por id
+        /// </summary>
+        /// <param name="pId"></param>
+        /// <returns></returns>
         public UsuarioDTO? getUsuarioById(string pId)
         {
             return iUsuariosEnMemoria.Find((u) => u.iId == pId);
