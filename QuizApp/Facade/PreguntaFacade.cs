@@ -14,10 +14,12 @@ namespace QuizApp.Facade
         /// Obtiene la lista de preguntas seleccionada
         /// </summary>
         /// <returns></returns>
-        public List<Pregunta> getPreguntas()
+        public List<Pregunta> getPreguntas(string pDificultadId, string pCategoriaId, int pCantidadPreg)
         {
+            var filtro = new PreguntaFiltro(pDificultadId, pCategoriaId, pCantidadPreg);
+
             var storage = new PreguntaStorage();
-            var preguntaDTOs = storage.getPreguntasByFiltro(new PreguntaFiltro("1", "1", 3));
+            var preguntaDTOs = storage.getPreguntasByFiltro(filtro);
 
             var preguntas = preguntaDTOs.Select(dto => new Pregunta(
                                                 dto.iPregunta,

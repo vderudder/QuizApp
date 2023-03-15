@@ -1,57 +1,88 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using Button = System.Windows.Forms.Button;
-using ComboBox = System.Windows.Forms.ComboBox;
-using TextBox = System.Windows.Forms.TextBox;
+﻿using QuizApp.Dominio;
+using QuizApp.Facade;
+
 
 namespace QuizApp.UI
 {
     public partial class MenuQuiz : Form
     {
-        public static string iNombreUsuario;
+        private PreguntaFacade iPreguntaFacade = new PreguntaFacade();
+        private UsuarioFacade iUsuarioFacade = new UsuarioFacade();
+
+        private string iNombreUsuario;
+
+        private List<Pregunta> iPreguntas;
+        private List<Categoria> iCategorias;
+        private List<Dificultad> iDificultades;
+        private List<Usuario> iUsuarios;
+
         public MenuQuiz()
         {
             InitializeComponent();
 
-            var preguntaFacade = new Facade.PreguntaFacade();
-            var usuarioFacade = new Facade.UsuarioFacade();
             // Obtiene las categorias y dificultades
-            var categorias = preguntaFacade.getCategorias();
-            var dificultades = preguntaFacade.getDificultades();
+            iCategorias = iPreguntaFacade.getCategorias();
+            iDificultades = iPreguntaFacade.getDificultades();
             // Obtiene los usuarios
-            var usuarios = usuarioFacade.getUsuarios();
+            iUsuarios = iUsuarioFacade.getUsuarios();
 
             // Agrega a la lista del comboBox los elementos de la lista de categorias
-            for (int i = 0; i < categorias.Count; i++)
+            for (int i = 0; i < iCategorias.Count; i++)
             {
-                categoriaList.Items.Add(categorias[i].Nombre);
+                categoriaList.Items.Add(iCategorias[i].Nombre);
             }
 
             // Agrega a la lista del comboBox los elementos de la lista de dificultades
-            for (int i = 0; i < dificultades.Count; i++)
+            for (int i = 0; i < iDificultades.Count; i++)
             {
-                dificultadList.Items.Add(dificultades[i].Nombre);
+                dificultadList.Items.Add(iDificultades[i].Nombre);
             }
 
             // Agrega a la lista del comboBox los elementos de la lista de usuarios
-            for (int i = 0; i < usuarios.Count; i++)
+            for (int i = 0; i < iUsuarios.Count; i++)
             {
-                usuarioList.Items.Add(usuarios[i].NombreUsuario);
+                usuarioList.Items.Add(iUsuarios[i].NombreUsuario);
             }
 
         }
 
         private void botonIniciarQuiz_Click(object sender, EventArgs e)
         {
-            new UI.SesionQuiz().Show();
+            // Fija si se seleccionaron todas las opciones
+            if (dificultadList.SelectedIndex >= 0 && categoriaList.SelectedIndex >= 0 && usuarioList.SelectedIndex > 0 && cantidadPreguntas.Value > 0)
+            {
+                // Tomar los datos de los inputs
+                iNombreUsuario = usuarioList.Text;
+
+                string categoriaId = iCategorias.Find(c => c.Nombre == categoriaList.Text).Id;
+
+                string dificultadId = iDificultades.Find(d => d.Nombre == dificultadList.Text).Id;
+
+                int cantidadPreg = (int)cantidadPreguntas.Value;
+
+                // Obtiene las preguntas filtradas
+                iPreguntas = iPreguntaFacade.getPreguntas(categoriaId, dificultadId, cantidadPreg);
+
+                // Si hay preguntas, pasa a la siguiente ventana pasandole los datos de usuario y las preguntas
+                if (iPreguntas.Count > 0)
+                {
+                    new UI.SesionQuiz(iNombreUsuario, iPreguntas).Show();
+                }
+                else
+                {
+                    MessageBox.Show("No hay preguntas para las opciones seleccionadas. Por favor elija otras");
+
+                }
+
+
+            }
+            // Faltan campos por seleccionar
+            else
+            {
+                MessageBox.Show("Por favor, complete todos los campos");
+            }
+
+
         }
 
         private void usuarioList_SelectionChangeCommitted(object sender, EventArgs e)
@@ -71,13 +102,7 @@ namespace QuizApp.UI
                     usuarioList.Text = value;
                 }
             }
-            // Tomar el usuario seleccionado y guardarlo
-            else
-            {
-                var index = senderComboBox.SelectedIndex;
-                // Guardar el valor para pasarlo
-                iNombreUsuario = senderComboBox.Items[index].ToString();
-            }
+
         }
 
         /// <summary>
@@ -122,5 +147,7 @@ namespace QuizApp.UI
             value = usuarioInput.Text;
             return dialogResult;
         }
+
+
     }
 }

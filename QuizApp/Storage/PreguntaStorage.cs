@@ -9,69 +9,64 @@ namespace QuizApp.Storage
 {
     internal class PreguntaStorage
     {
+        private List<PreguntaDTO> iPreguntasEnMemoria = new List<PreguntaDTO>()
+        {
+            new PreguntaDTO("Cuanto es 2+2?", "1", "1", "1",
+                // respuesta correcta
+                "4",
+                //respuestas incorrectas
+                new List<string> {"5", "2", "20"}),
+            new PreguntaDTO("Cuanto es 2*5?", "1", "1", "1",
+                // respuesta correcta
+                "10",
+                //respuestas incorrectas
+                new List<string> {"5", "2", "15"}),
+            new PreguntaDTO("Cuanto es 10+10?", "1", "1", "1",
+                // respuesta correcta
+                "20",
+                //respuestas incorrectas
+                new List<string> {"10", "100", "200"}),
+
+        };
+
         /// <summary>
         /// Obtiene los DTO de las preguntas con el filtro correspondiente
         /// </summary>
         /// <param name="pFiltro"></param>
         /// <returns></returns>
-        public PreguntaDTO[] getPreguntasByFiltro(PreguntaFiltro pFiltro)
+        public List<PreguntaDTO> getPreguntasByFiltro(PreguntaFiltro pFiltro)
         {
-            var pregunta1 = new PreguntaDTO(
-                "Cuanto es 2+2?",
-                "1",
-                "1",
-                "1",
-                // respuesta correcta
-                "4",
-                //respuestas incorrectas
-                new List<string> {"5", "2", "20"}
-                );
+            // Filtrar por categoria y dificultad
+            var preguntasByCategoriaDificultad = iPreguntasEnMemoria.Where(p => (p.iDificultadId == pFiltro.iDificultad) && (p.iCategoriaId == pFiltro.iCategoria)).ToList();
 
-            var pregunta2 = new PreguntaDTO(
-                "Cuanto es 2*5?",
-                "1",
-                "1",
-                "1",
-                // respuesta correcta
-                "10",
-                //respuestas incorrectas
-                new List<string> { "5", "2", "15" }
-                );
+            // Tomar la cantidad del filtro
+            var preguntasFiltradas = preguntasByCategoriaDificultad.Take(pFiltro.iCantidad).ToList();
 
-            var pregunta3 = new PreguntaDTO(
-                "Cuanto es 10+10?",
-                "1",
-                "1",
-                "1",
-                // respuesta correcta
-                "20",
-                //respuestas incorrectas
-                new List<string> { "10", "100", "200" }
-                );
+            return preguntasFiltradas;
 
-            return new PreguntaDTO[] { pregunta1, pregunta2, pregunta3};
         }
 
         /// <summary>
         /// Obtiene los DTO de las categorias 
         /// </summary>
         /// <returns></returns>
-        public CategoriaDTO[] getCategorias()
+        public List<CategoriaDTO> getCategorias()
         {
             var categoria1 = new CategoriaDTO("1", "Matematicas");
+            var categoria2 = new CategoriaDTO("2", "Animales");
 
-            return new CategoriaDTO[] { categoria1 };   
+            return new List<CategoriaDTO> { categoria1, categoria2 };
         }
 
         /// <summary>
         /// Obtiene los DTO de las dificultades 
         /// </summary>
         /// <returns></returns>
-        public DificultadDTO[] getDificultades()
+        public List<DificultadDTO> getDificultades()
         {
             var dificultad1 = new DificultadDTO("1", "Facil");
 
-            return new DificultadDTO[] { dificultad1 };
+            return new List<DificultadDTO> { dificultad1 };
         }
     }
 

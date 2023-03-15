@@ -1,25 +1,24 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Dominio.Util;
 using QuizApp.Facade;
-using QuizApp.Storage;
 using System.Data;
 using System.Diagnostics;
 
 namespace QuizApp.UI
 {
-    public partial class SesionQuiz : Form
+    internal partial class SesionQuiz : Form
     {
-        private PreguntaFacade iPreguntaFacade = new PreguntaFacade();
         private SesionFacade iSesionFacade = new SesionFacade();
 
         private Stopwatch iStopwatch = new Stopwatch();
 
         private string iNombreUsuario;
-        private Dictionary<Pregunta, GroupBox> iGrupoPregRes;
+        private List<Pregunta> iPreguntas;
 
-        public static SesionDTO iSesionActual;
+        private Dictionary<Pregunta, GroupBox> iGrupoPregRes = new Dictionary<Pregunta, GroupBox>();
 
-        public SesionQuiz()
+
+        public SesionQuiz(string pNombreUsuario, List<Pregunta> pPreguntas)
         {
             InitializeComponent();
 
@@ -27,15 +26,17 @@ namespace QuizApp.UI
             int groupMarginTop = 20;
             int pregBoxMaxHeight = 220;
 
-            var preguntas = iPreguntaFacade.getPreguntas();
-            iGrupoPregRes = new Dictionary<Pregunta, GroupBox>();
+            // Guarda los valores de los parametros
+            iPreguntas = pPreguntas;
+            iNombreUsuario = pNombreUsuario;
 
-            for (int i = 0; i < preguntas.Count; i++)
+
+            for (int i = 0; i < iPreguntas.Count; i++)
             {
-                var preg = preguntas[i];
+                Pregunta preg = iPreguntas[i];
 
-                var grupoRespuestas = new System.Windows.Forms.GroupBox();
-                var grupoY = groupMarginTop + pregBoxMaxHeight * i;
+                GroupBox grupoRespuestas = new GroupBox();
+                int grupoY = groupMarginTop + pregBoxMaxHeight * i;
                 grupoRespuestas.Location = new Point(300, grupoY);
                 grupoRespuestas.AutoSize = true;
                 grupoRespuestas.Text = preg.Nombre;
@@ -45,7 +46,7 @@ namespace QuizApp.UI
 
                 for (int j = 0; j < respuestasDesordenadas.Length; j++)
                 {
-                    var radioButton = new System.Windows.Forms.RadioButton();
+                    RadioButton radioButton = new RadioButton();
                     radioButton.Text = respuestasDesordenadas[j];
                     radioButton.Top = pregMarginTop * (j + 1);
                     radioButton.Left = 50;
@@ -58,8 +59,8 @@ namespace QuizApp.UI
 
             }
 
-            var botonFinalizar = new System.Windows.Forms.Button();
-            botonFinalizar.Top = pregBoxMaxHeight * preguntas.Count + pregMarginTop;
+            Button botonFinalizar = new Button();
+            botonFinalizar.Top = pregBoxMaxHeight * iPreguntas.Count + pregMarginTop;
             botonFinalizar.Text = "Finalizar";
             Controls.Add(botonFinalizar);
             botonFinalizar.Click += botonFinalizar_Click;
@@ -68,13 +69,11 @@ namespace QuizApp.UI
             iStopwatch.Start();
         }
 
-
         private void botonFinalizar_Click(object? sender, EventArgs e)
         {
-            iNombreUsuario = MenuQuiz.iNombreUsuario;
             List<PreguntaYRespuesta> pregResElegidas = new List<PreguntaYRespuesta>();
 
-            for (int i = 0; i < this.iGrupoPregRes.Count; i++)
+            for (int i = 0; i < iGrupoPregRes.Count; i++)
             {
                 var checkedRadio = iGrupoPregRes.ElementAt(i).Value.Controls.OfType<RadioButton>().FirstOrDefault((r) => r.Checked);
 
@@ -85,20 +84,20 @@ namespace QuizApp.UI
                     // Salir de este metodo
                     return;
                 }
-                
-                var pregRes = new PreguntaYRespuesta(iGrupoPregRes.ElementAt(i).Key, checkedRadio.Text);
+
+                PreguntaYRespuesta pregRes = new PreguntaYRespuesta(iGrupoPregRes.ElementAt(i).Key, checkedRadio.Text);
                 pregResElegidas.Add(pregRes);
             }
 
             // Detiene el cronometro
             iStopwatch.Stop();
             // Obtiene el tiempo insumido en la sesion
-            var tiempo = iStopwatch.Elapsed.TotalSeconds;
+            double tiempo = iStopwatch.Elapsed.TotalSeconds;
 
             // usar facade para calcular el puntaje
-            iSesionActual = iSesionFacade.finalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
+            var sesionActual = iSesionFacade.finalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
 
-            new UI.PuntajeQuiz().Show();
+            new UI.PuntajeQuiz(sesionActual).Show();
 
         }
         /// <summary>
@@ -108,7 +107,7 @@ namespace QuizApp.UI
         /// <param name="e"></param>
         private void sesionTimer_Tick(object sender, EventArgs e)
         {
-            this.labelTiempo.Text = iStopwatch.Elapsed.ToString("mm\\:ss\\.ff");
+            labelTiempo.Text = iStopwatch.Elapsed.ToString("mm\\:ss\\.ff");
 
         }
     }
