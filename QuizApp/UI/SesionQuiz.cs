@@ -8,7 +8,7 @@ namespace QuizApp.UI
 {
     internal partial class SesionQuiz : Form
     {
-        private SesionFacade iSesionFacade = new SesionFacade();
+        private SesionFacade iSesionFacade = Contexto.iInstancia.iSesionFacade;
 
         private Stopwatch iStopwatch = new Stopwatch();
 
@@ -30,7 +30,7 @@ namespace QuizApp.UI
             iPreguntas = pPreguntas;
             iNombreUsuario = pNombreUsuario;
 
-
+            // Renderizar cada grupo de pregunta-respuestas
             for (int i = 0; i < iPreguntas.Count; i++)
             {
                 Pregunta preg = iPreguntas[i];
@@ -41,6 +41,7 @@ namespace QuizApp.UI
                 grupoRespuestas.AutoSize = true;
                 grupoRespuestas.Text = preg.Nombre;
 
+                // Desordenar las respuestas
                 Random random = new Random();
                 var respuestasDesordenadas = preg.Incorrecta.Append(preg.Correcta).OrderBy(x => random.Next()).ToArray();
 
@@ -73,10 +74,12 @@ namespace QuizApp.UI
         {
             List<PreguntaYRespuesta> pregResElegidas = new List<PreguntaYRespuesta>();
 
+            // Fija el texto del radio button seleccionado para esa pregunta
             for (int i = 0; i < iGrupoPregRes.Count; i++)
             {
                 var checkedRadio = iGrupoPregRes.ElementAt(i).Value.Controls.OfType<RadioButton>().FirstOrDefault((r) => r.Checked);
 
+                // Si hay preguntas sin responder
                 if (checkedRadio == null)
                 {
                     MessageBox.Show("Por favor responda todas las preguntas");
@@ -94,9 +97,10 @@ namespace QuizApp.UI
             // Obtiene el tiempo insumido en la sesion
             double tiempo = iStopwatch.Elapsed.TotalSeconds;
 
-            // usar facade para calcular el puntaje
+            // Se finaliza la sesion, calcula el puntaje
             var sesionActual = iSesionFacade.finalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
 
+            // Abre la ventana de resultado pasandole la sesion actual
             new UI.PuntajeQuiz(sesionActual).Show();
 
         }

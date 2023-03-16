@@ -1,6 +1,7 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Dominio.Util;
 using QuizApp.Storage;
+using QuizApp.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +12,29 @@ namespace QuizApp.Facade
 {
     internal class SesionFacade
     {
-        private SesionStorage iSesionStorage = new SesionStorage();
-        private UsuarioStorage iUsuarioStorage = new UsuarioStorage();
-
         /// <summary>
         /// Guarda la sesion de juego
         /// </summary>
         public SesionDTO finalizarSesion(string pNombreUsuario, double pTiempo, List<PreguntaYRespuesta> pPregResElegidas)
         {
-            var usuarioDto = iUsuarioStorage.getUsuarioByNombre(pNombreUsuario);
+            // Obtiene el dto
+            UsuarioDTO usuarioDto = Contexto.iInstancia.iUsuarioStorage.getUsuarioByNombre(pNombreUsuario);
+
+            // Si no existe, entonces crea el usuario
             if (usuarioDto == null)
             {
-                usuarioDto = iUsuarioStorage.createUsuario(pNombreUsuario);
+                usuarioDto = Contexto.iInstancia.iUsuarioStorage.createUsuario(pNombreUsuario);
             }
-            var usuario = new Usuario(usuarioDto.iId, usuarioDto.iNombre);
 
-            var sesion = new Sesion(pTiempo, pPregResElegidas, usuario);
+            // Si existe, lo convierte a tipo Usuario
+            Usuario usuario = new Usuario(usuarioDto.iId, usuarioDto.iNombre);
+
+            // Llama al metodo del dominio
+            Sesion sesion = new Sesion(pTiempo, pPregResElegidas, usuario);
             sesion.finalizar();
 
-            return iSesionStorage.createSesion(usuario.Id, sesion.Puntaje, sesion.Tiempo, DateTime.Now);
+            // Crea la sesion
+            return Contexto.iInstancia.iSesionStorage.createSesion(usuario.Id, sesion.Puntaje, sesion.Tiempo, DateTime.Now);
         }
 
         /// <summary>
@@ -38,15 +43,19 @@ namespace QuizApp.Facade
         /// <returns></returns>
         public List<SesionDTO> getRanking()
         {
-            var list = iSesionStorage.getSesionesByPuntaje();
+            // Obtiene el ranking de sesiones
+            List<SesionDTO> list = Contexto.iInstancia.iSesionStorage.getSesionesByPuntaje();
 
             for (int i = 0; i < list.Count; i++)
             {
-                // Cambiar id de usuario por nombre para mostrar
-                list[i].iUsuarioId = iUsuarioStorage.getUsuarioById(list[i].iUsuarioId).iNombre;
+                // Busca el usuario para obtener el nombre
+                var usuario = Contexto.iInstancia.iUsuarioStorage.getUsuarioById(list[i].iUsuarioId);
+                
+                // Cambiar id de usuario por nombre para mostrarlo en la UI
+                list[i].iUsuarioId = usuario.iNombre;
             }
 
-            return iSesionStorage.getSesionesByPuntaje();
+            return list;
         }
 
         
