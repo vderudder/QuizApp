@@ -27,16 +27,29 @@ namespace QuizApp.Storage
         {
             var sesion = new SesionDTO(Guid.NewGuid().ToString(), pUsuarioId, pPuntaje, pTiempo, pFecha);
             iSesionesEnMemoria.Add(sesion);
-            return sesion;
+            return getCopy(sesion);
         }
 
+        /// <summary>
+        /// Obtiene las sesiones ordenadas por puntaje de mayor a menor, tomando solo las primeras 20
+        /// </summary>
+        /// <returns></returns>
         public List<SesionDTO> getSesionesByPuntaje()
         {
             var list = iSesionesEnMemoria.OrderByDescending(ses => ses.iPuntaje).ToList();
 
-            return list.Take(20).ToList();
+            return list.Take(20).Select(s => getCopy(s)).ToList();
         }
-             
+
+        /// <summary>
+        /// Hace una copia del objeto
+        /// </summary>
+        /// <param name="pSesion"></param>
+        /// <returns></returns>
+        private SesionDTO getCopy(SesionDTO pSesion)
+        {
+            return new SesionDTO(pSesion.iId, pSesion.iUsuarioId, pSesion.iPuntaje, pSesion.iTiempo, pSesion.iFecha);
+        }
     }
 
     public class SesionDTO
