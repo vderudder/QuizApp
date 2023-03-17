@@ -13,8 +13,8 @@ namespace QuizApp.UI
         private string iNombreUsuario;
 
         private List<Pregunta> iPreguntas;
-        private List<Categoria> iCategorias;
-        private List<Dificultad> iDificultades;
+        private List<string> iCategorias;
+        private List<string> iDificultades;
         private List<Usuario> iUsuarios;
 
         public MenuQuiz()
@@ -30,13 +30,13 @@ namespace QuizApp.UI
             // Agrega a la lista del comboBox los elementos de la lista de categorias
             for (int i = 0; i < iCategorias.Count; i++)
             {
-                categoriaList.Items.Add(iCategorias[i].Nombre);
+                categoriaList.Items.Add(iCategorias[i]);
             }
 
             // Agrega a la lista del comboBox los elementos de la lista de dificultades
             for (int i = 0; i < iDificultades.Count; i++)
             {
-                dificultadList.Items.Add(iDificultades[i].Nombre);
+                dificultadList.Items.Add(iDificultades[i]);
             }
 
             // Agrega a la lista del comboBox los elementos de la lista de usuarios
@@ -55,14 +55,14 @@ namespace QuizApp.UI
                 // Tomar los datos de los inputs
                 iNombreUsuario = usuarioList.Text;
 
-                string categoriaId = iCategorias.Find(c => c.Nombre == categoriaList.Text).Id;
+                string dificultad = dificultadList.Text;
 
-                string dificultadId = iDificultades.Find(d => d.Nombre == dificultadList.Text).Id;
+                string categoria = categoriaList.Text;
 
                 int cantidadPreg = (int)cantidadPreguntas.Value;
 
                 // Obtiene las preguntas filtradas
-                iPreguntas = iPreguntaFacade.getPreguntas(categoriaId, dificultadId, cantidadPreg);
+                iPreguntas = iPreguntaFacade.getPreguntas(dificultad, categoria, cantidadPreg);
 
                 // Si hay preguntas, pasa a la siguiente ventana pasandole los datos de usuario y las preguntas
                 if (iPreguntas.Count > 0)

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using QuizApp.Facade;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,17 +19,26 @@ namespace QuizApp.UI
             InitializeComponent();
         }
 
-        private void botonGuardar_Click(object sender, EventArgs e)
+        private async void botonGuardar_Click(object sender, EventArgs e)
         {
             if (urlInput.Text.Length > 0)
             {
-                // Hacer la request y persistir la response
-                MessageBox.Show("Deberia hacer la request");
+                if (Uri.IsWellFormedUriString(urlInput.Text, UriKind.Absolute))
+                {
+                    await Contexto.iInstancia.iAdminFacade.getPreguntas(urlInput.Text);
+
+                }
+                else
+                {
+                    // Tirar cartel de error, que tiene que poner una url
+                    MessageBox.Show("El link ingresado es incorrecto!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
             }
             else
             {
                 // Tirar cartel de error, que tiene que poner una url
-                MessageBox.Show("Deberia mostrar cartel de error");
+                MessageBox.Show("Debe ingresar un link", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
         }

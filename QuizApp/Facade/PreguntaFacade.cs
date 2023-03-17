@@ -16,10 +16,10 @@ namespace QuizApp.Facade
         /// Obtiene la lista de preguntas seleccionada
         /// </summary>
         /// <returns></returns>
-        public List<Pregunta> getPreguntas(string pDificultadId, string pCategoriaId, int pCantidadPreg)
+        public List<Pregunta> getPreguntas(string pDificultadNombre, string pCategoriaNombre, int pCantidadPreg)
         {
             // Crea el filtro segun los parametros pasados
-            PreguntaFiltro filtro = new PreguntaFiltro(pDificultadId, pCategoriaId, pCantidadPreg);
+            PreguntaFiltro filtro = new PreguntaFiltro(pDificultadNombre, pCategoriaNombre, pCantidadPreg);
 
             // Obtiene los dto
             List<PreguntaDTO> preguntaDTOs = Contexto.iInstancia.iPreguntaStorage.getPreguntasByFiltro(filtro);
@@ -27,9 +27,9 @@ namespace QuizApp.Facade
             // Los transforma a tipo Pregunta
             List<Pregunta> preguntas = preguntaDTOs.Select(dto => new Pregunta(
                                                 dto.iPregunta,
-                                                getCategoriaById(dto.iCategoriaId),
-                                                getDificultadById(dto.iDificultadId),
-                                                getTipoPreguntaById(dto.iTipoPreguntaId),
+                                                getCategoriaByNombre(dto.iCategoriaNombre),
+                                                getDificultadByNombre(dto.iDificultadNombre),
+                                                getTipoPreguntaByNombre(dto.iTipoPreguntaNombre),
                                                 dto.iCorrecta,
                                                 dto.iIncorrectaList.ToList())
                                                 ).ToList();
@@ -41,13 +41,9 @@ namespace QuizApp.Facade
         /// Obtiene la lista de categorias existente
         /// </summary>
         /// <returns></returns>
-        public List<Categoria> getCategorias()
+        public List<string> getCategorias()
         {
-            // Obtiene los dto
-            List<CategoriaDTO> categoriaDTOs = Contexto.iInstancia.iPreguntaStorage.getCategorias();
-
-            // Los transforma a tipo Categoria
-            List<Categoria> categorias = categoriaDTOs.Select(dto => new Categoria(dto.iId, dto.iCategoria)).ToList();
+            List<string> categorias = Contexto.iInstancia.iPreguntaStorage.getCategorias();
 
             return categorias;
         }
@@ -56,30 +52,26 @@ namespace QuizApp.Facade
         /// Obtiene la lista de dificultades existente
         /// </summary>
         /// <returns></returns>
-        public List<Dificultad> getDificultades()
+        public List<string> getDificultades()
         {
-            // Obtiene los dto
-            List<DificultadDTO> dificultadDTOs = Contexto.iInstancia.iPreguntaStorage.getDificultades();
-
-            // Los transforma a tipo Dificultad
-            List<Dificultad> dificultades = dificultadDTOs.Select(dto => new Dificultad(dto.iId, dto.iDificultad)).ToList();
+            List<string> dificultades = Contexto.iInstancia.iPreguntaStorage.getDificultades();
 
             return dificultades;
         }
 
-        private Categoria getCategoriaById(string pId)
+        private Categoria getCategoriaByNombre(string pNombre)
         {
-            return new Categoria(pId, "Matematicas");
+            return new Categoria(new Guid().ToString(), pNombre);
         }
 
-        private Dificultad getDificultadById(string pId)
+        private Dificultad getDificultadByNombre(string pNombre)
         {
-            return new Dificultad(pId, "Facil");
+            return new Dificultad(new Guid().ToString(), pNombre);
 
         }
-        private TipoPregunta getTipoPreguntaById(string pId)
+        private TipoPregunta getTipoPreguntaByNombre(string pNombre)
         {
-            return new TipoPregunta(pId, "Multiple");
+            return new TipoPregunta(new Guid().ToString(), pNombre);
 
         }
 

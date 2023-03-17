@@ -11,17 +11,17 @@ namespace QuizApp.Storage
     {
         private List<PreguntaDTO> iPreguntasEnMemoria = new List<PreguntaDTO>()
         {
-            new PreguntaDTO("Cuanto es 2+2?", "1", "1", "1",
+            new PreguntaDTO("Cuanto es 2+2?", "easy", "Matematicas", "multiple",
                 // respuesta correcta
                 "4",
                 //respuestas incorrectas
                 new List<string> {"5", "2", "20"}),
-            new PreguntaDTO("Cuanto es 2*5?", "1", "1", "1",
+            new PreguntaDTO("Cuanto es 2*5?", "easy", "Matematicas", "multiple",
                 // respuesta correcta
                 "10",
                 //respuestas incorrectas
                 new List<string> {"5", "2", "15"}),
-            new PreguntaDTO("Cuanto es 10+10?", "1", "1", "1",
+            new PreguntaDTO("Cuanto es 10+10?", "easy", "Matematicas", "multiple",
                 // respuesta correcta
                 "20",
                 //respuestas incorrectas
@@ -37,7 +37,7 @@ namespace QuizApp.Storage
         public List<PreguntaDTO> getPreguntasByFiltro(PreguntaFiltro pFiltro)
         {
             // Filtrar por categoria y dificultad
-            var preguntasByCategoriaDificultad = iPreguntasEnMemoria.Where(p => (p.iDificultadId == pFiltro.iDificultad) && (p.iCategoriaId == pFiltro.iCategoria)).ToList();
+            var preguntasByCategoriaDificultad = iPreguntasEnMemoria.Where(p => (p.iDificultadNombre == pFiltro.iDificultad) && (p.iCategoriaNombre == pFiltro.iCategoria)).ToList();
 
             // Tomar la cantidad del filtro
             var preguntasFiltradas = preguntasByCategoriaDificultad.Take(pFiltro.iCantidad).ToList();
@@ -46,27 +46,36 @@ namespace QuizApp.Storage
 
         }
 
-        /// <summary>
-        /// Obtiene los DTO de las categorias 
-        /// </summary>
-        /// <returns></returns>
-        public List<CategoriaDTO> getCategorias()
+        public List<PreguntaDTO> guardarPreguntas(List<PreguntaDTO> pPreguntas)
         {
-            var categoria1 = new CategoriaDTO("1", "Matematicas");
-            var categoria2 = new CategoriaDTO("2", "Animales");
+            foreach (var p in pPreguntas)
+            {
+                iPreguntasEnMemoria.Add(p);
+            }
 
-            return new List<CategoriaDTO> { categoria1, categoria2 };
+            return iPreguntasEnMemoria;
         }
 
         /// <summary>
-        /// Obtiene los DTO de las dificultades 
+        /// Obtiene las categorias
         /// </summary>
         /// <returns></returns>
-        public List<DificultadDTO> getDificultades()
+        public List<string> getCategorias()
         {
-            var dificultad1 = new DificultadDTO("1", "Facil");
+            var categorias = iPreguntasEnMemoria.DistinctBy(p => p.iCategoriaNombre).ToList().Select(elem => elem.iCategoriaNombre).ToList();
 
-            return new List<DificultadDTO> { dificultad1 };
+            return categorias;
+        }
+
+        /// <summary>
+        /// Obtiene las dificultades
+        /// </summary>
+        /// <returns></returns>
+        public List<string> getDificultades()
+        {
+            var dificultades = iPreguntasEnMemoria.DistinctBy(p => p.iDificultadNombre).ToList().Select(elem => elem.iDificultadNombre).ToList();
+
+            return dificultades;
         }
     }
 
@@ -89,18 +98,18 @@ namespace QuizApp.Storage
     {
         // Atributos
         public string iPregunta;
-        public string iDificultadId;
-        public string iCategoriaId;
-        public string iTipoPreguntaId;
+        public string iDificultadNombre;
+        public string iCategoriaNombre;
+        public string iTipoPreguntaNombre;
         public string iCorrecta;
         public List<string> iIncorrectaList;
 
-        public PreguntaDTO(string pPregunta, string pDificultadId, string pCategoriaId, string pTipoPreguntaId, string pCorrecta, List<string> pIncorrectaList)
+        public PreguntaDTO(string pPregunta, string pDificultadNombre, string pCategoriaNombre, string pTipoPreguntaNombre, string pCorrecta, List<string> pIncorrectaList)
         {
             this.iPregunta = pPregunta;
-            this.iDificultadId = pDificultadId;
-            this.iCategoriaId = pCategoriaId;
-            this.iTipoPreguntaId = pTipoPreguntaId;
+            this.iDificultadNombre = pDificultadNombre;
+            this.iCategoriaNombre = pCategoriaNombre;
+            this.iTipoPreguntaNombre = pTipoPreguntaNombre;
             this.iCorrecta = pCorrecta;
             this.iIncorrectaList = pIncorrectaList;
         }

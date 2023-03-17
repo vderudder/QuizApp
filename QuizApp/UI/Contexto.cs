@@ -14,26 +14,30 @@ namespace QuizApp.UI
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public static Contexto iInstancia;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public static void iniciar(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, PreguntaStorage pPreguntaStorage, UsuarioStorage pUsuarioStorage, SesionStorage pSesionStorage)
+        public static void iniciar(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, PreguntaStorage pPreguntaStorage, UsuarioStorage pUsuarioStorage, SesionStorage pSesionStorage, AdminStorage pAdminStorage)
         {
-            iInstancia = new Contexto(pPreguntaFacade, pUsuarioFacade, pSesionFacade, pPreguntaStorage, pUsuarioStorage, pSesionStorage);
+            iInstancia = new Contexto(pPreguntaFacade, pUsuarioFacade, pSesionFacade, pAdminFacade, pPreguntaStorage, pUsuarioStorage, pSesionStorage, pAdminStorage);
         }
 
         public PreguntaFacade iPreguntaFacade;
         public UsuarioFacade iUsuarioFacade;
         public SesionFacade iSesionFacade;
+        public AdminFacade iAdminFacade;
         public PreguntaStorage iPreguntaStorage;
         public UsuarioStorage iUsuarioStorage;
         public SesionStorage iSesionStorage;
+        public AdminStorage iAdminStorage;
 
-        private Contexto(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, PreguntaStorage pPreguntaStorage, UsuarioStorage pUsuarioStorage, SesionStorage pSesionStorage)
+        private Contexto(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, PreguntaStorage pPreguntaStorage, UsuarioStorage pUsuarioStorage, SesionStorage pSesionStorage, AdminStorage pAdminStorage)
         {
             iPreguntaFacade = pPreguntaFacade;
             iUsuarioFacade = pUsuarioFacade;
             iSesionFacade = pSesionFacade;
+            iAdminFacade = pAdminFacade;
             iPreguntaStorage = pPreguntaStorage;
             iUsuarioStorage = pUsuarioStorage;
             iSesionStorage = pSesionStorage;
+            iAdminStorage = pAdminStorage;
         }
     }
 }
