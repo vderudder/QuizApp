@@ -62,7 +62,7 @@ namespace QuizApp.UI
 
             Button botonFinalizar = new Button();
             botonFinalizar.Top = pregBoxMaxHeight * iPreguntas.Count + pregMarginTop;
-            botonFinalizar.Text = "Finalizar";
+            botonFinalizar.Text = "Finish";
             Controls.Add(botonFinalizar);
             botonFinalizar.Click += botonFinalizar_Click;
 
@@ -82,7 +82,7 @@ namespace QuizApp.UI
                 // Si hay preguntas sin responder
                 if (checkedRadio == null)
                 {
-                    MessageBox.Show("Por favor responda todas las preguntas");
+                    MessageBox.Show("Please, answer all the questions", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                     // Salir de este metodo
                     return;

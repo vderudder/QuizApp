@@ -36,7 +36,8 @@ namespace QuizApp.UI
             // Agrega a la lista del comboBox los elementos de la lista de dificultades
             for (int i = 0; i < iDificultades.Count; i++)
             {
-                dificultadList.Items.Add(iDificultades[i]);
+                // Mostrar la dificultad de una mejor manera
+                dificultadList.Items.Add(iDificultades[i][0].ToString().ToUpper() + iDificultades[i].Substring(1));
             }
 
             // Agrega a la lista del comboBox los elementos de la lista de usuarios
@@ -55,7 +56,7 @@ namespace QuizApp.UI
                 // Tomar los datos de los inputs
                 iNombreUsuario = usuarioList.Text;
 
-                string dificultad = dificultadList.Text;
+                string dificultad = dificultadList.Text.ToLower();
 
                 string categoria = categoriaList.Text;
 
@@ -71,7 +72,7 @@ namespace QuizApp.UI
                 }
                 else
                 {
-                    MessageBox.Show("No hay preguntas para las opciones seleccionadas. Por favor elija otras");
+                    MessageBox.Show("There are no questions for your selected options. Plase, choose other options", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 }
 
@@ -80,7 +81,7 @@ namespace QuizApp.UI
             // Faltan campos por seleccionar
             else
             {
-                MessageBox.Show("Por favor, complete todos los campos");
+                MessageBox.Show("Please, select all the options", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
 

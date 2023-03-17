@@ -38,48 +38,50 @@
             // resultadosLabel
             // 
             resultadosLabel.AutoSize = true;
-            resultadosLabel.Location = new Point(327, 35);
+            resultadosLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            resultadosLabel.Location = new Point(262, 73);
             resultadosLabel.Name = "resultadosLabel";
-            resultadosLabel.Size = new Size(75, 15);
+            resultadosLabel.Size = new Size(230, 15);
             resultadosLabel.TabIndex = 0;
-            resultadosLabel.Text = "RESULTADOS";
+            resultadosLabel.Text = "CONGRATS! THIS IS YOUR FINAL SCORE";
             // 
             // puntajeLabel
             // 
             puntajeLabel.AutoSize = true;
-            puntajeLabel.Location = new Point(277, 134);
+            puntajeLabel.Location = new Point(277, 154);
             puntajeLabel.Name = "puntajeLabel";
-            puntajeLabel.Size = new Size(53, 15);
+            puntajeLabel.Size = new Size(42, 15);
             puntajeLabel.TabIndex = 1;
-            puntajeLabel.Text = "Puntaje: ";
+            puntajeLabel.Text = "Score: ";
             // 
             // tiempoLabel
             // 
             tiempoLabel.AutoSize = true;
-            tiempoLabel.Location = new Point(277, 173);
+            tiempoLabel.Location = new Point(277, 193);
             tiempoLabel.Name = "tiempoLabel";
-            tiempoLabel.Size = new Size(106, 15);
+            tiempoLabel.Size = new Size(64, 15);
             tiempoLabel.TabIndex = 2;
-            tiempoLabel.Text = "Tiempo insumido: ";
+            tiempoLabel.Text = "Time used:";
             // 
             // volverMenuButton
             // 
-            volverMenuButton.Location = new Point(300, 265);
+            volverMenuButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            volverMenuButton.Location = new Point(299, 279);
             volverMenuButton.Name = "volverMenuButton";
-            volverMenuButton.Size = new Size(134, 23);
+            volverMenuButton.Size = new Size(163, 47);
             volverMenuButton.TabIndex = 3;
-            volverMenuButton.Text = "VOLVER AL MENU";
+            volverMenuButton.Text = "GO BACK TO MENU";
             volverMenuButton.UseVisualStyleBackColor = true;
             volverMenuButton.Click += volverMenuButton_Click;
             // 
             // fechaLabel
             // 
             fechaLabel.AutoSize = true;
-            fechaLabel.Location = new Point(277, 95);
+            fechaLabel.Location = new Point(277, 115);
             fechaLabel.Name = "fechaLabel";
-            fechaLabel.Size = new Size(44, 15);
+            fechaLabel.Size = new Size(34, 15);
             fechaLabel.TabIndex = 4;
-            fechaLabel.Text = "Fecha: ";
+            fechaLabel.Text = "Date:";
             // 
             // PuntajeQuiz
             // 
@@ -92,7 +94,7 @@
             Controls.Add(puntajeLabel);
             Controls.Add(resultadosLabel);
             Name = "PuntajeQuiz";
-            Text = "PuntajeQuiz";
+            Text = "SUMMARY";
             ResumeLayout(false);
             PerformLayout();
         }

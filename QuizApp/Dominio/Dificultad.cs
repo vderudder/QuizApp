@@ -29,13 +29,13 @@ namespace QuizApp.Dominio
             iNombre = pNombre;
             switch (pNombre)
             {
-                case "Dificil":
+                case "hard":
                     iFactor = 5;
                     break;
-                case "Medio":
+                case "medium":
                     iFactor = 3;
                     break;
-                case "Facil":
+                case "easy":
                     iFactor = 1;
                     break;
             }

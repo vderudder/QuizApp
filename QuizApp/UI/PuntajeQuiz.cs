@@ -11,9 +11,9 @@ namespace QuizApp.UI
 
             iSesion = sesionActual;
 
-            puntajeLabel.Text = "Puntaje: " + iSesion.iPuntaje.ToString("0.##") + " puntos";
-            tiempoLabel.Text = "Tiempo: " + iSesion.iTiempo.ToString("0.##") + " segundos";
-            fechaLabel.Text = "Fecha: " + iSesion.iFecha.ToString("d");
+            puntajeLabel.Text = "Score: " + iSesion.iPuntaje.ToString("0.##") + " points";
+            tiempoLabel.Text = "Time used: " + iSesion.iTiempo.ToString("0.##") + " seconds";
+            fechaLabel.Text = "Date: " + iSesion.iFecha.ToString("d");
         }
 
         private void volverMenuButton_Click(object sender, EventArgs e)

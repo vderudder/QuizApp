@@ -38,26 +38,28 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(327, 45);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+            label1.Location = new Point(311, 42);
             label1.Name = "label1";
-            label1.Size = new Size(113, 15);
+            label1.Size = new Size(100, 15);
             label1.TabIndex = 0;
-            label1.Text = "ADMINISTRAR QUIZ";
+            label1.Text = "MANAGE TRIVIA";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(82, 89);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(82, 88);
             label2.Name = "label2";
-            label2.Size = new Size(527, 15);
+            label2.Size = new Size(405, 15);
             label2.TabIndex = 1;
-            label2.Text = "Inserte en la caja de texto el link provisto por OpenTDB para el conjunto de preguntas seleccionado";
+            label2.Text = "Write down the URL address given by OpenTDB for the selected question set";
             // 
             // urlInput
             // 
-            urlInput.Location = new Point(134, 136);
+            urlInput.Location = new Point(161, 136);
             urlInput.Name = "urlInput";
-            urlInput.Size = new Size(475, 23);
+            urlInput.Size = new Size(443, 23);
             urlInput.TabIndex = 2;
             // 
             // label3
@@ -65,17 +67,18 @@
             label3.AutoSize = true;
             label3.Location = new Point(82, 139);
             label3.Name = "label3";
-            label3.Size = new Size(35, 15);
+            label3.Size = new Size(73, 15);
             label3.TabIndex = 3;
-            label3.Text = "Link: ";
+            label3.Text = "URL Address";
             // 
             // botonGuardar
             // 
-            botonGuardar.Location = new Point(346, 257);
+            botonGuardar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            botonGuardar.Location = new Point(313, 216);
             botonGuardar.Name = "botonGuardar";
-            botonGuardar.Size = new Size(75, 23);
+            botonGuardar.Size = new Size(92, 38);
             botonGuardar.TabIndex = 4;
-            botonGuardar.Text = "GUARDAR";
+            botonGuardar.Text = "SAVE";
             botonGuardar.UseVisualStyleBackColor = true;
             botonGuardar.Click += botonGuardar_Click;
             // 
@@ -83,14 +86,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(730, 341);
             Controls.Add(botonGuardar);
             Controls.Add(label3);
             Controls.Add(urlInput);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "AdministrarQuiz";
-            Text = "AdministrarQuiz";
+            Text = "Manage Trivia";
             ResumeLayout(false);
             PerformLayout();
         }

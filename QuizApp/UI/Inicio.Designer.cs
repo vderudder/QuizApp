@@ -35,29 +35,32 @@
             // 
             // botonJugar
             // 
-            botonJugar.Location = new Point(319, 94);
+            botonJugar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            botonJugar.Location = new Point(298, 82);
             botonJugar.Name = "botonJugar";
-            botonJugar.Size = new Size(75, 23);
+            botonJugar.Size = new Size(118, 50);
             botonJugar.TabIndex = 0;
-            botonJugar.Text = "JUGAR";
+            botonJugar.Text = "PLAY";
             botonJugar.UseVisualStyleBackColor = true;
             botonJugar.Click += botonJugar_Click;
             // 
             // botonAdministrar
             // 
-            botonAdministrar.Location = new Point(304, 331);
+            botonAdministrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            botonAdministrar.Location = new Point(298, 375);
             botonAdministrar.Name = "botonAdministrar";
-            botonAdministrar.Size = new Size(112, 23);
+            botonAdministrar.Size = new Size(124, 39);
             botonAdministrar.TabIndex = 1;
-            botonAdministrar.Text = "ADMINISTRAR";
+            botonAdministrar.Text = "MANAGE";
             botonAdministrar.UseVisualStyleBackColor = true;
             botonAdministrar.Click += botonAdministrar_Click;
             // 
             // botonRanking
             // 
-            botonRanking.Location = new Point(319, 161);
+            botonRanking.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            botonRanking.Location = new Point(298, 161);
             botonRanking.Name = "botonRanking";
-            botonRanking.Size = new Size(75, 23);
+            botonRanking.Size = new Size(118, 43);
             botonRanking.TabIndex = 2;
             botonRanking.Text = "RANKING";
             botonRanking.UseVisualStyleBackColor = true;
@@ -73,7 +76,7 @@
             Controls.Add(botonAdministrar);
             Controls.Add(botonJugar);
             Name = "Inicio";
-            Text = "Form1";
+            Text = "Trivia Game";
             ResumeLayout(false);
         }
 

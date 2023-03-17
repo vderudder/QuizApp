@@ -97,7 +97,7 @@
             fechaHeader.Name = "fechaHeader";
             fechaHeader.Size = new Size(106, 20);
             fechaHeader.TabIndex = 3;
-            fechaHeader.Text = "Fecha";
+            fechaHeader.Text = "Date";
             fechaHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tiempoHeader
@@ -108,7 +108,7 @@
             tiempoHeader.Name = "tiempoHeader";
             tiempoHeader.Size = new Size(116, 20);
             tiempoHeader.TabIndex = 2;
-            tiempoHeader.Text = "Tiempo";
+            tiempoHeader.Text = "Time (seconds)";
             tiempoHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // puntajeHeader
@@ -119,7 +119,7 @@
             puntajeHeader.Name = "puntajeHeader";
             puntajeHeader.Size = new Size(119, 20);
             puntajeHeader.TabIndex = 1;
-            puntajeHeader.Text = "Puntaje";
+            puntajeHeader.Text = "Score";
             puntajeHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // usuarioHeader
@@ -130,7 +130,7 @@
             usuarioHeader.Name = "usuarioHeader";
             usuarioHeader.Size = new Size(179, 20);
             usuarioHeader.TabIndex = 0;
-            usuarioHeader.Text = "Usuario";
+            usuarioHeader.Text = "User";
             usuarioHeader.TextAlign = ContentAlignment.MiddleCenter;
             usuarioHeader.UseMnemonic = false;
             // 
@@ -142,7 +142,7 @@
             puestoHeader.Name = "puestoHeader";
             puestoHeader.Size = new Size(63, 20);
             puestoHeader.TabIndex = 4;
-            puestoHeader.Text = "Puesto";
+            puestoHeader.Text = "Position";
             puestoHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // RankingQuiz

@@ -31,14 +31,14 @@ namespace QuizApp.UI
                 else
                 {
                     // Tirar cartel de error, que tiene que poner una url
-                    MessageBox.Show("El link ingresado es incorrecto!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("The URL address is incorrect!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
 
             }
             else
             {
                 // Tirar cartel de error, que tiene que poner una url
-                MessageBox.Show("Debe ingresar un link", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("You need to insert an URL address", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
         }

@@ -44,7 +44,7 @@
             dificultadList.Name = "dificultadList";
             dificultadList.Size = new Size(213, 23);
             dificultadList.TabIndex = 1;
-            dificultadList.Text = "Seleccione una dificultad";
+            dificultadList.Text = "Select a difficulty";
             // 
             // categoriaList
             // 
@@ -53,7 +53,7 @@
             categoriaList.Name = "categoriaList";
             categoriaList.Size = new Size(213, 23);
             categoriaList.TabIndex = 0;
-            categoriaList.Text = "Seleccione una categoría";
+            categoriaList.Text = "Select a category";
             // 
             // cantidadPreguntas
             // 
@@ -67,23 +67,24 @@
             // 
             // botonIniciarQuiz
             // 
-            botonIniciarQuiz.Location = new Point(351, 289);
+            botonIniciarQuiz.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            botonIniciarQuiz.Location = new Point(345, 291);
             botonIniciarQuiz.Name = "botonIniciarQuiz";
-            botonIniciarQuiz.Size = new Size(75, 23);
+            botonIniciarQuiz.Size = new Size(97, 44);
             botonIniciarQuiz.TabIndex = 3;
-            botonIniciarQuiz.Text = "Comenzar";
+            botonIniciarQuiz.Text = "PLAY !";
             botonIniciarQuiz.UseVisualStyleBackColor = true;
             botonIniciarQuiz.Click += botonIniciarQuiz_Click;
             // 
             // usuarioList
             // 
             usuarioList.FormattingEnabled = true;
-            usuarioList.Items.AddRange(new object[] { "Crear nuevo usuario" });
+            usuarioList.Items.AddRange(new object[] { "Create new user" });
             usuarioList.Location = new Point(292, 64);
             usuarioList.Name = "usuarioList";
             usuarioList.Size = new Size(213, 23);
             usuarioList.TabIndex = 4;
-            usuarioList.Text = "Seleccione su usuario";
+            usuarioList.Text = "Select your user";
             usuarioList.SelectionChangeCommitted += usuarioList_SelectionChangeCommitted;
             // 
             // label1
@@ -91,9 +92,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(292, 216);
             label1.Name = "label1";
-            label1.Size = new Size(127, 15);
+            label1.Size = new Size(119, 15);
             label1.TabIndex = 5;
-            label1.Text = "Cantidad de preguntas";
+            label1.Text = "Number of questions";
             // 
             // MenuQuiz
             // 
@@ -107,7 +108,7 @@
             Controls.Add(dificultadList);
             Controls.Add(categoriaList);
             Name = "MenuQuiz";
-            Text = "MenuQuiz";
+            Text = "PLAY MENU";
             ((System.ComponentModel.ISupportInitialize)cantidadPreguntas).EndInit();
             ResumeLayout(false);
             PerformLayout();
