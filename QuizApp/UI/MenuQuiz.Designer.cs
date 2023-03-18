@@ -59,11 +59,11 @@
             // 
             cantidadPreguntas.Location = new Point(428, 214);
             cantidadPreguntas.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
-            cantidadPreguntas.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            cantidadPreguntas.Minimum = new decimal(new int[] { 10, 0, 0, 0 });
             cantidadPreguntas.Name = "cantidadPreguntas";
             cantidadPreguntas.Size = new Size(77, 23);
             cantidadPreguntas.TabIndex = 2;
-            cantidadPreguntas.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            cantidadPreguntas.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
             // botonIniciarQuiz
             // 

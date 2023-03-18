@@ -26,6 +26,61 @@ namespace QuizApp.Storage
                 "20",
                 //respuestas incorrectas
                 new List<string> {"10", "100", "200"}),
+            new PreguntaDTO("Cuanto es 10+20?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "30",
+                //respuestas incorrectas
+                new List<string> {"10", "100", "200"}),
+            new PreguntaDTO("Cuanto es 100+100?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "200",
+                //respuestas incorrectas
+                new List<string> {"10", "1000", "200"}),
+            new PreguntaDTO("Cuanto es 10+10?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "20",
+                //respuestas incorrectas
+                new List<string> {"10", "100", "200"}),
+            new PreguntaDTO("Cuanto es 2 elevado a la 2?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "4",
+                //respuestas incorrectas
+                new List<string> {"8", "2", "200"}),
+            new PreguntaDTO("Se puede dividir por cero?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "No",
+                //respuestas incorrectas
+                new List<string> {"Si"}),
+            new PreguntaDTO("Si tengo 24 manzanas y me sacan 3, con cuantas me quedo?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "21",
+                //respuestas incorrectas
+                new List<string> {"20", "3", "24"}),
+            new PreguntaDTO("Cuanto es 10+10?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "20",
+                //respuestas incorrectas
+                new List<string> {"10", "100", "200"}),
+            new PreguntaDTO("Que significa el operador +?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "Suma",
+                //respuestas incorrectas
+                new List<string> {"Resta", "Division", "Multiplicacion"}),
+            new PreguntaDTO("El orden de los factores altera al producto?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "No",
+                //respuestas incorrectas
+                new List<string> {"Si" }),
+            new PreguntaDTO("Cuales son los numeros naturales?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "Los numeros positivos, sin incluir el cero",
+                //respuestas incorrectas
+                new List<string> {"Los numeros negativos y positivos", "Los numeros negativos y positivos, incluido el cero"}),
+            new PreguntaDTO("Cuantos numeros hay?", "easy", "Matematicas", "multiple",
+                // respuesta correcta
+                "Infinitos",
+                //respuestas incorrectas
+                new List<string> {"Mas de un millon", "Mas de 3 millones", "No existen"}),
 
         };
 
@@ -39,8 +94,8 @@ namespace QuizApp.Storage
             // Filtrar por categoria y dificultad
             var preguntasByCategoriaDificultad = iPreguntasEnMemoria.Where(p => (p.iDificultadNombre == pFiltro.iDificultad) && (p.iCategoriaNombre == pFiltro.iCategoria)).ToList();
 
-            // Tomar la cantidad del filtro
-            var preguntasFiltradas = preguntasByCategoriaDificultad.Take(pFiltro.iCantidad).ToList();
+            // Desordenar y tomar la cantidad del filtro
+            var preguntasFiltradas = preguntasByCategoriaDificultad.OrderBy(elem => Guid.NewGuid()).ToList().Take(pFiltro.iCantidad).ToList();
 
             return preguntasFiltradas;
 
