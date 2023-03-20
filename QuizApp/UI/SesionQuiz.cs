@@ -1,8 +1,16 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Dominio.Util;
 using QuizApp.Facade;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QuizApp.UI
 {
@@ -16,7 +24,6 @@ namespace QuizApp.UI
         private List<Pregunta> iPreguntas;
 
         private Dictionary<Pregunta, GroupBox> iGrupoPregRes = new Dictionary<Pregunta, GroupBox>();
-
 
         public SesionQuiz(string pNombreUsuario, List<Pregunta> pPreguntas)
         {
@@ -55,22 +62,18 @@ namespace QuizApp.UI
                     grupoRespuestas.Controls.Add(radioButton);
                 }
 
-                Controls.Add(grupoRespuestas);
+                // TODO: reacomodar las preguntas
+                panel1.Controls.Add(grupoRespuestas);
                 iGrupoPregRes.Add(preg, grupoRespuestas);
 
             }
 
-            Button botonFinalizar = new Button();
-            botonFinalizar.Top = pregBoxMaxHeight * iPreguntas.Count + pregMarginTop;
-            botonFinalizar.Text = "Finish";
-            Controls.Add(botonFinalizar);
-            botonFinalizar.Click += botonFinalizar_Click;
 
             // Comienza el cronometro
             iStopwatch.Start();
         }
 
-        private void botonFinalizar_Click(object? sender, EventArgs e)
+        private void botonFinalizar_Click(object sender, EventArgs e)
         {
             List<PreguntaYRespuesta> pregResElegidas = new List<PreguntaYRespuesta>();
 
@@ -102,29 +105,25 @@ namespace QuizApp.UI
 
             // Abre la ventana de resultado pasandole la sesion actual
             new UI.PuntajeQuiz(sesionActual).Show();
-
         }
-        /// <summary>
-        /// Muestra el cronometro de tiempo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void sesionTimer_Tick(object sender, EventArgs e)
         {
             labelTiempo.Text = iStopwatch.Elapsed.ToString("mm\\:ss\\.ff");
-
         }
-    }
 
-    internal class PreguntaRespuesta
-    {
-        public string iPregunta;
-        public string iRespuesta;
-
-        public PreguntaRespuesta(string pPregunta, string pRespuesta)
+        internal class PreguntaRespuesta
         {
-            this.iPregunta = pPregunta;
-            this.iRespuesta = pRespuesta;
+            public string iPregunta;
+            public string iRespuesta;
+
+            public PreguntaRespuesta(string pPregunta, string pRespuesta)
+            {
+                this.iPregunta = pPregunta;
+                this.iRespuesta = pRespuesta;
+            }
         }
+
+
     }
 }

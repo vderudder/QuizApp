@@ -29,9 +29,17 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            labelTiempo = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SesionQuiz));
             sesionTimer = new System.Windows.Forms.Timer(components);
+            labelTiempo = new Label();
+            panel1 = new Panel();
+            botonFinalizar = new Button();
             SuspendLayout();
+            // 
+            // sesionTimer
+            // 
+            sesionTimer.Enabled = true;
+            sesionTimer.Tick += sesionTimer_Tick;
             // 
             // labelTiempo
             // 
@@ -43,10 +51,24 @@
             labelTiempo.TabIndex = 0;
             labelTiempo.Text = "00:00.00";
             // 
-            // sesionTimer
+            // panel1
             // 
-            sesionTimer.Enabled = true;
-            sesionTimer.Tick += sesionTimer_Tick;
+            panel1.AutoScroll = true;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Location = new Point(177, 56);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(473, 341);
+            panel1.TabIndex = 1;
+            // 
+            // botonFinalizar
+            // 
+            botonFinalizar.Location = new Point(51, 374);
+            botonFinalizar.Name = "botonFinalizar";
+            botonFinalizar.Size = new Size(75, 23);
+            botonFinalizar.TabIndex = 2;
+            botonFinalizar.Text = "FINISH";
+            botonFinalizar.UseVisualStyleBackColor = true;
+            botonFinalizar.Click += botonFinalizar_Click;
             // 
             // SesionQuiz
             // 
@@ -54,16 +76,23 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             ClientSize = new Size(800, 450);
+            Controls.Add(botonFinalizar);
+            Controls.Add(panel1);
             Controls.Add(labelTiempo);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "SesionQuiz";
-            Text = "SesionQuiz";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Quizzify";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label labelTiempo;
         private System.Windows.Forms.Timer sesionTimer;
+        private Label labelTiempo;
+        private Panel panel1;
+        private Button botonFinalizar;
     }
 }

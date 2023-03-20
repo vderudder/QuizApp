@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RankingQuiz));
             tituloLabel = new Label();
             rankingTable = new TableLayoutPanel();
             fechaHeader = new Label();
@@ -149,11 +150,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(969, 605);
+            ClientSize = new Size(884, 605);
             Controls.Add(rankingTable);
             Controls.Add(tituloLabel);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "RankingQuiz";
-            Text = "RankingQuiz";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Quizzify";
             rankingTable.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

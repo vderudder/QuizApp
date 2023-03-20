@@ -69,10 +69,19 @@ namespace QuizApp.UI
                 if (iPreguntas.Count > 0)
                 {
                     new UI.SesionQuiz(iNombreUsuario, iPreguntas).Show();
+
+                    // Resetar los inputs
+                    usuarioList.SelectedIndex = 0;
+                    dificultadList.SelectedIndex = 0;
+                    categoriaList.SelectedIndex = 0;
+                    cantidadPreguntas.ResetText();
+
+                    // Cerrar la ventana
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("There are no questions for your selected options. Plase, choose other options", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("There are no questions for your selected options. Please, choose other options", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 }
 

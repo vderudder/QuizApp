@@ -41,7 +41,7 @@ namespace QuizApp.UI
                             MessageBox.Show("There is an invalid parameter in this query", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         }
-                        else if (ex is NoResultException) 
+                        else if (ex is NoResultException)
                         {
                             MessageBox.Show("There are no questions for this query", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -54,7 +54,7 @@ namespace QuizApp.UI
 
                         urlInput.Text = "";
                     }
-                    
+
                 }
                 else
                 {
