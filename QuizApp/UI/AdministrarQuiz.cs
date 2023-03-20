@@ -1,4 +1,5 @@
-﻿using QuizApp.Facade;
+﻿using QuizApp.Excepcion;
+using QuizApp.Facade;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,20 +26,50 @@ namespace QuizApp.UI
             {
                 if (Uri.IsWellFormedUriString(urlInput.Text, UriKind.Absolute))
                 {
-                    await Contexto.iInstancia.iAdminFacade.getPreguntas(urlInput.Text);
+                    try
+                    {
+                        await Contexto.iInstancia.iAdminFacade.guardarPreguntasLocal(urlInput.Text);
 
+                        MessageBox.Show("The questions were saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex is InvalidParameterException)
+                        {
+                            MessageBox.Show("There is an invalid parameter in this query", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else if (ex is NoResultException) 
+                        {
+                            MessageBox.Show("There are no questions for this query", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Something went wrong. Try again later.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+
+                        urlInput.Text = "";
+                    }
+                    
                 }
                 else
                 {
-                    // Tirar cartel de error, que tiene que poner una url
-                    MessageBox.Show("The URL address is incorrect!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    // El link no tiene formato de url
+                    MessageBox.Show("The URL address is incorrect", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    urlInput.Text = "";
+
                 }
 
             }
             else
             {
-                // Tirar cartel de error, que tiene que poner una url
-                MessageBox.Show("You need to insert an URL address", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                // No se ha ingresado una url
+                MessageBox.Show("You need to enter an URL address", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
         }

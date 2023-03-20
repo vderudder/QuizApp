@@ -101,14 +101,14 @@ namespace QuizApp.Storage
 
         }
 
-        public List<PreguntaDTO> guardarPreguntas(List<PreguntaDTO> pPreguntas)
+        public Task guardarPreguntas(List<PreguntaDTO> pPreguntas)
         {
             foreach (var p in pPreguntas)
             {
                 iPreguntasEnMemoria.Add(p);
             }
 
-            return iPreguntasEnMemoria;
+            return Task.CompletedTask;
         }
 
         /// <summary>

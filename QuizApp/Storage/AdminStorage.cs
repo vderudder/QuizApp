@@ -18,37 +18,46 @@ namespace QuizApp.Storage
         public async Task<List<PreguntaDTO>> getPreguntas(string pUrl)
         {
             HttpClient client = new HttpClient();
-            try
+
+            // Se hace la request
+            var response = await client.GetFromJsonAsync<JsonResponse>(pUrl);            
+
+            if (response.response_code != 0)
             {
-                // Se hace la request
-                var response = await client.GetFromJsonAsync<JsonResponse>(pUrl);
-
-                // Esto va a ser lo que devuelva
-                List<PreguntaDTO> preguntas = new();
-
-                // Se recorre la response para formar los datos a guardar
-                for (int i = 0; i < response.results.Length; i++)
+                if (response.response_code == 1)
                 {
-                    var preg = response.results[i];
-                    List<string> incorrectas = new();
-
-                    foreach (var item in preg.incorrect_answers)
-                    {
-                        incorrectas.Add(item);
-                    }
-
-                    var preguntaDTO = new PreguntaDTO(preg.question, preg.difficulty, preg.category, preg.type, preg.correct_answer, incorrectas);
-                    preguntas.Add(preguntaDTO);
+                    throw new Excepcion.NoResultException();
                 }
 
-                return preguntas;
+                if (response.response_code == 2)
+                {
+                    throw new Excepcion.InvalidParameterException();
+                }
 
+                throw new Exception();
             }
-            catch (HttpRequestException ex)
+
+            // Esto va a ser lo que devuelva
+            List<PreguntaDTO> preguntas = new();
+
+            // Se recorre la response para formar los datos a guardar
+            for (int i = 0; i < response.results.Length; i++)
             {
-                Debug.WriteLine("Error: {0}", ex.Message);
-                throw ex;
+                var preg = response.results[i];
+                List<string> incorrectas = new();
+
+                foreach (var item in preg.incorrect_answers)
+                {
+                    incorrectas.Add(item);
+                }
+
+                var preguntaDTO = new PreguntaDTO(preg.question, preg.difficulty, preg.category, preg.type, preg.correct_answer, incorrectas);
+                preguntas.Add(preguntaDTO);
             }
+
+            return preguntas;
+
+
         }
 
         internal record class JsonResponse
