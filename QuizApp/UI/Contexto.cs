@@ -1,6 +1,6 @@
 ﻿using QuizApp.DB;
 using QuizApp.Facade;
-using QuizApp.Storage;
+using QuizApp.Storage.DBStorage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace QuizApp.UI
         public static Contexto iInstancia;
         public static QuizContext iServicioBD;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public static void iniciar(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, PreguntaStorage pPreguntaStorage, UsuarioStorage pUsuarioStorage, SesionStorage pSesionStorage, AdminStorage pAdminStorage)
+        public static void iniciar(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, PreguntaDBStorage pPreguntaStorage, UsuarioDBStorage pUsuarioStorage, SesionDBStorage pSesionStorage, AdminStorage pAdminStorage)
         {
             iInstancia = new Contexto(pPreguntaFacade, pUsuarioFacade, pSesionFacade, pAdminFacade, pPreguntaStorage, pUsuarioStorage, pSesionStorage, pAdminStorage);
 
@@ -27,12 +27,12 @@ namespace QuizApp.UI
         public UsuarioFacade iUsuarioFacade;
         public SesionFacade iSesionFacade;
         public AdminFacade iAdminFacade;
-        public PreguntaStorage iPreguntaStorage;
-        public UsuarioStorage iUsuarioStorage;
-        public SesionStorage iSesionStorage;
+        public PreguntaDBStorage iPreguntaStorage;
+        public UsuarioDBStorage iUsuarioStorage;
+        public SesionDBStorage iSesionStorage;
         public AdminStorage iAdminStorage;
 
-        private Contexto(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, PreguntaStorage pPreguntaStorage, UsuarioStorage pUsuarioStorage, SesionStorage pSesionStorage, AdminStorage pAdminStorage)
+        private Contexto(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, PreguntaDBStorage pPreguntaStorage, UsuarioDBStorage pUsuarioStorage, SesionDBStorage pSesionStorage, AdminStorage pAdminStorage)
         {
             iPreguntaFacade = pPreguntaFacade;
             iUsuarioFacade = pUsuarioFacade;

@@ -11,7 +11,7 @@ using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace QuizApp.Storage
+namespace QuizApp.Storage.DBStorage
 {
     internal class AdminStorage
     {
@@ -20,7 +20,7 @@ namespace QuizApp.Storage
             HttpClient client = new HttpClient();
 
             // Se hace la request
-            var response = await client.GetFromJsonAsync<JsonResponse>(pUrl);            
+            var response = await client.GetFromJsonAsync<JsonResponse>(pUrl);
 
             if (response.response_code != 0)
             {
@@ -51,7 +51,7 @@ namespace QuizApp.Storage
                     incorrectas.Add(item);
                 }
 
-                var preguntaDTO = new PreguntaDTO(preg.question, preg.difficulty, preg.category, preg.type, preg.correct_answer, incorrectas);
+                var preguntaDTO = new PreguntaDTO(preg.question, preg.difficulty, preg.category, preg.correct_answer, incorrectas);
                 preguntas.Add(preguntaDTO);
             }
 

@@ -1,20 +1,14 @@
-﻿using System;
+﻿using QuizApp.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizApp.Storage
+namespace QuizApp.Storage.DBStorage
 {
-    internal class SesionStorage
+    internal class SesionDBStorage
     {
-        private List<SesionDTO> iSesionesEnMemoria = new List<SesionDTO>() {
-            new SesionDTO(){ iId = "1", iUsuarioId = "1", iPuntaje = 4, iTiempo = 20, iFecha = DateTime.Now },
-            new SesionDTO(){ iId = "2", iUsuarioId = "2", iPuntaje = 10, iTiempo = 15, iFecha = DateTime.Now },
-            new SesionDTO(){ iId = "3", iUsuarioId = "1", iPuntaje = 42, iTiempo = 5, iFecha = DateTime.Now },
-            new SesionDTO(){ iId = "4", iUsuarioId = "3", iPuntaje = 22, iTiempo = 10, iFecha = DateTime.Now },
-        };
-
         /// <summary>
         /// Crea una nueva sesion de juego
         /// </summary>
@@ -25,9 +19,11 @@ namespace QuizApp.Storage
         /// <returns></returns>
         public SesionDTO createSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
         {
-            var sesion = new SesionDTO(Guid.NewGuid().ToString(), pUsuarioId, pPuntaje, pTiempo, pFecha);
-            iSesionesEnMemoria.Add(sesion);
-            return getCopy(sesion);
+            Contexto.iServicioBD.Sesiones.Add(new DB.QuizContext.Sesion() {SesionId = Guid.NewGuid().ToString(), UsuarioId = pUsuarioId, SesionPuntaje = pPuntaje, SesionTiempo = pTiempo, SesionFecha = pFecha });
+            Contexto.iServicioBD.SaveChanges();
+            
+            return new SesionDTO() { iUsuarioId = pUsuarioId, iPuntaje = pPuntaje, iTiempo = pTiempo, iFecha = pFecha };
+
         }
 
         /// <summary>
@@ -36,20 +32,20 @@ namespace QuizApp.Storage
         /// <returns></returns>
         public List<SesionDTO> getSesionesByPuntaje()
         {
-            var list = iSesionesEnMemoria.OrderByDescending(ses => ses.iPuntaje).ToList();
+            var sesionesByPuntaje = Contexto.iServicioBD.Sesiones.OrderByDescending(ses => ses.SesionPuntaje).ToList();
 
-            return list.Take(20).Select(s => getCopy(s)).ToList();
+            var sesionesTruncadas = sesionesByPuntaje.Take(20).Select(s => s).ToList();
+
+            List<SesionDTO> sesionesDTO = new List<SesionDTO>();
+
+            foreach (var item in sesionesTruncadas)
+            {
+                sesionesDTO.Add(new SesionDTO() { iId = item.SesionId, iUsuarioId = item.UsuarioId, iPuntaje = item.SesionPuntaje, iTiempo = item.SesionTiempo, iFecha = item.SesionFecha });
+            };
+
+            return sesionesDTO;
         }
 
-        /// <summary>
-        /// Hace una copia del objeto
-        /// </summary>
-        /// <param name="pSesion"></param>
-        /// <returns></returns>
-        private SesionDTO getCopy(SesionDTO pSesion)
-        {
-            return new SesionDTO(pSesion.iId, pSesion.iUsuarioId, pSesion.iPuntaje, pSesion.iTiempo, pSesion.iFecha);
-        }
     }
 
     public class SesionDTO

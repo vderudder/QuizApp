@@ -8,14 +8,6 @@ namespace QuizApp
         public Inicio()
         {
             InitializeComponent();
-
-            var listaPreguntas = Contexto.iServicioBD.Pruebas.Select(p => p.Pregunta).ToList();
-
-            foreach ( var p in listaPreguntas )
-            {
-                Debug.WriteLine(p);
-
-            }
         }
 
         private void botonJugar_Click(object sender, EventArgs e)

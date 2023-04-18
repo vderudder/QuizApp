@@ -15,7 +15,6 @@ namespace QuizApp.Dominio
         private string iNombre;
         private Categoria iCategoria;
         private Dificultad iDificultad;
-        private TipoPregunta iTipo;
         private string iCorrecta;
         private IList<string> iIncorrecta;
 
@@ -23,17 +22,15 @@ namespace QuizApp.Dominio
         public string Nombre => iNombre;
         public Categoria Categoria => iCategoria;
         public Dificultad Dificultad => iDificultad;
-        public TipoPregunta Tipo => iTipo;
         public string Correcta => iCorrecta;
         public IList<string> Incorrecta => iIncorrecta;
 
         // Constructor
-        public Pregunta(string pNombre, Categoria pCategoria, Dificultad pDificultad, TipoPregunta pTipoPregunta, string pCorrecta, List<string> pIncorrecta)
+        public Pregunta(string pNombre, Categoria pCategoria, Dificultad pDificultad, string pCorrecta, List<string> pIncorrecta)
         {
             iNombre = pNombre;
             iCategoria = pCategoria;
             iDificultad = pDificultad;
-            iTipo = pTipoPregunta;
             iCorrecta = pCorrecta;
             iIncorrecta = pIncorrecta;
         }

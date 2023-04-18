@@ -1,6 +1,6 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Dominio.Util;
-using QuizApp.Storage;
+using QuizApp.Storage.DBStorage;
 using QuizApp.UI;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace QuizApp.Facade
         public SesionDTO finalizarSesion(string pNombreUsuario, double pTiempo, List<PreguntaYRespuesta> pPregResElegidas)
         {
             // Obtiene el dto
-            UsuarioDTO usuarioDto = Contexto.iInstancia.iUsuarioStorage.getUsuarioByNombre(pNombreUsuario);
+            var usuarioDto = Contexto.iInstancia.iUsuarioStorage.getUsuarioByNombre(pNombreUsuario);
 
             // Si no existe, entonces crea el usuario
             if (usuarioDto == null)
@@ -44,18 +44,18 @@ namespace QuizApp.Facade
         public List<SesionDTO> getRanking()
         {
             // Obtiene el ranking de sesiones
-            List<SesionDTO> list = Contexto.iInstancia.iSesionStorage.getSesionesByPuntaje();
+            List<SesionDTO> sesionesList = Contexto.iInstancia.iSesionStorage.getSesionesByPuntaje();
 
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < sesionesList.Count; i++)
             {
                 // Busca el usuario para obtener el nombre
-                var usuario = Contexto.iInstancia.iUsuarioStorage.getUsuarioById(list[i].iUsuarioId);
-                
+                var usuario = Contexto.iInstancia.iUsuarioStorage.getUsuarioById(sesionesList[i].iUsuarioId);
+
                 // Cambiar id de usuario por nombre para mostrarlo en la UI
-                list[i].iUsuarioId = usuario.iNombre;
+                sesionesList[i].iUsuarioId = usuario.iNombre;
             }
 
-            return list;
+            return sesionesList;
         }
 
         

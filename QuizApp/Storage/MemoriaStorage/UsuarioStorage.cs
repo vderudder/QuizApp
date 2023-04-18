@@ -1,10 +1,12 @@
-﻿using System;
+﻿using QuizApp.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizApp.Storage
+namespace QuizApp.Storage.MemoriaStorage
 {
     internal class UsuarioStorage
     {

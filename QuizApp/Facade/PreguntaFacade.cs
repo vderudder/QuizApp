@@ -1,5 +1,5 @@
 ﻿using QuizApp.Dominio;
-using QuizApp.Storage;
+using QuizApp.Storage.DBStorage;
 using QuizApp.UI;
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,6 @@ namespace QuizApp.Facade
                                                 dto.iPregunta,
                                                 getCategoriaByNombre(dto.iCategoriaNombre),
                                                 getDificultadByNombre(dto.iDificultadNombre),
-                                                getTipoPreguntaByNombre(dto.iTipoPreguntaNombre),
                                                 dto.iCorrecta,
                                                 dto.iIncorrectaList.ToList())
                                                 ).ToList();
@@ -41,9 +40,16 @@ namespace QuizApp.Facade
         /// Obtiene la lista de categorias existente
         /// </summary>
         /// <returns></returns>
-        public List<string> getCategorias()
+        public List<Categoria> getCategorias()
         {
-            List<string> categorias = Contexto.iInstancia.iPreguntaStorage.getCategorias();
+            List<CategoriaDTO> categoriasDTO = Contexto.iInstancia.iPreguntaStorage.getCategorias();
+            List<Categoria> categorias = new List<Categoria>();
+
+            foreach (var item in categoriasDTO)
+            {
+                categorias.Add(new Categoria(item.iId, item.iCategoria));
+            }
+            
 
             return categorias;
         }
@@ -52,29 +58,33 @@ namespace QuizApp.Facade
         /// Obtiene la lista de dificultades existente
         /// </summary>
         /// <returns></returns>
-        public List<string> getDificultades()
+        public List<Dificultad> getDificultades()
         {
-            List<string> dificultades = Contexto.iInstancia.iPreguntaStorage.getDificultades();
+            List<DificultadDTO> dificultadesDTO = Contexto.iInstancia.iPreguntaStorage.getDificultades();
+            List<Dificultad> dificultades = new List<Dificultad>();
+
+            foreach (var item in dificultadesDTO)
+            {
+                dificultades.Add(new Dificultad(item.iId, item.iDificultad));
+            }
 
             return dificultades;
         }
 
         private Categoria getCategoriaByNombre(string pNombre)
         {
-            return new Categoria(new Guid().ToString(), pNombre);
+            var categoriaEncontrada = getCategorias().First(c => c.Nombre == pNombre);
+
+            return new Categoria(categoriaEncontrada.Id, categoriaEncontrada.Nombre);
         }
 
         private Dificultad getDificultadByNombre(string pNombre)
         {
-            return new Dificultad(new Guid().ToString(), pNombre);
+            var dificultadEncontrada = getDificultades().First(d => d.Nombre == pNombre);
+
+            return new Dificultad(dificultadEncontrada.Id, dificultadEncontrada.Nombre);
 
         }
-        private TipoPregunta getTipoPreguntaByNombre(string pNombre)
-        {
-            return new TipoPregunta(new Guid().ToString(), pNombre);
-
-        }
-
        
     }
 }

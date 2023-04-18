@@ -1,5 +1,6 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Storage;
+using QuizApp.Storage.DBStorage;
 using QuizApp.UI;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,13 @@ namespace QuizApp.Facade
         public List<Usuario> getUsuarios()
         {
             // Obtiene los dto
-            List<UsuarioDTO> usuarioDTOs = Contexto.iInstancia.iUsuarioStorage.getUsuarios();
+            List<UsuarioDTO> usuariosDTO = Contexto.iInstancia.iUsuarioStorage.getUsuarios();
+            List<Usuario> usuarios = new List<Usuario>();
 
-            // Los convierte a tipo Usuario
-            List<Usuario> usuarios = usuarioDTOs.Select(dto => new Usuario(dto.iId, dto.iNombre)).ToList();
+            foreach (var item in usuariosDTO)
+            {
+                usuarios.Add(new Usuario(item.iId, item.iNombre));
+            }
 
             return usuarios;
         }

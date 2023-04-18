@@ -1,4 +1,4 @@
-﻿using QuizApp.Storage;
+﻿using QuizApp.Storage.DBStorage;
 
 namespace QuizApp.UI
 {

@@ -1,5 +1,5 @@
 using QuizApp.Facade;
-using QuizApp.Storage;
+using QuizApp.Storage.DBStorage;
 using QuizApp.UI;
 
 namespace QuizApp
@@ -13,7 +13,9 @@ namespace QuizApp
         static void Main()
         {
             // Se inicializa las fachadas y storages
-            Contexto.iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaStorage(), new UsuarioStorage(), new SesionStorage(), new AdminStorage());
+            Contexto.iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaDBStorage(), new UsuarioDBStorage(), new SesionDBStorage(), new AdminStorage());
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
