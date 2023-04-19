@@ -52,8 +52,6 @@ namespace QuizApp.Storage.DBStorage
                     incorrectas.Add(HttpUtility.HtmlDecode(item));
                 }
 
-                var decoded = HttpUtility.HtmlDecode(preg.question);
-
                 var preguntaDTO = new PreguntaDTO(HttpUtility.HtmlDecode(preg.question), preg.difficulty, preg.category, HttpUtility.HtmlDecode(preg.correct_answer), incorrectas);
                 preguntas.Add(preguntaDTO);
             }
