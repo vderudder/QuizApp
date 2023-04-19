@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace QuizApp.Storage.DBStorage
 {
@@ -48,10 +49,12 @@ namespace QuizApp.Storage.DBStorage
 
                 foreach (var item in preg.incorrect_answers)
                 {
-                    incorrectas.Add(item);
+                    incorrectas.Add(HttpUtility.HtmlDecode(item));
                 }
 
-                var preguntaDTO = new PreguntaDTO(preg.question, preg.difficulty, preg.category, preg.correct_answer, incorrectas);
+                var decoded = HttpUtility.HtmlDecode(preg.question);
+
+                var preguntaDTO = new PreguntaDTO(HttpUtility.HtmlDecode(preg.question), preg.difficulty, preg.category, HttpUtility.HtmlDecode(preg.correct_answer), incorrectas);
                 preguntas.Add(preguntaDTO);
             }
 
