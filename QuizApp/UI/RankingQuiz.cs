@@ -10,6 +10,8 @@ namespace QuizApp.UI
         {
             InitializeComponent();
 
+            tituloLabel.Location = new Point(this.Location.X + this.Width / 2 - tituloLabel.Width / 2, 40);
+
             // Obtiene la lista de ranking
             var ranking = iSesionFacade.getRanking();
 
@@ -32,6 +34,8 @@ namespace QuizApp.UI
                     puestoLabel.AutoSize = false;
                     puestoLabel.TextAlign = ContentAlignment.MiddleCenter;
 
+                    puestoLabel.ForeColor = Color.FromArgb(38, 70, 83);
+
                     rankingTable.Controls.Add(puestoLabel, 0, row);
 
 
@@ -43,6 +47,12 @@ namespace QuizApp.UI
                     puntajeLabel.Text = ranking[row - 1].iPuntaje.ToString("0.##");
                     tiempoLabel.Text = ranking[row - 1].iTiempo.ToString("0.##"); ;
                     fechaLabel.Text = ranking[row - 1].iFecha.ToString("d");
+
+                    puestoLabel.ForeColor = Color.FromArgb(38, 70, 83);
+                    usuarioLabel.ForeColor = Color.FromArgb(38, 70, 83);
+                    puntajeLabel.ForeColor = Color.FromArgb(38, 70, 83);
+                    tiempoLabel.ForeColor = Color.FromArgb(38, 70, 83);
+                    fechaLabel.ForeColor = Color.FromArgb(38, 70, 83);
 
                     // Propiedades para centrar el texto
                     puestoLabel.Anchor = AnchorStyles.None;
@@ -70,6 +80,11 @@ namespace QuizApp.UI
                 }
 
             }
+        }
+
+        private void RankingQuiz_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            new Inicio().Show();
         }
     }
 }

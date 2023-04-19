@@ -19,8 +19,7 @@ namespace QuizApp.UI
         private void volverMenuButton_Click(object sender, EventArgs e)
         {
             this.Close();
-
-            new UI.MenuQuiz().Show();
+            new Inicio().Show();
         }
 
         private void salirButton_Click(object sender, EventArgs e)

@@ -43,14 +43,16 @@
             // 
             tituloLabel.AutoSize = true;
             tituloLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            tituloLabel.ForeColor = Color.FromArgb(38, 70, 83);
             tituloLabel.Location = new Point(394, 37);
             tituloLabel.Name = "tituloLabel";
-            tituloLabel.Size = new Size(139, 21);
+            tituloLabel.Size = new Size(127, 21);
             tituloLabel.TabIndex = 0;
-            tituloLabel.Text = "RANKING TOP 20";
+            tituloLabel.Text = "Ranking Top 20";
             // 
             // rankingTable
             // 
+            rankingTable.Anchor = AnchorStyles.None;
             rankingTable.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             rankingTable.ColumnCount = 5;
             rankingTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.7824688F));
@@ -63,6 +65,7 @@
             rankingTable.Controls.Add(puntajeHeader, 2, 0);
             rankingTable.Controls.Add(usuarioHeader, 1, 0);
             rankingTable.Controls.Add(puestoHeader, 0, 0);
+            rankingTable.ForeColor = Color.FromArgb(38, 70, 83);
             rankingTable.Location = new Point(142, 94);
             rankingTable.Name = "rankingTable";
             rankingTable.RowCount = 21;
@@ -159,6 +162,7 @@
             Name = "RankingQuiz";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quizzify";
+            FormClosed += RankingQuiz_FormClosed;
             rankingTable.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();

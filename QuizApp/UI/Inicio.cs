@@ -12,17 +12,25 @@ namespace QuizApp
 
         private void botonJugar_Click(object sender, EventArgs e)
         {
+            this.Hide();
             new UI.MenuQuiz().Show();
         }
 
         private void botonAdministrar_Click(object sender, EventArgs e)
         {
+            this.Hide();
             new UI.AdministrarQuiz().Show();
         }
 
         private void botonRanking_Click(object sender, EventArgs e)
         {
+            this.Hide();
             new UI.RankingQuiz().Show();
+        }
+
+        private void Inicio_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

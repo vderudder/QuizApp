@@ -78,7 +78,7 @@ namespace QuizApp.UI
                     cantidadPreguntas.ResetText();
 
                     // Cerrar la ventana
-                    this.Close();
+                    this.Hide();
                 }
                 else
                 {
@@ -160,6 +160,9 @@ namespace QuizApp.UI
             return dialogResult;
         }
 
-
+        private void MenuQuiz_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            new Inicio().Show();
+        }
     }
 }

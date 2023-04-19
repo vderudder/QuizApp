@@ -39,21 +39,28 @@
             // botonJugar
             // 
             botonJugar.Anchor = AnchorStyles.None;
+            botonJugar.BackColor = Color.FromArgb(228, 23, 68);
+            botonJugar.FlatAppearance.BorderColor = Color.FromArgb(228, 23, 68);
+            botonJugar.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 20, 60);
+            botonJugar.FlatStyle = FlatStyle.Flat;
             botonJugar.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            botonJugar.ForeColor = Color.FromArgb(240, 31, 31);
+            botonJugar.ForeColor = Color.White;
             botonJugar.Location = new Point(113, 129);
             botonJugar.Name = "botonJugar";
             botonJugar.Size = new Size(118, 50);
             botonJugar.TabIndex = 0;
             botonJugar.Text = "PLAY";
-            botonJugar.UseVisualStyleBackColor = true;
+            botonJugar.UseVisualStyleBackColor = false;
             botonJugar.Click += botonJugar_Click;
             // 
             // botonAdministrar
             // 
-            botonAdministrar.BackColor = Color.Transparent;
+            botonAdministrar.BackColor = Color.White;
+            botonAdministrar.FlatAppearance.BorderColor = Color.FromArgb(38, 70, 83);
+            botonAdministrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(228, 232, 234);
+            botonAdministrar.FlatStyle = FlatStyle.Flat;
             botonAdministrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            botonAdministrar.ForeColor = Color.FromArgb(64, 64, 64);
+            botonAdministrar.ForeColor = Color.FromArgb(38, 70, 83);
             botonAdministrar.Location = new Point(198, 269);
             botonAdministrar.Name = "botonAdministrar";
             botonAdministrar.Size = new Size(124, 56);
@@ -64,12 +71,15 @@
             // 
             // botonRanking
             // 
-            botonRanking.BackColor = SystemColors.ButtonFace;
+            botonRanking.BackColor = Color.White;
+            botonRanking.FlatAppearance.BorderColor = Color.FromArgb(228, 23, 68);
+            botonRanking.FlatAppearance.MouseOverBackColor = Color.FromArgb(253, 233, 238);
+            botonRanking.FlatStyle = FlatStyle.Flat;
             botonRanking.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            botonRanking.ForeColor = Color.FromArgb(64, 64, 64);
-            botonRanking.Location = new Point(293, 135);
+            botonRanking.ForeColor = Color.FromArgb(228, 23, 68);
+            botonRanking.Location = new Point(291, 129);
             botonRanking.Name = "botonRanking";
-            botonRanking.Size = new Size(118, 43);
+            botonRanking.Size = new Size(118, 50);
             botonRanking.TabIndex = 2;
             botonRanking.Text = "RANKING";
             botonRanking.UseVisualStyleBackColor = false;
@@ -80,6 +90,7 @@
             label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.FromArgb(38, 70, 83);
             label1.Location = new Point(169, 58);
             label1.Name = "label1";
             label1.Size = new Size(174, 21);
@@ -89,7 +100,9 @@
             // label2
             // 
             label2.Anchor = AnchorStyles.None;
+            label2.BackColor = Color.FromArgb(38, 70, 83);
             label2.BorderStyle = BorderStyle.Fixed3D;
+            label2.ForeColor = Color.FromArgb(38, 70, 83);
             label2.Location = new Point(61, 238);
             label2.Name = "label2";
             label2.Size = new Size(400, 2);
@@ -100,6 +113,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(505, 348);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -112,6 +126,7 @@
             Name = "Inicio";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quizzify";
+            FormClosed += Inicio_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

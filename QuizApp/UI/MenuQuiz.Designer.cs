@@ -34,8 +34,8 @@
             cantidadPreguntas = new NumericUpDown();
             botonIniciarQuiz = new Button();
             usuarioList = new ComboBox();
-            label1 = new Label();
-            label2 = new Label();
+            preguntasLabel = new Label();
+            tituloLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)cantidadPreguntas).BeginInit();
             SuspendLayout();
             // 
@@ -69,13 +69,18 @@
             // 
             // botonIniciarQuiz
             // 
-            botonIniciarQuiz.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            botonIniciarQuiz.BackColor = Color.FromArgb(228, 23, 68);
+            botonIniciarQuiz.FlatAppearance.BorderColor = Color.FromArgb(228, 23, 68);
+            botonIniciarQuiz.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 20, 60);
+            botonIniciarQuiz.FlatStyle = FlatStyle.Flat;
+            botonIniciarQuiz.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            botonIniciarQuiz.ForeColor = Color.White;
             botonIniciarQuiz.Location = new Point(171, 325);
             botonIniciarQuiz.Name = "botonIniciarQuiz";
             botonIniciarQuiz.Size = new Size(97, 44);
             botonIniciarQuiz.TabIndex = 3;
             botonIniciarQuiz.Text = "PLAY !";
-            botonIniciarQuiz.UseVisualStyleBackColor = true;
+            botonIniciarQuiz.UseVisualStyleBackColor = false;
             botonIniciarQuiz.Click += botonIniciarQuiz_Click;
             // 
             // usuarioList
@@ -89,32 +94,33 @@
             usuarioList.Text = "Select your user";
             usuarioList.SelectionChangeCommitted += usuarioList_SelectionChangeCommitted;
             // 
-            // label1
+            // preguntasLabel
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(118, 250);
-            label1.Name = "label1";
-            label1.Size = new Size(119, 15);
-            label1.TabIndex = 5;
-            label1.Text = "Number of questions";
+            preguntasLabel.AutoSize = true;
+            preguntasLabel.Location = new Point(118, 250);
+            preguntasLabel.Name = "preguntasLabel";
+            preguntasLabel.Size = new Size(119, 15);
+            preguntasLabel.TabIndex = 5;
+            preguntasLabel.Text = "Number of questions";
             // 
-            // label2
+            // tituloLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(171, 39);
-            label2.Name = "label2";
-            label2.Size = new Size(101, 21);
-            label2.TabIndex = 6;
-            label2.Text = "PLAY MENU";
+            tituloLabel.AutoSize = true;
+            tituloLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            tituloLabel.ForeColor = Color.FromArgb(38, 70, 83);
+            tituloLabel.Location = new Point(135, 40);
+            tituloLabel.Name = "tituloLabel";
+            tituloLabel.Size = new Size(169, 21);
+            tituloLabel.TabIndex = 6;
+            tituloLabel.Text = "Quizzify's Play Menu";
             // 
             // MenuQuiz
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(435, 450);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            ClientSize = new Size(435, 424);
+            Controls.Add(tituloLabel);
+            Controls.Add(preguntasLabel);
             Controls.Add(usuarioList);
             Controls.Add(botonIniciarQuiz);
             Controls.Add(cantidadPreguntas);
@@ -126,6 +132,7 @@
             Name = "MenuQuiz";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quizzify";
+            FormClosed += MenuQuiz_FormClosed;
             ((System.ComponentModel.ISupportInitialize)cantidadPreguntas).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -138,7 +145,7 @@
         private ComboBox categoriaList;
         private ComboBox dificultadList;
         private ComboBox usuarioList;
-        private Label label1;
-        private Label label2;
+        private Label preguntasLabel;
+        private Label tituloLabel;
     }
 }

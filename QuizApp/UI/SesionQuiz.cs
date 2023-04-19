@@ -8,6 +8,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,41 +30,51 @@ namespace QuizApp.UI
         {
             InitializeComponent();
 
-            int pregMarginTop = 40;
             int groupMarginTop = 20;
-            int pregBoxMaxHeight = 220;
+            int nextGroupY = groupMarginTop;
 
             // Guarda los valores de los parametros
             iPreguntas = pPreguntas;
             iNombreUsuario = pNombreUsuario;
 
+            labelTiempo.Location = new Point(this.Location.X + this.Width / 2 - labelTiempo.Width / 2, 16);
+            botonFinalizar.Location = new Point(this.Location.X + this.Width / 2 - labelTiempo.Width / 2, 420);
+
             // Renderizar cada grupo de pregunta-respuestas
             for (int i = 0; i < iPreguntas.Count; i++)
             {
+                // Guardo la pregunta temporalmente
                 Pregunta preg = iPreguntas[i];
 
+                // Renderizar group box que contiene la pregunta y sus respuestas
                 GroupBox grupoRespuestas = new GroupBox();
-                int grupoY = groupMarginTop + pregBoxMaxHeight * i;
-                grupoRespuestas.Location = new Point(300, grupoY);
-                grupoRespuestas.AutoSize = true;
+                grupoRespuestas.Location = new Point(20, nextGroupY);
+                grupoRespuestas.Width = 500;
                 grupoRespuestas.Text = preg.Nombre;
+
 
                 // Desordenar las respuestas
                 Random random = new Random();
                 var respuestasDesordenadas = preg.Incorrecta.Append(preg.Correcta).OrderBy(x => random.Next()).ToArray();
 
+                // Chequear si tiene mas de dos respuestas setear la altura del groupbox
+                if (respuestasDesordenadas.Length > 2) { grupoRespuestas.Height = 190; } else { grupoRespuestas.Height = 110; }
+
+                // Incrementar la altura del groupbox con un margen para renderizar el proximo groupbox
+                nextGroupY = nextGroupY + grupoRespuestas.Height + groupMarginTop;
+
+                // Renderizar las respuestas con radios
                 for (int j = 0; j < respuestasDesordenadas.Length; j++)
                 {
                     RadioButton radioButton = new RadioButton();
                     radioButton.Text = respuestasDesordenadas[j];
-                    radioButton.Top = pregMarginTop * (j + 1);
-                    radioButton.Left = 50;
+                    radioButton.Top = 36 * (j + 1);
+                    radioButton.Left = 20;
 
                     grupoRespuestas.Controls.Add(radioButton);
                 }
 
-                // TODO: reacomodar las preguntas
-                panel1.Controls.Add(grupoRespuestas);
+                containerPreguntas.Controls.Add(grupoRespuestas);
                 iGrupoPregRes.Add(preg, grupoRespuestas);
 
             }
@@ -103,13 +114,16 @@ namespace QuizApp.UI
             // Se finaliza la sesion, calcula el puntaje
             var sesionActual = iSesionFacade.finalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
 
+            // Cierra la ventana actual
+            this.Hide();
+
             // Abre la ventana de resultado pasandole la sesion actual
             new UI.PuntajeQuiz(sesionActual).Show();
         }
 
         private void sesionTimer_Tick(object sender, EventArgs e)
         {
-            labelTiempo.Text = iStopwatch.Elapsed.ToString("mm\\:ss\\.ff");
+            labelTiempo.Text = "Time: " + iStopwatch.Elapsed.ToString("mm\\:ss\\.ff");
         }
 
         internal class PreguntaRespuesta
@@ -124,6 +138,9 @@ namespace QuizApp.UI
             }
         }
 
-
+        private void SesionQuiz_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            new Inicio().Show();
+        }
     }
 }

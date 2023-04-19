@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SesionQuiz));
             sesionTimer = new System.Windows.Forms.Timer(components);
             labelTiempo = new Label();
-            panel1 = new Panel();
+            containerPreguntas = new Panel();
             botonFinalizar = new Button();
             SuspendLayout();
             // 
@@ -44,30 +44,37 @@
             // labelTiempo
             // 
             labelTiempo.AutoSize = true;
-            labelTiempo.Font = new Font("Segoe UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            labelTiempo.Location = new Point(12, 166);
+            labelTiempo.FlatStyle = FlatStyle.Flat;
+            labelTiempo.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelTiempo.ForeColor = Color.FromArgb(38, 70, 83);
+            labelTiempo.Location = new Point(243, 9);
             labelTiempo.Name = "labelTiempo";
-            labelTiempo.Size = new Size(86, 28);
+            labelTiempo.Size = new Size(120, 19);
             labelTiempo.TabIndex = 0;
-            labelTiempo.Text = "00:00.00";
+            labelTiempo.Text = "Time: 00:00.00";
             // 
-            // panel1
+            // containerPreguntas
             // 
-            panel1.AutoScroll = true;
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Location = new Point(177, 56);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(473, 341);
-            panel1.TabIndex = 1;
+            containerPreguntas.AutoScroll = true;
+            containerPreguntas.Location = new Point(12, 43);
+            containerPreguntas.Name = "containerPreguntas";
+            containerPreguntas.Size = new Size(602, 364);
+            containerPreguntas.TabIndex = 1;
             // 
             // botonFinalizar
             // 
-            botonFinalizar.Location = new Point(51, 374);
+            botonFinalizar.BackColor = Color.FromArgb(228, 23, 68);
+            botonFinalizar.FlatAppearance.BorderColor = Color.FromArgb(228, 23, 68);
+            botonFinalizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 20, 60);
+            botonFinalizar.FlatStyle = FlatStyle.Flat;
+            botonFinalizar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            botonFinalizar.ForeColor = Color.White;
+            botonFinalizar.Location = new Point(253, 427);
             botonFinalizar.Name = "botonFinalizar";
-            botonFinalizar.Size = new Size(75, 23);
+            botonFinalizar.Size = new Size(110, 48);
             botonFinalizar.TabIndex = 2;
             botonFinalizar.Text = "FINISH";
-            botonFinalizar.UseVisualStyleBackColor = true;
+            botonFinalizar.UseVisualStyleBackColor = false;
             botonFinalizar.Click += botonFinalizar_Click;
             // 
             // SesionQuiz
@@ -75,15 +82,16 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(626, 487);
+            Controls.Add(containerPreguntas);
             Controls.Add(botonFinalizar);
-            Controls.Add(panel1);
             Controls.Add(labelTiempo);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "SesionQuiz";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quizzify";
+            FormClosed += SesionQuiz_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -92,7 +100,7 @@
 
         private System.Windows.Forms.Timer sesionTimer;
         private Label labelTiempo;
-        private Panel panel1;
+        private Panel containerPreguntas;
         private Button botonFinalizar;
     }
 }

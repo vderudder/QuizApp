@@ -29,32 +29,33 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdministrarQuiz));
-            label1 = new Label();
-            label2 = new Label();
+            tituloLabel = new Label();
+            subtituloLabel = new Label();
             urlInput = new TextBox();
-            label3 = new Label();
+            urlLabel = new Label();
             botonGuardar = new Button();
             SuspendLayout();
             // 
-            // label1
+            // tituloLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(202, 40);
-            label1.Name = "label1";
-            label1.Size = new Size(325, 21);
-            label1.TabIndex = 0;
-            label1.Text = "Welcome to Quizzify's Question Manager";
+            tituloLabel.AutoSize = true;
+            tituloLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            tituloLabel.ForeColor = Color.FromArgb(38, 70, 83);
+            tituloLabel.Location = new Point(202, 40);
+            tituloLabel.Name = "tituloLabel";
+            tituloLabel.Size = new Size(325, 21);
+            tituloLabel.TabIndex = 0;
+            tituloLabel.Text = "Welcome to Quizzify's Question Manager";
             // 
-            // label2
+            // subtituloLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label2.Location = new Point(82, 88);
-            label2.Name = "label2";
-            label2.Size = new Size(372, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Enter the URL address given by OpenTDB for the selected question set";
+            subtituloLabel.AutoSize = true;
+            subtituloLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            subtituloLabel.Location = new Point(82, 88);
+            subtituloLabel.Name = "subtituloLabel";
+            subtituloLabel.Size = new Size(372, 15);
+            subtituloLabel.TabIndex = 1;
+            subtituloLabel.Text = "Enter the URL address given by OpenTDB for the selected question set";
             // 
             // urlInput
             // 
@@ -63,24 +64,29 @@
             urlInput.Size = new Size(443, 23);
             urlInput.TabIndex = 2;
             // 
-            // label3
+            // urlLabel
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(82, 139);
-            label3.Name = "label3";
-            label3.Size = new Size(73, 15);
-            label3.TabIndex = 3;
-            label3.Text = "URL Address";
+            urlLabel.AutoSize = true;
+            urlLabel.Location = new Point(82, 139);
+            urlLabel.Name = "urlLabel";
+            urlLabel.Size = new Size(73, 15);
+            urlLabel.TabIndex = 3;
+            urlLabel.Text = "URL Address";
             // 
             // botonGuardar
             // 
+            botonGuardar.BackColor = Color.FromArgb(228, 23, 68);
+            botonGuardar.FlatAppearance.BorderColor = Color.FromArgb(228, 23, 68);
+            botonGuardar.FlatAppearance.MouseOverBackColor = Color.FromArgb(200, 20, 60);
+            botonGuardar.FlatStyle = FlatStyle.Flat;
             botonGuardar.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            botonGuardar.Location = new Point(295, 210);
+            botonGuardar.ForeColor = Color.White;
+            botonGuardar.Location = new Point(308, 218);
             botonGuardar.Name = "botonGuardar";
-            botonGuardar.Size = new Size(107, 53);
+            botonGuardar.Size = new Size(96, 46);
             botonGuardar.TabIndex = 4;
             botonGuardar.Text = "SAVE";
-            botonGuardar.UseVisualStyleBackColor = true;
+            botonGuardar.UseVisualStyleBackColor = false;
             botonGuardar.Click += botonGuardar_Click;
             // 
             // AdministrarQuiz
@@ -89,26 +95,27 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(704, 305);
             Controls.Add(botonGuardar);
-            Controls.Add(label3);
+            Controls.Add(urlLabel);
             Controls.Add(urlInput);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(subtituloLabel);
+            Controls.Add(tituloLabel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "AdministrarQuiz";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quizzify";
+            FormClosed += AdministrarQuiz_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
-        private Label label2;
+        private Label tituloLabel;
+        private Label subtituloLabel;
         private TextBox urlInput;
-        private Label label3;
+        private Label urlLabel;
         private Button botonGuardar;
     }
 }

@@ -18,6 +18,11 @@ namespace QuizApp.UI
         public AdministrarQuiz()
         {
             InitializeComponent();
+
+            tituloLabel.Location = new Point(this.Location.X + this.Width / 2 - tituloLabel.Width / 2, 40);
+            botonGuardar.Location = new Point(this.Location.X + this.Width / 2 - botonGuardar.Width / 2, 200);
+
+
         }
 
         private async void botonGuardar_Click(object sender, EventArgs e)
@@ -74,5 +79,9 @@ namespace QuizApp.UI
             }
         }
 
+        private void AdministrarQuiz_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            new Inicio().Show();
+        }
     }
 }
