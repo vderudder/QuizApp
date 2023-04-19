@@ -70,6 +70,7 @@ namespace QuizApp.UI
                     radioButton.Text = respuestasDesordenadas[j];
                     radioButton.Top = 36 * (j + 1);
                     radioButton.Left = 20;
+                    radioButton.AutoSize = true;
 
                     grupoRespuestas.Controls.Add(radioButton);
                 }
