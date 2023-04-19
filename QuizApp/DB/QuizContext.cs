@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QuizApp.Dominio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 
 namespace QuizApp.DB
 {
@@ -21,7 +16,7 @@ namespace QuizApp.DB
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost:5433;Database=db_test;Username=postgres;Password=admin");
+                optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["QuizDatabase"].ConnectionString);
             }
         }
 
