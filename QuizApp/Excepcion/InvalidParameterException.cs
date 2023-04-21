@@ -8,6 +8,12 @@ namespace QuizApp.Excepcion
 {
     internal class InvalidParameterException : Exception
     {
-
+        public override string Message
+        {
+            get
+            {
+                return "There is an invalid parameter in this query";
+            }
+        }
     }
 }

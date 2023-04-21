@@ -12,6 +12,11 @@ namespace QuizApp
         [STAThread]
         static void Main()
         {
+            if (!Directory.Exists(@"C:\Quizzify\Temp"))
+            {
+                Directory.CreateDirectory(@"C:\Quizzify\Temp");
+            }
+
             // Se inicializa las fachadas y storages
             Contexto.iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaDBStorage(), new UsuarioDBStorage(), new SesionDBStorage(), new AdminStorage());
 

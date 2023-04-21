@@ -8,5 +8,12 @@ namespace QuizApp.Excepcion
 {
     internal class NoResultException : Exception
     {
+        public override string Message
+        {
+            get
+            {
+                return "There are no questions for this query";
+            }
+        }
     }
 }

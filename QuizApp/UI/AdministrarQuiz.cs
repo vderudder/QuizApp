@@ -43,12 +43,12 @@ namespace QuizApp.UI
                     {
                         if (ex is InvalidParameterException)
                         {
-                            MessageBox.Show("There is an invalid parameter in this query", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         }
                         else if (ex is NoResultException)
                         {
-                            MessageBox.Show("There are no questions for this query", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         }
                         else
