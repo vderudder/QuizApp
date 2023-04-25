@@ -12,8 +12,17 @@ namespace QuizApp
 
         private void botonJugar_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new UI.MenuQuiz().Show();
+            try
+            {
+                new UI.MenuQuiz().Show();
+                this.Hide();
+
+            }
+            catch (Exception)
+            {
+                // Si sale mal vuelve al menu inicio
+                this.Show();
+            }
         }
 
         private void botonAdministrar_Click(object sender, EventArgs e)
@@ -24,8 +33,16 @@ namespace QuizApp
 
         private void botonRanking_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new UI.RankingQuiz().Show();
+            try
+            {
+                new UI.RankingQuiz().Show();
+                this.Hide();
+            }
+            catch (Exception)
+            {
+                // Si sale mal vuelve al menu inicio
+                this.Show();
+            }
         }
 
         private void Inicio_FormClosed(object sender, FormClosedEventArgs e)

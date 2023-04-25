@@ -21,30 +21,51 @@ namespace QuizApp.UI
         {
             InitializeComponent();
 
-            // Obtiene las categorias y dificultades
-            iCategorias = iPreguntaFacade.getCategorias();
-            iDificultades = iPreguntaFacade.getDificultades();
-            // Obtiene los usuarios
-            iUsuarios = iUsuarioFacade.getUsuarios();
-
-            // Agrega a la lista del comboBox los elementos de la lista de categorias
-            for (int i = 0; i < iCategorias.Count; i++)
+            try
             {
-                categoriaList.Items.Add(iCategorias[i].Nombre);
-            }
+                // Cambia el cursor mientras espera
+                Cursor.Current = Cursors.WaitCursor;
+                // Obtiene las categorias y dificultades
+                iCategorias = iPreguntaFacade.getCategorias();
+                iDificultades = iPreguntaFacade.getDificultades();
+                // Obtiene los usuarios
+                iUsuarios = iUsuarioFacade.getUsuarios();
 
-            // Agrega a la lista del comboBox los elementos de la lista de dificultades
-            for (int i = 0; i < iDificultades.Count; i++)
-            {
-                // Mostrar la dificultad de una mejor manera (con la primera letra en mayuscula)
-                dificultadList.Items.Add(iDificultades[i].Nombre[0].ToString().ToUpper() + iDificultades[i].Nombre.Substring(1));
-            }
+                if (iCategorias.Count == 0 || iDificultades.Count == 0)
+                {
+                    // Si no hay categorias o dificultades cargadas
+                    MessageBox.Show("There are no categories and/or difficulties loaded", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+                else
+                {
+                    // Agrega a la lista del comboBox los elementos de la lista de categorias
+                    for (int i = 0; i < iCategorias.Count; i++)
+                    {
+                        categoriaList.Items.Add(iCategorias[i].Nombre);
+                    }
 
-            // Agrega a la lista del comboBox los elementos de la lista de usuarios
-            for (int i = 0; i < iUsuarios.Count; i++)
-            {
-                usuarioList.Items.Add(iUsuarios[i].NombreUsuario);
+                    // Agrega a la lista del comboBox los elementos de la lista de dificultades
+                    for (int i = 0; i < iDificultades.Count; i++)
+                    {
+                        // Mostrar la dificultad de una mejor manera (con la primera letra en mayuscula)
+                        dificultadList.Items.Add(iDificultades[i].Nombre[0].ToString().ToUpper() + iDificultades[i].Nombre.Substring(1));
+                    }
+
+                    // Agrega a la lista del comboBox los elementos de la lista de usuarios
+                    for (int i = 0; i < iUsuarios.Count; i++)
+                    {
+                        usuarioList.Items.Add(iUsuarios[i].NombreUsuario);
+                    }
+                }
+
             }
+            catch (Exception)
+            {
+                // Si sale mal, cierra la ventana
+                MessageBox.Show("Something went wrong. Try again later.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }           
 
         }
 
@@ -63,28 +84,38 @@ namespace QuizApp.UI
 
                 int cantidadPreg = (int)cantidadPreguntas.Value;
 
-                // Obtiene las preguntas filtradas
-                iPreguntas = iPreguntaFacade.getPreguntas(dificultad, categoria, cantidadPreg);
-
-                // Si hay preguntas, pasa a la siguiente ventana pasandole los datos de usuario y las preguntas
-                if (iPreguntas.Count > 0)
+                try
                 {
-                    new UI.SesionQuiz(iNombreUsuario, iPreguntas).Show();
+                    // Obtiene las preguntas filtradas
+                    iPreguntas = iPreguntaFacade.getPreguntas(dificultad, categoria, cantidadPreg);
 
-                    // Resetar los inputs
-                    usuarioList.SelectedIndex = 0;
-                    dificultadList.SelectedIndex = 0;
-                    categoriaList.SelectedIndex = 0;
-                    cantidadPreguntas.ResetText();
+                    // Si hay preguntas, pasa a la siguiente ventana pasandole los datos de usuario y las preguntas
+                    if (iPreguntas.Count > 0)
+                    {
+                        new UI.SesionQuiz(iNombreUsuario, iPreguntas).Show();
 
-                    // Cerrar la ventana
-                    this.Hide();
+                        // Resetar los inputs
+                        usuarioList.SelectedIndex = 0;
+                        dificultadList.SelectedIndex = 0;
+                        categoriaList.SelectedIndex = 0;
+                        cantidadPreguntas.ResetText();
+
+                        // Cerrar la ventana
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("There are no questions for your selected options. Please, choose other options", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    MessageBox.Show("There are no questions for your selected options. Please, choose other options", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+                    // Si sale mal, cierra la ventana
+                    MessageBox.Show("Something went wrong. Try again later.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
                 }
+                
 
 
             }
@@ -130,11 +161,16 @@ namespace QuizApp.UI
             Button botonOk = new Button();
             Button botonCancelar = new Button();
 
-            ventana.Text = "Nuevo usuario";
-            tituloLabel.Text = "Escribe tu nombre de usuario";
+            ventana.Text = "New user";
+            ventana.Icon = Properties.Resources.favicon;
+            tituloLabel.Text = "Insert your user name";
+            tituloLabel.Font = new Font("Segoe UI", 10.0f);
 
-            botonOk.Text = "Aceptar";
-            botonCancelar.Text = "Cancelar";
+
+            botonOk.Text = "OK";
+            botonOk.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
+            botonCancelar.Text = "Cancel";
+            botonCancelar.Font = new Font("Segoe UI", 12.0f, FontStyle.Bold);
             botonOk.DialogResult = DialogResult.OK;
             botonCancelar.DialogResult = DialogResult.Cancel;
 

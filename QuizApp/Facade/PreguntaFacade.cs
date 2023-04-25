@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static QuizApp.DB.QuizContext;
 
 namespace QuizApp.Facade
 {
@@ -16,73 +17,117 @@ namespace QuizApp.Facade
         /// Obtiene la lista de preguntas seleccionada
         /// </summary>
         /// <returns></returns>
-        public List<Pregunta> getPreguntas(string pDificultadNombre, string pCategoriaNombre, int pCantidadPreg)
+        public List<Dominio.Pregunta> getPreguntas(string pDificultadNombre, string pCategoriaNombre, int pCantidadPreg)
         {
             // Crea el filtro segun los parametros pasados
             PreguntaFiltro filtro = new PreguntaFiltro(pDificultadNombre, pCategoriaNombre, pCantidadPreg);
 
-            // Obtiene los dto
-            List<PreguntaDTO> preguntaDTOs = Contexto.iInstancia.iPreguntaStorage.getPreguntasByFiltro(filtro);
+            try
+            {
+                // Obtiene los dto
+                List<PreguntaDTO> preguntaDTOs = Contexto.iInstancia.iPreguntaStorage.getPreguntasByFiltro(filtro);
 
-            // Los transforma a tipo Pregunta
-            List<Pregunta> preguntas = preguntaDTOs.Select(dto => new Pregunta(
-                                                dto.iPregunta,
-                                                getCategoriaByNombre(dto.iCategoriaNombre),
-                                                getDificultadByNombre(dto.iDificultadNombre),
-                                                dto.iCorrecta,
-                                                dto.iIncorrectaList.ToList())
-                                                ).ToList();
+                // Los transforma a tipo Pregunta
+                List<Dominio.Pregunta> preguntas = preguntaDTOs.Select(dto => new Dominio.Pregunta(
+                                                    dto.iPregunta,
+                                                    getCategoriaByNombre(dto.iCategoriaNombre),
+                                                    getDificultadByNombre(dto.iDificultadNombre),
+                                                    dto.iCorrecta,
+                                                    dto.iIncorrectaList.ToList())
+                                                    ).ToList();
 
-            return preguntas;
+                return preguntas;
+            }
+            catch (Exception ex)
+            {
+                Bitacora.Log($"Operation: Get filtered question list\nState: Error\nMessage: {ex.Message}");
+                throw;
+            }
+            
+
+            
         }
 
         /// <summary>
         /// Obtiene la lista de categorias existente
         /// </summary>
         /// <returns></returns>
-        public List<Categoria> getCategorias()
+        public List<Dominio.Categoria> getCategorias()
         {
-            List<CategoriaDTO> categoriasDTO = Contexto.iInstancia.iPreguntaStorage.getCategorias();
-            List<Categoria> categorias = new List<Categoria>();
-
-            foreach (var item in categoriasDTO)
+            try
             {
-                categorias.Add(new Categoria(item.iId, item.iCategoria));
+                List<CategoriaDTO> categoriasDTO = Contexto.iInstancia.iPreguntaStorage.getCategorias();
+                List<Dominio.Categoria> categorias = new List<Dominio.Categoria>();
+
+                foreach (var item in categoriasDTO)
+                {
+                    categorias.Add(new Dominio.Categoria(item.iId, item.iCategoria));
+                }
+
+                if (categorias.Count == 0) { Bitacora.Log("Operation: Get categories list\nState: Error\nMessage: There are no categories"); }
+                else { Bitacora.Log("Operation: Get categories list\nState: Success"); }
+
+                return categorias;
+            }
+            catch (Exception ex)
+            {
+                Bitacora.Log($"Operation: Get categories list\nState: Error\nMessage: {ex.Message}");
+                throw;
             }
             
-
-            return categorias;
         }
 
         /// <summary>
         /// Obtiene la lista de dificultades existente
         /// </summary>
         /// <returns></returns>
-        public List<Dificultad> getDificultades()
+        public List<Dominio.Dificultad> getDificultades()
         {
-            List<DificultadDTO> dificultadesDTO = Contexto.iInstancia.iPreguntaStorage.getDificultades();
-            List<Dificultad> dificultades = new List<Dificultad>();
-
-            foreach (var item in dificultadesDTO)
+            try
             {
-                dificultades.Add(new Dificultad(item.iId, item.iDificultad));
-            }
+                List<DificultadDTO> dificultadesDTO = Contexto.iInstancia.iPreguntaStorage.getDificultades();
+                List<Dominio.Dificultad> dificultades = new List<Dominio.Dificultad>();
 
-            return dificultades;
+                foreach (var item in dificultadesDTO)
+                {
+                    dificultades.Add(new Dominio.Dificultad(item.iId, item.iDificultad));
+                }
+
+                if (dificultades.Count == 0) { Bitacora.Log("Operation: Get difficulties list\nState: Error\nMessage: There are no difficulties"); }
+                else { Bitacora.Log("Operation: Get difficulties list\nState: Success"); }
+
+                return dificultades;
+            }
+            catch (Exception ex)
+            {
+                Bitacora.Log($"Operation: Get difficulties list\nState: Error\nMessage: {ex.Message}");
+                throw;
+            }
+            
         }
 
-        private Categoria getCategoriaByNombre(string pNombre)
+        /// <summary>
+        /// Obtiene la categoria buscando por su nombre
+        /// </summary>
+        /// <param name="pNombre"></param>
+        /// <returns></returns>
+        private Dominio.Categoria getCategoriaByNombre(string pNombre)
         {
             var categoriaEncontrada = getCategorias().First(c => c.Nombre == pNombre);
 
-            return new Categoria(categoriaEncontrada.Id, categoriaEncontrada.Nombre);
+            return new Dominio.Categoria(categoriaEncontrada.Id, categoriaEncontrada.Nombre);
         }
 
-        private Dificultad getDificultadByNombre(string pNombre)
+        /// <summary>
+        /// Obtiene la dificultad buscando por su nombre
+        /// </summary>
+        /// <param name="pNombre"></param>
+        /// <returns></returns>
+        private Dominio.Dificultad getDificultadByNombre(string pNombre)
         {
             var dificultadEncontrada = getDificultades().First(d => d.Nombre == pNombre);
 
-            return new Dificultad(dificultadEncontrada.Id, dificultadEncontrada.Nombre);
+            return new Dominio.Dificultad(dificultadEncontrada.Id, dificultadEncontrada.Nombre);
 
         }
        

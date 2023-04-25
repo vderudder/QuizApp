@@ -14,6 +14,11 @@ namespace QuizApp.Facade
 {
     internal class AdminFacade
     {
+        /// <summary>
+        /// Guarda las preguntas
+        /// </summary>
+        /// <param name="pUrl"></param>
+        /// <returns></returns>
         public async Task guardarPreguntasLocal(string pUrl)
         {
             try

@@ -36,6 +36,7 @@
             puntajeHeader = new Label();
             usuarioHeader = new Label();
             puestoHeader = new Label();
+            noResultadoLabel = new Label();
             rankingTable.SuspendLayout();
             SuspendLayout();
             // 
@@ -149,11 +150,23 @@
             puestoHeader.Text = "Position";
             puestoHeader.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // noResultadoLabel
+            // 
+            noResultadoLabel.AutoSize = true;
+            noResultadoLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            noResultadoLabel.ForeColor = Color.FromArgb(38, 70, 83);
+            noResultadoLabel.Location = new Point(338, 74);
+            noResultadoLabel.Name = "noResultadoLabel";
+            noResultadoLabel.Size = new Size(236, 21);
+            noResultadoLabel.TabIndex = 2;
+            noResultadoLabel.Text = "! There are no sessions to show !";
+            // 
             // RankingQuiz
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(884, 605);
+            Controls.Add(noResultadoLabel);
             Controls.Add(rankingTable);
             Controls.Add(tituloLabel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -177,5 +190,6 @@
         private Label tiempoHeader;
         private Label fechaHeader;
         private Label puestoHeader;
+        private Label noResultadoLabel;
     }
 }

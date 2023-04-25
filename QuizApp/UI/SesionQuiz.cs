@@ -112,14 +112,24 @@ namespace QuizApp.UI
             // Obtiene el tiempo insumido en la sesion
             double tiempo = iStopwatch.Elapsed.TotalSeconds;
 
-            // Se finaliza la sesion, calcula el puntaje
-            var sesionActual = iSesionFacade.finalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
+            try
+            {
+                // Se finaliza la sesion, calcula el puntaje
+                var sesionActual = iSesionFacade.finalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
 
-            // Cierra la ventana actual
-            this.Hide();
+                // Cierra la ventana actual
+                this.Hide();
 
-            // Abre la ventana de resultado pasandole la sesion actual
-            new UI.PuntajeQuiz(sesionActual).Show();
+                // Abre la ventana de resultado pasandole la sesion actual
+                new UI.PuntajeQuiz(sesionActual).Show();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong. Try again later.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            
+                    
         }
 
         private void sesionTimer_Tick(object sender, EventArgs e)

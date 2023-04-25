@@ -23,7 +23,17 @@ namespace QuizApp.Facade
             // Si no existe, entonces crea el usuario
             if (usuarioDto == null)
             {
-                usuarioDto = Contexto.iInstancia.iUsuarioStorage.createUsuario(pNombreUsuario);
+                try
+                {
+                    usuarioDto = Contexto.iInstancia.iUsuarioStorage.createUsuario(pNombreUsuario);
+                    Bitacora.Log($"Operation: User saved to DB\nState: Success");
+
+                }
+                catch (Exception ex)
+                {
+                    Bitacora.Log($"Operation: User saved to DB\nState: Error\nMessage: {ex.Message}");
+                    throw;
+                }
             }
 
             // Si existe, lo convierte a tipo Usuario
@@ -33,8 +43,21 @@ namespace QuizApp.Facade
             Sesion sesion = new Sesion(pTiempo, pPregResElegidas, usuario);
             sesion.finalizar();
 
-            // Crea la sesion
-            return Contexto.iInstancia.iSesionStorage.createSesion(usuario.Id, sesion.Puntaje, sesion.Tiempo, DateTime.Now);
+            try
+            {
+                // Crea la sesion
+                var sesionDTO = Contexto.iInstancia.iSesionStorage.createSesion(usuario.Id, sesion.Puntaje, sesion.Tiempo, DateTime.Now);
+                Bitacora.Log($"Operation: Game session saved to DB\nState: Success");
+
+                return sesionDTO;
+
+            }
+            catch (Exception ex)
+            {
+                Bitacora.Log($"Operation: Game session saved to DB\nState: Error\nMessage: {ex.Message}");
+                throw;
+            }
+            
         }
 
         /// <summary>
@@ -43,19 +66,31 @@ namespace QuizApp.Facade
         /// <returns></returns>
         public List<SesionDTO> getRanking()
         {
-            // Obtiene el ranking de sesiones
-            List<SesionDTO> sesionesList = Contexto.iInstancia.iSesionStorage.getSesionesByPuntaje();
-
-            for (int i = 0; i < sesionesList.Count; i++)
+            try
             {
-                // Busca el usuario para obtener el nombre
-                var usuario = Contexto.iInstancia.iUsuarioStorage.getUsuarioById(sesionesList[i].iUsuarioId);
+                // Obtiene el ranking de sesiones
+                List<SesionDTO> sesionesList = Contexto.iInstancia.iSesionStorage.getSesionesByPuntaje();
 
-                // Cambiar id de usuario por nombre para mostrarlo en la UI
-                sesionesList[i].iUsuarioId = usuario.iNombre;
+                for (int i = 0; i < sesionesList.Count; i++)
+                {
+                    // Busca el usuario para obtener el nombre
+                    var usuario = Contexto.iInstancia.iUsuarioStorage.getUsuarioById(sesionesList[i].iUsuarioId);
+
+                    // Cambiar id de usuario por nombre para mostrarlo en la UI
+                    sesionesList[i].iUsuarioId = usuario.iNombre;
+                }
+
+                if (sesionesList.Count > 0) { Bitacora.Log("Operation: Get Ranking\nState: Success"); }
+                else { Bitacora.Log("Operation: Get Ranking\nState: Error\nMessage: There are no sessions to show"); }
+
+                return sesionesList;
             }
-
-            return sesionesList;
+            catch (Exception ex)
+            {
+                Bitacora.Log($"Operation: Get Ranking\nState: Error\nMessage: {ex.Message}");
+                throw;
+            }
+            
         }
 
         
