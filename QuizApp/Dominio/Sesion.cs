@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Dominio
 {
+    /// <summary>
+    /// Clase para persistir las sesiones de juego
+    /// </summary>
     internal class Sesion
     {
         // Atributos
@@ -43,7 +46,7 @@ namespace QuizApp.Dominio
         /// <summary>
         /// Termina la sesion de juego, calculando el puntaje
         /// </summary>
-        public void finalizar()
+        public void Finalizar()
         {
             int cantCorrectas = 0;
             int cantPreguntas = iEleccionesUsuario.Count();

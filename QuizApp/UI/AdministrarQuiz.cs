@@ -26,7 +26,7 @@ namespace QuizApp.UI
 
         }
 
-        private async void botonGuardar_Click(object sender, EventArgs e)
+        private async void BotonGuardar_Click(object sender, EventArgs e)
         {
             // Chequea que haya texto en el input
             if (urlInput.Text.Length > 0)
@@ -36,7 +36,7 @@ namespace QuizApp.UI
                 {
                     try
                     {
-                        await Contexto.iInstancia.iAdminFacade.guardarPreguntasLocal(urlInput.Text);
+                        await Contexto.iInstancia.iAdminFacade.GuardarPreguntas(urlInput.Text);
 
                         MessageBox.Show("The questions were saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

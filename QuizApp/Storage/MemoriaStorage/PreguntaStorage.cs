@@ -92,7 +92,7 @@ namespace QuizApp.Storage.MemoriaStorage
         /// </summary>
         /// <param name="pFiltro"></param>
         /// <returns></returns>
-        public List<PreguntaDTO> getPreguntasByFiltro(PreguntaFiltro pFiltro)
+        public List<PreguntaDTO> GetPreguntasByFiltro(PreguntaFiltro pFiltro)
         {
             // Filtrar por categoria y dificultad
             var preguntasByCategoriaDificultad = iPreguntasEnMemoria.Where(p => (p.iDificultadNombre == pFiltro.iDificultad) && (p.iCategoriaNombre == pFiltro.iCategoria)).ToList();
@@ -104,7 +104,7 @@ namespace QuizApp.Storage.MemoriaStorage
 
         }
 
-        public Task guardarPreguntas(List<PreguntaDTO> pPreguntas)
+        public Task GuardarPreguntas(List<PreguntaDTO> pPreguntas)
         {
             foreach (var p in pPreguntas)
             {
@@ -118,7 +118,7 @@ namespace QuizApp.Storage.MemoriaStorage
         /// Obtiene las categorias
         /// </summary>
         /// <returns></returns>
-        public List<string> getCategorias()
+        public List<string> GetCategorias()
         {
             var categorias = iPreguntasEnMemoria.DistinctBy(p => p.iCategoriaNombre).ToList().Select(elem => elem.iCategoriaNombre).ToList();
 
@@ -129,7 +129,7 @@ namespace QuizApp.Storage.MemoriaStorage
         /// Obtiene las dificultades
         /// </summary>
         /// <returns></returns>
-        public List<string> getDificultades()
+        public List<string> GetDificultades()
         {
             var dificultades = iPreguntasEnMemoria.DistinctBy(p => p.iDificultadNombre).ToList().Select(elem => elem.iDificultadNombre).ToList();
 

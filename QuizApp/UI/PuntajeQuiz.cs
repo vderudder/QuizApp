@@ -16,13 +16,13 @@ namespace QuizApp.UI
             fechaLabel.Text = "Date: " + iSesion.iFecha.ToString("d");
         }
 
-        private void volverMenuButton_Click(object sender, EventArgs e)
+        private void VolverMenuButton_Click(object sender, EventArgs e)
         {
             this.Close();
             new Inicio().Show();
         }
 
-        private void salirButton_Click(object sender, EventArgs e)
+        private void SalirButton_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
         }

@@ -17,7 +17,7 @@ namespace QuizApp.Facade
         /// Obtiene la lista de preguntas seleccionada
         /// </summary>
         /// <returns></returns>
-        public List<Dominio.Pregunta> getPreguntas(string pDificultadNombre, string pCategoriaNombre, int pCantidadPreg)
+        public List<Dominio.Pregunta> GetPreguntas(string pDificultadNombre, string pCategoriaNombre, int pCantidadPreg)
         {
             // Crea el filtro segun los parametros pasados
             PreguntaFiltro filtro = new PreguntaFiltro(pDificultadNombre, pCategoriaNombre, pCantidadPreg);
@@ -25,13 +25,13 @@ namespace QuizApp.Facade
             try
             {
                 // Obtiene los dto
-                List<PreguntaDTO> preguntaDTOs = Contexto.iInstancia.iPreguntaStorage.getPreguntasByFiltro(filtro);
+                List<PreguntaDTO> preguntaDTOs = Contexto.iInstancia.iPreguntaStorage.GetPreguntasByFiltro(filtro);
 
                 // Los transforma a tipo Pregunta
                 List<Dominio.Pregunta> preguntas = preguntaDTOs.Select(dto => new Dominio.Pregunta(
                                                     dto.iPregunta,
-                                                    getCategoriaByNombre(dto.iCategoriaNombre),
-                                                    getDificultadByNombre(dto.iDificultadNombre),
+                                                    GetCategoriaByNombre(dto.iCategoriaNombre),
+                                                    GetDificultadByNombre(dto.iDificultadNombre),
                                                     dto.iCorrecta,
                                                     dto.iIncorrectaList.ToList())
                                                     ).ToList();
@@ -52,11 +52,11 @@ namespace QuizApp.Facade
         /// Obtiene la lista de categorias existente
         /// </summary>
         /// <returns></returns>
-        public List<Dominio.Categoria> getCategorias()
+        public List<Dominio.Categoria> GetCategorias()
         {
             try
             {
-                List<CategoriaDTO> categoriasDTO = Contexto.iInstancia.iPreguntaStorage.getCategorias();
+                List<CategoriaDTO> categoriasDTO = Contexto.iInstancia.iPreguntaStorage.GetCategorias();
                 List<Dominio.Categoria> categorias = new List<Dominio.Categoria>();
 
                 foreach (var item in categoriasDTO)
@@ -81,11 +81,11 @@ namespace QuizApp.Facade
         /// Obtiene la lista de dificultades existente
         /// </summary>
         /// <returns></returns>
-        public List<Dominio.Dificultad> getDificultades()
+        public List<Dominio.Dificultad> GetDificultades()
         {
             try
             {
-                List<DificultadDTO> dificultadesDTO = Contexto.iInstancia.iPreguntaStorage.getDificultades();
+                List<DificultadDTO> dificultadesDTO = Contexto.iInstancia.iPreguntaStorage.GetDificultades();
                 List<Dominio.Dificultad> dificultades = new List<Dominio.Dificultad>();
 
                 foreach (var item in dificultadesDTO)
@@ -111,9 +111,9 @@ namespace QuizApp.Facade
         /// </summary>
         /// <param name="pNombre"></param>
         /// <returns></returns>
-        private Dominio.Categoria getCategoriaByNombre(string pNombre)
+        private Dominio.Categoria GetCategoriaByNombre(string pNombre)
         {
-            var categoriaEncontrada = getCategorias().First(c => c.Nombre == pNombre);
+            var categoriaEncontrada = GetCategorias().First(c => c.Nombre == pNombre);
 
             return new Dominio.Categoria(categoriaEncontrada.Id, categoriaEncontrada.Nombre);
         }
@@ -123,9 +123,9 @@ namespace QuizApp.Facade
         /// </summary>
         /// <param name="pNombre"></param>
         /// <returns></returns>
-        private Dominio.Dificultad getDificultadByNombre(string pNombre)
+        private Dominio.Dificultad GetDificultadByNombre(string pNombre)
         {
-            var dificultadEncontrada = getDificultades().First(d => d.Nombre == pNombre);
+            var dificultadEncontrada = GetDificultades().First(d => d.Nombre == pNombre);
 
             return new Dominio.Dificultad(dificultadEncontrada.Id, dificultadEncontrada.Nombre);
 

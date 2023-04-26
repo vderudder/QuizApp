@@ -15,7 +15,7 @@ namespace QuizApp.Storage.DBStorage
         /// </summary>
         /// <param name="pFiltro"></param>
         /// <returns></returns>
-        public List<PreguntaDTO> getPreguntasByFiltro(PreguntaFiltro pFiltro)
+        public List<PreguntaDTO> GetPreguntasByFiltro(PreguntaFiltro pFiltro)
         {
             // Filtrar por categoria y dificultad
             var preguntasByCategoriaDificultad = Contexto.iServicioBD.Preguntas.Where(p => p.Dificultad.DificultadNombre == pFiltro.iDificultad && p.Categoria.CategoriaNombre == pFiltro.iCategoria).ToList();
@@ -33,11 +33,11 @@ namespace QuizApp.Storage.DBStorage
 
         }
 
-        public Task guardarPreguntas(List<PreguntaDTO> pPreguntas)
+        public Task GuardarPreguntas(List<PreguntaDTO> pPreguntas)
         {
             foreach (var p in pPreguntas)
             {
-                var categoriaId = getCategoriaIdByNombre(p.iCategoriaNombre);
+                var categoriaId = GetCategoriaIdByNombre(p.iCategoriaNombre);
                 if (categoriaId == null)
                 {
                     var categoriaContext = Contexto.iServicioBD.Categorias.Add(new DB.QuizContext.Categoria() { CategoriaId = Guid.NewGuid().ToString(), CategoriaNombre = p.iCategoriaNombre });
@@ -46,7 +46,7 @@ namespace QuizApp.Storage.DBStorage
                     categoriaId = categoriaContext.Entity.CategoriaId;
                 }
 
-                var dificultadId = getDificultadIdByNombre(p.iDificultadNombre);
+                var dificultadId = GetDificultadIdByNombre(p.iDificultadNombre);
                 if (dificultadId == null)
                 {
                     var dificultadContext = Contexto.iServicioBD.Dificultades.Add(new DB.QuizContext.Dificultad() { DificultadId = Guid.NewGuid().ToString(), DificultadNombre = p.iDificultadNombre });
@@ -55,7 +55,7 @@ namespace QuizApp.Storage.DBStorage
                     dificultadId = dificultadContext.Entity.DificultadId;
                 }
 
-                if (!existePregunta(p.iPregunta))
+                if (!ExistePregunta(p.iPregunta))
                 {
                     Contexto.iServicioBD.Preguntas.Add(new DB.QuizContext.Pregunta() { PreguntaId = Guid.NewGuid().ToString(), PreguntaNombre = p.iPregunta, PreguntaCorrecta = p.iCorrecta, PreguntaIncorrectas = p.iIncorrectaList.ToArray(), CategoriaId = categoriaId, DificultadId = dificultadId });
                     Contexto.iServicioBD.SaveChanges();
@@ -69,7 +69,7 @@ namespace QuizApp.Storage.DBStorage
         /// Obtiene las categorias
         /// </summary>
         /// <returns></returns>
-        public List<CategoriaDTO> getCategorias()
+        public List<CategoriaDTO> GetCategorias()
         {
             var categoriasContext = Contexto.iServicioBD.Categorias.ToList();
             var categoriasDTO = new List<CategoriaDTO>();
@@ -86,7 +86,7 @@ namespace QuizApp.Storage.DBStorage
         /// Obtiene las dificultades
         /// </summary>
         /// <returns></returns>
-        public List<DificultadDTO> getDificultades()
+        public List<DificultadDTO> GetDificultades()
         {
             var dificultadesContext = Contexto.iServicioBD.Dificultades.ToList();
             var dificultadesDTO = new List<DificultadDTO>();
@@ -99,7 +99,7 @@ namespace QuizApp.Storage.DBStorage
             return dificultadesDTO;
         }
 
-        public string? getCategoriaIdByNombre(string pNombre)
+        public string? GetCategoriaIdByNombre(string pNombre)
         {
             var cat = Contexto.iServicioBD.Categorias.Where(c => c.CategoriaNombre == pNombre).SingleOrDefault();
 
@@ -113,7 +113,7 @@ namespace QuizApp.Storage.DBStorage
             }
                 
         }
-        public string? getDificultadIdByNombre(string pNombre)
+        public string? GetDificultadIdByNombre(string pNombre)
         {
             var dif = Contexto.iServicioBD.Dificultades.Where(d => d.DificultadNombre == pNombre).SingleOrDefault();
 
@@ -128,7 +128,7 @@ namespace QuizApp.Storage.DBStorage
             
         }
 
-        public bool existePregunta(string pPregunta)
+        public bool ExistePregunta(string pPregunta)
         {
             return Contexto.iServicioBD.Preguntas.Any(p => p.PreguntaNombre == pPregunta);
         }

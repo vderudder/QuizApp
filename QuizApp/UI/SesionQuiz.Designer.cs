@@ -39,7 +39,7 @@
             // sesionTimer
             // 
             sesionTimer.Enabled = true;
-            sesionTimer.Tick += sesionTimer_Tick;
+            sesionTimer.Tick += SesionTimer_Tick;
             // 
             // labelTiempo
             // 
@@ -75,7 +75,7 @@
             botonFinalizar.TabIndex = 2;
             botonFinalizar.Text = "FINISH";
             botonFinalizar.UseVisualStyleBackColor = false;
-            botonFinalizar.Click += botonFinalizar_Click;
+            botonFinalizar.Click += BotonFinalizar_Click;
             // 
             // SesionQuiz
             // 

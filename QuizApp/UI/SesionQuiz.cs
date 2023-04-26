@@ -85,7 +85,7 @@ namespace QuizApp.UI
             iStopwatch.Start();
         }
 
-        private void botonFinalizar_Click(object sender, EventArgs e)
+        private void BotonFinalizar_Click(object sender, EventArgs e)
         {
             List<PreguntaYRespuesta> pregResElegidas = new List<PreguntaYRespuesta>();
 
@@ -132,7 +132,7 @@ namespace QuizApp.UI
                     
         }
 
-        private void sesionTimer_Tick(object sender, EventArgs e)
+        private void SesionTimer_Tick(object sender, EventArgs e)
         {
             labelTiempo.Text = "Time: " + iStopwatch.Elapsed.ToString("mm\\:ss\\.ff");
         }

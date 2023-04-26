@@ -16,7 +16,7 @@ namespace QuizApp.Storage.DBStorage
 {
     internal class AdminStorage
     {
-        public async Task<List<PreguntaDTO>> getPreguntas(string pUrl)
+        public async Task<List<PreguntaDTO>> GetPreguntas(string pUrl)
         {
             HttpClient client = new HttpClient();
 

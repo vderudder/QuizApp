@@ -82,7 +82,7 @@
             volverMenuButton.TabIndex = 3;
             volverMenuButton.Text = "MAIN MENU";
             volverMenuButton.UseVisualStyleBackColor = false;
-            volverMenuButton.Click += volverMenuButton_Click;
+            volverMenuButton.Click += VolverMenuButton_Click;
             // 
             // fechaLabel
             // 
@@ -107,7 +107,7 @@
             salirButton.TabIndex = 5;
             salirButton.Text = "EXIT";
             salirButton.UseVisualStyleBackColor = false;
-            salirButton.Click += salirButton_Click;
+            salirButton.Click += SalirButton_Click;
             // 
             // resultadosLabel
             // 

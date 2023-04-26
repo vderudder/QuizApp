@@ -18,14 +18,14 @@ namespace QuizApp.Facade
         public SesionDTO finalizarSesion(string pNombreUsuario, double pTiempo, List<PreguntaYRespuesta> pPregResElegidas)
         {
             // Obtiene el dto
-            var usuarioDto = Contexto.iInstancia.iUsuarioStorage.getUsuarioByNombre(pNombreUsuario);
+            var usuarioDto = Contexto.iInstancia.iUsuarioStorage.GetUsuarioByNombre(pNombreUsuario);
 
             // Si no existe, entonces crea el usuario
             if (usuarioDto == null)
             {
                 try
                 {
-                    usuarioDto = Contexto.iInstancia.iUsuarioStorage.createUsuario(pNombreUsuario);
+                    usuarioDto = Contexto.iInstancia.iUsuarioStorage.CreateUsuario(pNombreUsuario);
                     Bitacora.Log($"Operation: User saved to DB\nState: Success");
 
                 }
@@ -41,12 +41,12 @@ namespace QuizApp.Facade
 
             // Llama al metodo del dominio
             Sesion sesion = new Sesion(pTiempo, pPregResElegidas, usuario);
-            sesion.finalizar();
+            sesion.Finalizar();
 
             try
             {
                 // Crea la sesion
-                var sesionDTO = Contexto.iInstancia.iSesionStorage.createSesion(usuario.Id, sesion.Puntaje, sesion.Tiempo, DateTime.Now);
+                var sesionDTO = Contexto.iInstancia.iSesionStorage.CreateSesion(usuario.Id, sesion.Puntaje, sesion.Tiempo, DateTime.Now);
                 Bitacora.Log($"Operation: Game session saved to DB\nState: Success");
 
                 return sesionDTO;
@@ -69,12 +69,12 @@ namespace QuizApp.Facade
             try
             {
                 // Obtiene el ranking de sesiones
-                List<SesionDTO> sesionesList = Contexto.iInstancia.iSesionStorage.getSesionesByPuntaje();
+                List<SesionDTO> sesionesList = Contexto.iInstancia.iSesionStorage.GetSesionesByPuntaje();
 
                 for (int i = 0; i < sesionesList.Count; i++)
                 {
                     // Busca el usuario para obtener el nombre
-                    var usuario = Contexto.iInstancia.iUsuarioStorage.getUsuarioById(sesionesList[i].iUsuarioId);
+                    var usuario = Contexto.iInstancia.iUsuarioStorage.GetUsuarioById(sesionesList[i].iUsuarioId);
 
                     // Cambiar id de usuario por nombre para mostrarlo en la UI
                     sesionesList[i].iUsuarioId = usuario.iNombre;

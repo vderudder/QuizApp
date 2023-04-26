@@ -15,7 +15,7 @@ namespace QuizApp.Storage.DBStorage
         /// </summary>
         /// <param name="pNombre"></param>
         /// <returns></returns>
-        public UsuarioDTO? getUsuarioByNombre(string pNombre)
+        public UsuarioDTO? GetUsuarioByNombre(string pNombre)
         {
             var usuario = Contexto.iServicioBD.Usuarios.Where(u => u.UsuarioNombre == pNombre).SingleOrDefault();
 
@@ -36,12 +36,12 @@ namespace QuizApp.Storage.DBStorage
         /// </summary>
         /// <param name="pNombreUsuario"></param>
         /// <returns></returns>
-        public UsuarioDTO createUsuario(string pNombreUsuario)
+        public UsuarioDTO CreateUsuario(string pNombreUsuario)
         {
             Contexto.iServicioBD.Usuarios.Add(new DB.QuizContext.Usuario { UsuarioId = Guid.NewGuid().ToString(), UsuarioNombre = pNombreUsuario });
             Contexto.iServicioBD.SaveChanges();
 
-            var usuario = getUsuarioByNombre(pNombreUsuario);
+            var usuario = GetUsuarioByNombre(pNombreUsuario);
 
             return usuario;
         }
@@ -50,7 +50,7 @@ namespace QuizApp.Storage.DBStorage
         /// Obtiene todos los nombres de usuarios
         /// </summary>
         /// <returns></returns>
-        public List<UsuarioDTO> getUsuarios()
+        public List<UsuarioDTO> GetUsuarios()
         {
             var usuariosContext = Contexto.iServicioBD.Usuarios.ToList();
             var usuariosDTO = new List<UsuarioDTO>();
@@ -68,7 +68,7 @@ namespace QuizApp.Storage.DBStorage
         /// </summary>
         /// <param name="pId"></param>
         /// <returns></returns>
-        public UsuarioDTO? getUsuarioById(string pId)
+        public UsuarioDTO? GetUsuarioById(string pId)
         {
             var usuario = Contexto.iServicioBD.Usuarios.First(u => u.UsuarioId == pId);
             var usuarioDTO = new UsuarioDTO() { iId = usuario.UsuarioId, iNombre = usuario.UsuarioNombre };

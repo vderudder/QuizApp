@@ -22,7 +22,7 @@ namespace QuizApp.Storage.MemoriaStorage
         /// </summary>
         /// <param name="pNombre"></param>
         /// <returns></returns>
-        public UsuarioDTO? getUsuarioByNombre(string pNombre)
+        public UsuarioDTO? GetUsuarioByNombre(string pNombre)
         {
             return iUsuariosEnMemoria.Find((u) => u.iNombre == pNombre);
         }
@@ -32,7 +32,7 @@ namespace QuizApp.Storage.MemoriaStorage
         /// </summary>
         /// <param name="pNombreUsuario"></param>
         /// <returns></returns>
-        public UsuarioDTO createUsuario(string pNombreUsuario)
+        public UsuarioDTO CreateUsuario(string pNombreUsuario)
         {
             var usuario = new UsuarioDTO() { iId = Guid.NewGuid().ToString(), iNombre = pNombreUsuario };
             iUsuariosEnMemoria.Add(usuario);
@@ -43,7 +43,7 @@ namespace QuizApp.Storage.MemoriaStorage
         /// Obtiene todos los usuarios
         /// </summary>
         /// <returns></returns>
-        public List<UsuarioDTO> getUsuarios()
+        public List<UsuarioDTO> GetUsuarios()
         {
             return iUsuariosEnMemoria;
         }
@@ -53,7 +53,7 @@ namespace QuizApp.Storage.MemoriaStorage
         /// </summary>
         /// <param name="pId"></param>
         /// <returns></returns>
-        public UsuarioDTO? getUsuarioById(string pId)
+        public UsuarioDTO? GetUsuarioById(string pId)
         {
             return iUsuariosEnMemoria.Find((u) => u.iId == pId);
 

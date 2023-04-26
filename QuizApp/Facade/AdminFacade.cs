@@ -19,13 +19,13 @@ namespace QuizApp.Facade
         /// </summary>
         /// <param name="pUrl"></param>
         /// <returns></returns>
-        public async Task guardarPreguntasLocal(string pUrl)
+        public async Task GuardarPreguntas(string pUrl)
         {
             try
             {
-                var preguntas = await Contexto.iInstancia.iAdminStorage.getPreguntas(pUrl);
+                var preguntas = await Contexto.iInstancia.iAdminStorage.GetPreguntas(pUrl);
 
-                await Contexto.iInstancia.iPreguntaStorage.guardarPreguntas(preguntas);
+                await Contexto.iInstancia.iPreguntaStorage.GuardarPreguntas(preguntas);
 
                 Bitacora.Log("Operation: Questions saved to DB\nState: Success");
             }

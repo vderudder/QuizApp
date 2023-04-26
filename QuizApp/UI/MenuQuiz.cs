@@ -26,10 +26,10 @@ namespace QuizApp.UI
                 // Cambia el cursor mientras espera
                 Cursor.Current = Cursors.WaitCursor;
                 // Obtiene las categorias y dificultades
-                iCategorias = iPreguntaFacade.getCategorias();
-                iDificultades = iPreguntaFacade.getDificultades();
+                iCategorias = iPreguntaFacade.GetCategorias();
+                iDificultades = iPreguntaFacade.GetDificultades();
                 // Obtiene los usuarios
-                iUsuarios = iUsuarioFacade.getUsuarios();
+                iUsuarios = iUsuarioFacade.GetUsuarios();
 
                 if (iCategorias.Count == 0 || iDificultades.Count == 0)
                 {
@@ -87,7 +87,7 @@ namespace QuizApp.UI
                 try
                 {
                     // Obtiene las preguntas filtradas
-                    iPreguntas = iPreguntaFacade.getPreguntas(dificultad, categoria, cantidadPreg);
+                    iPreguntas = iPreguntaFacade.GetPreguntas(dificultad, categoria, cantidadPreg);
 
                     // Si hay preguntas, pasa a la siguiente ventana pasandole los datos de usuario y las preguntas
                     if (iPreguntas.Count > 0)

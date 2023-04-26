@@ -17,7 +17,7 @@ namespace QuizApp.Storage.DBStorage
         /// <param name="pTiempo">El tiempo insumido de la sesion</param>
         /// <param name="pFecha">La fecha que se realizo la sesion</param>
         /// <returns></returns>
-        public SesionDTO createSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
+        public SesionDTO CreateSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
         {
             Contexto.iServicioBD.Sesiones.Add(new DB.QuizContext.Sesion() {SesionId = Guid.NewGuid().ToString(), UsuarioId = pUsuarioId, SesionPuntaje = pPuntaje, SesionTiempo = pTiempo, SesionFecha = pFecha });
             Contexto.iServicioBD.SaveChanges();
@@ -30,7 +30,7 @@ namespace QuizApp.Storage.DBStorage
         /// Obtiene las sesiones ordenadas por puntaje de mayor a menor, tomando solo las primeras 20
         /// </summary>
         /// <returns></returns>
-        public List<SesionDTO> getSesionesByPuntaje()
+        public List<SesionDTO> GetSesionesByPuntaje()
         {
             var sesionesByPuntaje = Contexto.iServicioBD.Sesiones.OrderByDescending(ses => ses.SesionPuntaje).ToList();
 

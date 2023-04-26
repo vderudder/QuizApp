@@ -16,12 +16,12 @@ namespace QuizApp.Facade
         /// Obtiene la lista de usuarios existente
         /// </summary>
         /// <returns></returns>
-        public List<Usuario> getUsuarios()
+        public List<Usuario> GetUsuarios()
         {
             try
             {
                 // Obtiene los dto
-                List<UsuarioDTO> usuariosDTO = Contexto.iInstancia.iUsuarioStorage.getUsuarios();
+                List<UsuarioDTO> usuariosDTO = Contexto.iInstancia.iUsuarioStorage.GetUsuarios();
                 List<Usuario> usuarios = new List<Usuario>();
 
                 foreach (var item in usuariosDTO)

@@ -23,22 +23,22 @@ namespace QuizApp.Storage.MemoriaStorage
         /// <param name="pTiempo">El tiempo insumido de la sesion</param>
         /// <param name="pFecha">La fecha que se realizo la sesion</param>
         /// <returns></returns>
-        public SesionDTO createSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
+        public SesionDTO CreateSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
         {
             var sesion = new SesionDTO(Guid.NewGuid().ToString(), pUsuarioId, pPuntaje, pTiempo, pFecha);
             iSesionesEnMemoria.Add(sesion);
-            return getCopy(sesion);
+            return GetCopy(sesion);
         }
 
         /// <summary>
         /// Obtiene las sesiones ordenadas por puntaje de mayor a menor, tomando solo las primeras 20
         /// </summary>
         /// <returns></returns>
-        public List<SesionDTO> getSesionesByPuntaje()
+        public List<SesionDTO> GetSesionesByPuntaje()
         {
             var list = iSesionesEnMemoria.OrderByDescending(ses => ses.iPuntaje).ToList();
 
-            return list.Take(20).Select(s => getCopy(s)).ToList();
+            return list.Take(20).Select(s => GetCopy(s)).ToList();
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace QuizApp.Storage.MemoriaStorage
         /// </summary>
         /// <param name="pSesion"></param>
         /// <returns></returns>
-        private SesionDTO getCopy(SesionDTO pSesion)
+        private SesionDTO GetCopy(SesionDTO pSesion)
         {
             return new SesionDTO(pSesion.iId, pSesion.iUsuarioId, pSesion.iPuntaje, pSesion.iTiempo, pSesion.iFecha);
         }

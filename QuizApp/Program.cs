@@ -18,7 +18,7 @@ namespace QuizApp
             }
 
             // Se inicializa las fachadas y storages
-            Contexto.iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaDBStorage(), new UsuarioDBStorage(), new SesionDBStorage(), new AdminStorage());
+            Contexto.Iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaDBStorage(), new UsuarioDBStorage(), new SesionDBStorage(), new AdminStorage());
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 

@@ -40,7 +40,7 @@ namespace QuizApp.Dominio
                     break;
             }
             // Estas son las dificultades requeridas en el TP, 
-            // Se dejo un constructor de un solo atributo para que no haya forma de que difiera el factor de su correspondiente nombre
+            // Se dejo un constructor de este tipo para que no haya forma de que difiera el factor de su correspondiente nombre
             // En un futuro se podria ampliar esto y que el factor sea independiente del nombre
         }
     }

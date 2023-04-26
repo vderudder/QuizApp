@@ -87,7 +87,7 @@
             botonGuardar.TabIndex = 4;
             botonGuardar.Text = "SAVE";
             botonGuardar.UseVisualStyleBackColor = false;
-            botonGuardar.Click += botonGuardar_Click;
+            botonGuardar.Click += BotonGuardar_Click;
             // 
             // AdministrarQuiz
             // 
