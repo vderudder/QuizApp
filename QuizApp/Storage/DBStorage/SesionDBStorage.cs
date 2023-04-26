@@ -1,9 +1,5 @@
 ﻿using QuizApp.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuizApp.IO;
 
 namespace QuizApp.Storage.DBStorage
 {
@@ -19,10 +15,10 @@ namespace QuizApp.Storage.DBStorage
         /// <returns></returns>
         public SesionDTO CreateSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
         {
-            Contexto.iServicioBD.Sesiones.Add(new DB.QuizContext.Sesion() {SesionId = Guid.NewGuid().ToString(), UsuarioId = pUsuarioId, SesionPuntaje = pPuntaje, SesionTiempo = pTiempo, SesionFecha = pFecha });
+            var sesionContext = Contexto.iServicioBD.Sesiones.Add(new DB.QuizContext.Sesion() {SesionId = Guid.NewGuid().ToString(), UsuarioId = pUsuarioId, SesionPuntaje = pPuntaje, SesionTiempo = pTiempo, SesionFecha = pFecha });
             Contexto.iServicioBD.SaveChanges();
             
-            return new SesionDTO() { iUsuarioId = pUsuarioId, iPuntaje = pPuntaje, iTiempo = pTiempo, iFecha = pFecha };
+            return new SesionDTO(sesionContext.Entity.SesionId, pUsuarioId, pPuntaje, pTiempo, pFecha);
 
         }
 
@@ -40,7 +36,7 @@ namespace QuizApp.Storage.DBStorage
 
             foreach (var item in sesionesTruncadas)
             {
-                sesionesDTO.Add(new SesionDTO() { iId = item.SesionId, iUsuarioId = item.UsuarioId, iPuntaje = item.SesionPuntaje, iTiempo = item.SesionTiempo, iFecha = item.SesionFecha });
+                sesionesDTO.Add(new SesionDTO(item.SesionId, item.UsuarioId, item.SesionPuntaje, item.SesionTiempo, item.SesionFecha));
             };
 
             return sesionesDTO;
@@ -48,22 +44,5 @@ namespace QuizApp.Storage.DBStorage
 
     }
 
-    public class SesionDTO
-    {
-        public string iId;
-        public string iUsuarioId;
-        public double iPuntaje;
-        public double iTiempo;
-        public DateTime iFecha;
-
-        public SesionDTO(string iId, string iUsuarioId, double iPuntaje, double iTiempo, DateTime iFecha)
-        {
-            this.iId = iId;
-            this.iUsuarioId = iUsuarioId;
-            this.iPuntaje = iPuntaje;
-            this.iTiempo = iTiempo;
-            this.iFecha = iFecha;
-        }
-        public SesionDTO() { }
-    }
+   
 }

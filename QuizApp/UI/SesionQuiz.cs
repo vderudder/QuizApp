@@ -1,17 +1,8 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Dominio.Util;
 using QuizApp.Facade;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace QuizApp.UI
 {
@@ -115,7 +106,7 @@ namespace QuizApp.UI
             try
             {
                 // Se finaliza la sesion, calcula el puntaje
-                var sesionActual = iSesionFacade.finalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
+                var sesionActual = iSesionFacade.FinalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
 
                 // Cierra la ventana actual
                 this.Hide();

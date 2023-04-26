@@ -1,12 +1,7 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Dominio.Util;
-using QuizApp.Storage.DBStorage;
 using QuizApp.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuizApp.IO;
 
 namespace QuizApp.Facade
 {
@@ -15,7 +10,7 @@ namespace QuizApp.Facade
         /// <summary>
         /// Guarda la sesion de juego
         /// </summary>
-        public SesionDTO finalizarSesion(string pNombreUsuario, double pTiempo, List<PreguntaYRespuesta> pPregResElegidas)
+        public SesionDTO FinalizarSesion(string pNombreUsuario, double pTiempo, List<PreguntaYRespuesta> pPregResElegidas)
         {
             // Obtiene el dto
             var usuarioDto = Contexto.iInstancia.iUsuarioStorage.GetUsuarioByNombre(pNombreUsuario);
@@ -64,7 +59,7 @@ namespace QuizApp.Facade
         /// Obtiene la lista de sesiones que entran en el ranking top 20
         /// </summary>
         /// <returns></returns>
-        public List<SesionDTO> getRanking()
+        public List<SesionDTO> GetRanking()
         {
             try
             {

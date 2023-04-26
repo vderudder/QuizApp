@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Runtime.InteropServices.JavaScript;
-using System.Security.Policy;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
 using System.Web;
+using QuizApp.IO;
 
 namespace QuizApp.Storage.DBStorage
 {
@@ -23,14 +13,14 @@ namespace QuizApp.Storage.DBStorage
             // Se hace la request
             var response = await client.GetFromJsonAsync<JsonResponse>(pUrl);
 
-            if (response.response_code != 0)
+            if (response.Response_code != 0)
             {
-                if (response.response_code == 1)
+                if (response.Response_code == 1)
                 {
                     throw new Excepcion.NoResultException();
                 }
 
-                if (response.response_code == 2)
+                if (response.Response_code == 2)
                 {
                     throw new Excepcion.InvalidParameterException();
                 }
@@ -42,17 +32,17 @@ namespace QuizApp.Storage.DBStorage
             List<PreguntaDTO> preguntas = new();
 
             // Se recorre la response para formar los datos a guardar
-            for (int i = 0; i < response.results.Length; i++)
+            for (int i = 0; i < response.Results.Length; i++)
             {
-                var preg = response.results[i];
+                var preg = response.Results[i];
                 List<string> incorrectas = new();
 
-                foreach (var item in preg.incorrect_answers)
+                foreach (var item in preg.Incorrect_answers)
                 {
                     incorrectas.Add(HttpUtility.HtmlDecode(item));
                 }
 
-                var preguntaDTO = new PreguntaDTO(HttpUtility.HtmlDecode(preg.question), preg.difficulty, preg.category, HttpUtility.HtmlDecode(preg.correct_answer), incorrectas);
+                var preguntaDTO = new PreguntaDTO(HttpUtility.HtmlDecode(preg.Question), preg.Difficulty, preg.Category, HttpUtility.HtmlDecode(preg.Correct_answer), incorrectas);
                 preguntas.Add(preguntaDTO);
             }
 
@@ -63,19 +53,19 @@ namespace QuizApp.Storage.DBStorage
 
         internal record class JsonResponse
         {
-            public int response_code { get; set; }
-            public JsonResults[] results { get; set; }
+            public int Response_code { get; set; }
+            public JsonResults[] Results { get; set; }
 
         }
 
         internal record class JsonResults
         {
-            public string category { get; set; }
-            public string type { get; set; }
-            public string difficulty { get; set; }
-            public string question { get; set; }
-            public string correct_answer { get; set; }
-            public string[] incorrect_answers { get; set; }
+            public string Category { get; set; }
+            public string Type { get; set; }
+            public string Difficulty { get; set; }
+            public string Question { get; set; }
+            public string Correct_answer { get; set; }
+            public string[] Incorrect_answers { get; set; }
         }
     }
 }

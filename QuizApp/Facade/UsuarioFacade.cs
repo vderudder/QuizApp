@@ -1,12 +1,6 @@
 ﻿using QuizApp.Dominio;
-using QuizApp.Storage;
-using QuizApp.Storage.DBStorage;
 using QuizApp.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuizApp.IO;
 
 namespace QuizApp.Facade
 {

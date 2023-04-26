@@ -1,10 +1,5 @@
-﻿using QuizApp.Storage.MemoriaStorage;
-using QuizApp.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuizApp.UI;
+using QuizApp.IO;
 
 namespace QuizApp.Storage.DBStorage
 {
@@ -150,48 +145,4 @@ namespace QuizApp.Storage.DBStorage
         }
     }
 
-    internal class PreguntaDTO
-    {
-        // Atributos
-        public string iPregunta;
-        public string iDificultadNombre;
-        public string iCategoriaNombre;
-        public string iCorrecta;
-        public List<string> iIncorrectaList;
-
-        public PreguntaDTO(string pPregunta, string pDificultadNombre, string pCategoriaNombre, string pCorrecta, List<string> pIncorrectaList)
-        {
-            iPregunta = pPregunta;
-            iDificultadNombre = pDificultadNombre;
-            iCategoriaNombre = pCategoriaNombre;
-            iCorrecta = pCorrecta;
-            iIncorrectaList = pIncorrectaList;
-        }
-    }
-
-    internal class CategoriaDTO
-    {
-        // Atributos
-        public string iId;
-        public string iCategoria;
-
-        public CategoriaDTO(string pId, string pCategoria)
-        {
-            iId = pId;
-            iCategoria = pCategoria;
-        }
-    }
-
-    internal class DificultadDTO
-    {
-        // Atributos
-        public string iId;
-        public string iDificultad;
-
-        public DificultadDTO(string pId, string pDificultad)
-        {
-            iId = pId;
-            iDificultad = pDificultad;
-        }
-    }
 }

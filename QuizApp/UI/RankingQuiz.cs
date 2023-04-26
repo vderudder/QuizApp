@@ -1,5 +1,5 @@
 ﻿using QuizApp.Facade;
-using QuizApp.Storage.DBStorage;
+using QuizApp.IO;
 
 namespace QuizApp.UI
 {
@@ -17,7 +17,7 @@ namespace QuizApp.UI
                 // Cambia el cursor mientras espera
                 Cursor.Current = Cursors.WaitCursor;
                 // Obtiene el ranking
-                iRanking = iSesionFacade.getRanking();
+                iRanking = iSesionFacade.GetRanking();
 
             }
             catch (Exception)

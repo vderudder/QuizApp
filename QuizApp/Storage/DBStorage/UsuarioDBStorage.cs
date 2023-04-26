@@ -1,10 +1,5 @@
-﻿using QuizApp.Dominio;
-using QuizApp.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuizApp.UI;
+using QuizApp.IO;
 
 namespace QuizApp.Storage.DBStorage
 {
@@ -25,7 +20,7 @@ namespace QuizApp.Storage.DBStorage
             }
             else
             {
-                return new UsuarioDTO() { iId = usuario.UsuarioId, iNombre = usuario.UsuarioNombre };
+                return new UsuarioDTO(usuario.UsuarioId, usuario.UsuarioNombre);
             }
 
 
@@ -57,7 +52,7 @@ namespace QuizApp.Storage.DBStorage
 
             foreach (var item in usuariosContext)
             {
-                usuariosDTO.Add(new UsuarioDTO() { iId = item.UsuarioId, iNombre = item.UsuarioNombre });
+                usuariosDTO.Add(new UsuarioDTO(item.UsuarioId, item.UsuarioNombre));
             }
 
             return usuariosDTO;
@@ -71,16 +66,10 @@ namespace QuizApp.Storage.DBStorage
         public UsuarioDTO? GetUsuarioById(string pId)
         {
             var usuario = Contexto.iServicioBD.Usuarios.First(u => u.UsuarioId == pId);
-            var usuarioDTO = new UsuarioDTO() { iId = usuario.UsuarioId, iNombre = usuario.UsuarioNombre };
+            var usuarioDTO = new UsuarioDTO(usuario.UsuarioId, usuario.UsuarioNombre);
 
             return usuarioDTO;
 
         }
-    }
-
-    internal class UsuarioDTO
-    {
-        public string iId;
-        public string iNombre;
     }
 }
