@@ -90,7 +90,7 @@ namespace QuizApp.UI
                     iPreguntas = iPreguntaFacade.GetPreguntas(dificultad, categoria, cantidadPreg);
 
                     // Si hay preguntas, pasa a la siguiente ventana pasandole los datos de usuario y las preguntas
-                    if (iPreguntas.Count > 0)
+                    if (iPreguntas.Count >= 10)
                     {
                         new UI.SesionQuiz(iNombreUsuario, iPreguntas).Show();
 
@@ -105,7 +105,7 @@ namespace QuizApp.UI
                     }
                     else
                     {
-                        MessageBox.Show("There are no questions for your selected options. Please, choose other options", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("There aren't enough questions for your selected options. Please, choose other options", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                     }
                 }
