@@ -1,6 +1,6 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Facade;
-
+using QuizApp.UI;
 
 namespace QuizApp.UI
 {
@@ -71,6 +71,9 @@ namespace QuizApp.UI
 
         private void botonIniciarQuiz_Click(object sender, EventArgs e)
         {
+            // Cambia el cursor mientras espera
+            Cursor.Current = Cursors.WaitCursor;
+
             // Fija si se seleccionaron todas las opciones
             if (dificultadList.SelectedIndex >= 0 && categoriaList.SelectedIndex >= 0 && usuarioList.SelectedIndex > 0 && cantidadPreguntas.Value > 0)
             {
@@ -92,7 +95,7 @@ namespace QuizApp.UI
                     // Si hay preguntas, pasa a la siguiente ventana pasandole los datos de usuario y las preguntas
                     if (iPreguntas.Count >= 10)
                     {
-                        new UI.SesionQuiz(iNombreUsuario, iPreguntas).Show();
+                        new SesionQuiz(iNombreUsuario, iPreguntas).Show();
 
                         // Resetar los inputs
                         usuarioList.SelectedIndex = 0;
@@ -162,7 +165,7 @@ namespace QuizApp.UI
             Button botonCancelar = new Button();
 
             ventana.Text = "New user";
-            ventana.Icon = Properties.Resources.favicon;
+            ventana.Icon = Quizzify.Properties.Resources.favicon;
             tituloLabel.Text = "Insert your user name";
             tituloLabel.Font = new Font("Segoe UI", 10.0f);
 

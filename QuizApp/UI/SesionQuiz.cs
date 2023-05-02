@@ -21,6 +21,9 @@ namespace QuizApp.UI
         {
             InitializeComponent();
 
+            // Cambia el cursor mientras espera
+            Cursor.Current = Cursors.WaitCursor;
+
             int groupMarginTop = 20;
             int nextGroupY = groupMarginTop;
 
@@ -29,7 +32,6 @@ namespace QuizApp.UI
             iNombreUsuario = pNombreUsuario;
 
             labelTiempo.Location = new Point(this.Location.X + this.Width / 2 - labelTiempo.Width / 2, 16);
-            botonFinalizar.Location = new Point(this.Location.X + this.Width / 2 - labelTiempo.Width / 2, 420);
 
             // Renderizar cada grupo de pregunta-respuestas
             for (int i = 0; i < iPreguntas.Count; i++)
@@ -78,6 +80,9 @@ namespace QuizApp.UI
 
         private void BotonFinalizar_Click(object sender, EventArgs e)
         {
+            // Cambia el cursor mientras espera
+            Cursor.Current = Cursors.WaitCursor;
+
             List<PreguntaYRespuesta> pregResElegidas = new List<PreguntaYRespuesta>();
 
             // Fija el texto del radio button seleccionado para esa pregunta

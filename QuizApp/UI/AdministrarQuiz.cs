@@ -21,13 +21,14 @@ namespace QuizApp.UI
 
             // Centrar titulos
             tituloLabel.Location = new Point(this.Location.X + this.Width / 2 - tituloLabel.Width / 2, 40);
-            botonGuardar.Location = new Point(this.Location.X + this.Width / 2 - botonGuardar.Width / 2, 200);
-
 
         }
 
         private async void BotonGuardar_Click(object sender, EventArgs e)
         {
+            // Cambia el cursor mientras espera
+            Cursor.Current = Cursors.WaitCursor;
+
             // Chequea que haya texto en el input
             if (urlInput.Text.Length > 0)
             {
@@ -36,7 +37,10 @@ namespace QuizApp.UI
                 {
                     try
                     {
+
                         await Contexto.iInstancia.iAdminFacade.GuardarPreguntas(urlInput.Text);
+                        Cursor.Current = Cursors.WaitCursor;
+
 
                         MessageBox.Show("The questions were saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

@@ -53,18 +53,20 @@
             // puntajeLabel
             // 
             puntajeLabel.AutoSize = true;
+            puntajeLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             puntajeLabel.Location = new Point(141, 174);
             puntajeLabel.Name = "puntajeLabel";
-            puntajeLabel.Size = new Size(42, 15);
+            puntajeLabel.Size = new Size(53, 20);
             puntajeLabel.TabIndex = 1;
             puntajeLabel.Text = "Score: ";
             // 
             // tiempoLabel
             // 
             tiempoLabel.AutoSize = true;
+            tiempoLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             tiempoLabel.Location = new Point(141, 213);
             tiempoLabel.Name = "tiempoLabel";
-            tiempoLabel.Size = new Size(64, 15);
+            tiempoLabel.Size = new Size(80, 20);
             tiempoLabel.TabIndex = 2;
             tiempoLabel.Text = "Time used:";
             // 
@@ -87,9 +89,10 @@
             // fechaLabel
             // 
             fechaLabel.AutoSize = true;
+            fechaLabel.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             fechaLabel.Location = new Point(141, 135);
             fechaLabel.Name = "fechaLabel";
-            fechaLabel.Size = new Size(34, 15);
+            fechaLabel.Size = new Size(44, 20);
             fechaLabel.TabIndex = 4;
             fechaLabel.Text = "Date:";
             // 
@@ -150,6 +153,7 @@
             Name = "PuntajeQuiz";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Quizzify";
+            FormClosed += PuntajeQuiz_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -9,6 +9,9 @@ namespace QuizApp.UI
         {
             InitializeComponent();
 
+            // Cambia el cursor mientras espera
+            Cursor.Current = Cursors.WaitCursor;
+
             iSesion = sesionActual;
 
             puntajeLabel.Text = "Score: " + iSesion.iPuntaje.ToString("0.##") + " points";
@@ -18,13 +21,19 @@ namespace QuizApp.UI
 
         private void VolverMenuButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
             new Inicio().Show();
         }
 
         private void SalirButton_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void PuntajeQuiz_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+
         }
     }
 }
