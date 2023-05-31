@@ -75,7 +75,7 @@ namespace QuizApp.UI
                     else
                     {
                         puestoLabel.Text = row.ToString();
-                        usuarioLabel.Text = iRanking[row - 1].iUsuarioId;
+                        usuarioLabel.Text = iRanking[row - 1].iUsuarioNombre;
                         puntajeLabel.Text = iRanking[row - 1].iPuntaje.ToString("0.##");
                         tiempoLabel.Text = iRanking[row - 1].iTiempo.ToString("0.##"); ;
                         fechaLabel.Text = iRanking[row - 1].iFecha.ToString("d");

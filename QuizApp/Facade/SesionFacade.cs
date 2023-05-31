@@ -7,11 +7,26 @@ namespace QuizApp.Facade
 {
     internal class SesionFacade
     {
+        private Sesion iSesion = new Sesion();
+        /// <summary>
+        /// Inicia la sesion de juego, comenzando el contador
+        /// </summary>
+        public void IniciarSesion()
+        {
+            iSesion.IniciarContador();
+        }
+
+        public void FinalizarTiempo()
+        {
+            iSesion.FinalizarContador();
+        }
+
         /// <summary>
         /// Guarda la sesion de juego
         /// </summary>
-        public SesionDTO FinalizarSesion(string pNombreUsuario, double pTiempo, List<PreguntaYRespuesta> pPregResElegidas)
+        public SesionDTO GuardarSesion(string pNombreUsuario, List<PreguntaYRespuesta> pPregResElegidas)
         {
+
             // Obtiene el dto
             var usuarioDto = Contexto.iInstancia.iUsuarioStorage.GetUsuarioByNombre(pNombreUsuario);
 
@@ -34,14 +49,12 @@ namespace QuizApp.Facade
             // Si existe, lo convierte a tipo Usuario
             Usuario usuario = new Usuario(usuarioDto.iId, usuarioDto.iNombre);
 
-            // Llama al metodo del dominio
-            Sesion sesion = new Sesion(pTiempo, pPregResElegidas, usuario);
-            sesion.Finalizar();
+            iSesion.CalcularPuntaje(pPregResElegidas, usuario);
 
             try
             {
                 // Crea la sesion
-                var sesionDTO = Contexto.iInstancia.iSesionStorage.CreateSesion(usuario.Id, sesion.Puntaje, sesion.Tiempo, DateTime.Now);
+                var sesionDTO = Contexto.iInstancia.iSesionStorage.CreateSesion(usuarioDto.iId, iSesion.Puntaje, iSesion.Tiempo, DateTime.Now);
                 Bitacora.Log($"Operation: Game session saved to DB\nState: Success");
 
                 return sesionDTO;
@@ -65,15 +78,6 @@ namespace QuizApp.Facade
             {
                 // Obtiene el ranking de sesiones
                 List<SesionDTO> sesionesList = Contexto.iInstancia.iSesionStorage.GetSesionesByPuntaje();
-
-                for (int i = 0; i < sesionesList.Count; i++)
-                {
-                    // Busca el usuario para obtener el nombre
-                    var usuario = Contexto.iInstancia.iUsuarioStorage.GetUsuarioById(sesionesList[i].iUsuarioId);
-
-                    // Cambiar id de usuario por nombre para mostrarlo en la UI
-                    sesionesList[i].iUsuarioId = usuario.iNombre;
-                }
 
                 if (sesionesList.Count > 0) { Bitacora.Log("Operation: Get Ranking\nState: Success"); }
                 else { Bitacora.Log("Operation: Get Ranking\nState: Error\nMessage: There are no sessions to show"); }

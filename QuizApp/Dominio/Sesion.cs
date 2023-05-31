@@ -2,6 +2,7 @@
 using QuizApp.Dominio.Util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace QuizApp.Dominio
         private Usuario iUsuario;
         private List<PreguntaYRespuesta> iEleccionesUsuario;
 
+        private Stopwatch iStopwatch = new Stopwatch();
+
         // Propiedades
         public string? Id => iId;
         public DateTime Fecha => iFecha;
@@ -34,20 +37,32 @@ namespace QuizApp.Dominio
         public Usuario Usuario => iUsuario;
 
         // Constructor
-        public Sesion(double pTiempo, List<PreguntaYRespuesta> pEleccionesUsuario, Usuario pUsuario)
-        {
-            iTiempo = pTiempo;
-            iEleccionesUsuario = pEleccionesUsuario;
-            iUsuario = pUsuario;
-        }
+         public Sesion() { }
 
         // Metodos
 
         /// <summary>
+        /// Inicia la sesion de juego, comenzando el contador de tiempo
+        /// </summary>
+        public void IniciarContador()
+        {
+            iStopwatch.Start();
+        }
+
+        public void FinalizarContador()
+        {
+            iStopwatch.Stop();
+            iTiempo = iStopwatch.Elapsed.TotalSeconds;
+        }
+
+        /// <summary>
         /// Termina la sesion de juego, calculando el puntaje
         /// </summary>
-        public void Finalizar()
+        public void CalcularPuntaje(List<PreguntaYRespuesta> pEleccionesUsuario, Usuario pUsuario)
         {
+            iEleccionesUsuario = pEleccionesUsuario;
+            iUsuario = pUsuario;
+
             int cantCorrectas = 0;
             int cantPreguntas = iEleccionesUsuario.Count();
             int factorDificultad = iEleccionesUsuario[0].iPregunta.Dificultad.Factor;

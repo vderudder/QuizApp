@@ -10,17 +10,9 @@ namespace QuizApp.IO
     {
         public string iId;
         public string iUsuarioId;
+        public string iUsuarioNombre;
         public double iPuntaje;
         public double iTiempo;
         public DateTime iFecha;
-
-        public SesionDTO(string iId, string iUsuarioId, double iPuntaje, double iTiempo, DateTime iFecha)
-        {
-            this.iId = iId;
-            this.iUsuarioId = iUsuarioId;
-            this.iPuntaje = iPuntaje;
-            this.iTiempo = iTiempo;
-            this.iFecha = iFecha;
-        }
     }
 }

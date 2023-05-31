@@ -1,5 +1,6 @@
 ﻿using QuizApp.UI;
 using QuizApp.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace QuizApp.Storage.DBStorage
 {
@@ -15,10 +16,10 @@ namespace QuizApp.Storage.DBStorage
         /// <returns></returns>
         public SesionDTO CreateSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
         {
-            var sesionContext = Contexto.iServicioBD.Sesiones.Add(new DB.QuizContext.Sesion() {SesionId = Guid.NewGuid().ToString(), UsuarioId = pUsuarioId, SesionPuntaje = pPuntaje, SesionTiempo = pTiempo, SesionFecha = pFecha });
+            Contexto.iServicioBD.Sesiones.Add(new DB.QuizContext.Sesion() { SesionId = Guid.NewGuid().ToString(), SesionFecha = pFecha, SesionTiempo = pTiempo, SesionPuntaje = pPuntaje, UsuarioId = pUsuarioId });
             Contexto.iServicioBD.SaveChanges();
-            
-            return new SesionDTO(sesionContext.Entity.SesionId, pUsuarioId, pPuntaje, pTiempo, pFecha);
+
+            return new SesionDTO { iPuntaje = pPuntaje, iTiempo = pTiempo, iFecha = pFecha };
 
         }
 
@@ -28,15 +29,15 @@ namespace QuizApp.Storage.DBStorage
         /// <returns></returns>
         public List<SesionDTO> GetSesionesByPuntaje()
         {
-            var sesionesByPuntaje = Contexto.iServicioBD.Sesiones.OrderByDescending(ses => ses.SesionPuntaje).ToList();
 
-            var sesionesTruncadas = sesionesByPuntaje.Take(20).Select(s => s).ToList();
+            var sesiones = Contexto.iServicioBD.Sesiones.Include(s => s.Usuario).OrderByDescending(ses => ses.SesionPuntaje).Take(20).ToList();
 
             List<SesionDTO> sesionesDTO = new List<SesionDTO>();
 
-            foreach (var item in sesionesTruncadas)
+            foreach (var item in sesiones)
             {
-                sesionesDTO.Add(new SesionDTO(item.SesionId, item.UsuarioId, item.SesionPuntaje, item.SesionTiempo, item.SesionFecha));
+                var sesionDTO = new SesionDTO { iId = item.SesionId, iUsuarioId = item.UsuarioId, iUsuarioNombre = item.Usuario.UsuarioNombre, iPuntaje = item.SesionPuntaje, iTiempo = item.SesionTiempo, iFecha = item.SesionFecha };
+                sesionesDTO.Add(sesionDTO);
             };
 
             return sesionesDTO;
@@ -44,5 +45,5 @@ namespace QuizApp.Storage.DBStorage
 
     }
 
-   
+
 }

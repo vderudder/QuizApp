@@ -74,8 +74,10 @@ namespace QuizApp.UI
             }
 
 
-            // Comienza el cronometro
+            // Comienza el cronometro visual
             iStopwatch.Start();
+            // Comienza el contador del dominio
+            iSesionFacade.IniciarSesion();
         }
 
         private void BotonFinalizar_Click(object sender, EventArgs e)
@@ -105,13 +107,13 @@ namespace QuizApp.UI
 
             // Detiene el cronometro
             iStopwatch.Stop();
-            // Obtiene el tiempo insumido en la sesion
-            double tiempo = iStopwatch.Elapsed.TotalSeconds;
+            // Detiene el contador de dominio
+            iSesionFacade.FinalizarTiempo();
 
             try
             {
                 // Se finaliza la sesion, calcula el puntaje
-                var sesionActual = iSesionFacade.FinalizarSesion(iNombreUsuario, tiempo, pregResElegidas);
+                var sesionActual = iSesionFacade.GuardarSesion(iNombreUsuario, pregResElegidas);
 
                 // Cierra la ventana actual
                 this.Hide();
