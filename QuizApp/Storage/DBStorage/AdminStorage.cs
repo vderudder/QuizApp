@@ -1,10 +1,11 @@
 ﻿using System.Net.Http.Json;
 using System.Web;
 using QuizApp.IO;
+using Quizzify.Storage;
 
 namespace QuizApp.Storage.DBStorage
 {
-    internal class AdminStorage
+    internal class AdminStorage : IAdminStorage
     {
         public async Task<List<PreguntaDTO>> GetPreguntas(string pUrl)
         {

@@ -1,9 +1,10 @@
 ﻿using QuizApp.UI;
 using QuizApp.IO;
+using Quizzify.Storage;
 
 namespace QuizApp.Storage.DBStorage
 {
-    internal class PreguntaDBStorage
+    internal class PreguntaDBStorage : IPreguntaStorage
     {
         /// <summary>
         /// Obtiene los DTO de las preguntas con el filtro correspondiente

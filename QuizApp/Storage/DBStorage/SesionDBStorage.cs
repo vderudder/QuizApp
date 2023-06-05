@@ -1,10 +1,11 @@
 ﻿using QuizApp.UI;
 using QuizApp.IO;
 using Microsoft.EntityFrameworkCore;
+using Quizzify.Storage;
 
 namespace QuizApp.Storage.DBStorage
 {
-    internal class SesionDBStorage
+    internal class SesionDBStorage : ISesionStorage
     {
         /// <summary>
         /// Crea una nueva sesion de juego

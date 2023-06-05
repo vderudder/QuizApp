@@ -1,9 +1,10 @@
 ﻿using QuizApp.UI;
 using QuizApp.IO;
+using Quizzify.Storage;
 
 namespace QuizApp.Storage.DBStorage
 {
-    internal class UsuarioDBStorage
+    internal class UsuarioDBStorage : IUsuarioStorage
     {
         /// <summary>
         /// Obtiene el usuario por nombre
@@ -33,12 +34,10 @@ namespace QuizApp.Storage.DBStorage
         /// <returns></returns>
         public UsuarioDTO CreateUsuario(string pNombreUsuario)
         {
-            Contexto.iServicioBD.Usuarios.Add(new DB.QuizContext.Usuario { UsuarioId = Guid.NewGuid().ToString(), UsuarioNombre = pNombreUsuario });
+            var usuario = Contexto.iServicioBD.Usuarios.Add(new DB.QuizContext.Usuario { UsuarioId = Guid.NewGuid().ToString(), UsuarioNombre = pNombreUsuario });
             Contexto.iServicioBD.SaveChanges();
 
-            var usuario = GetUsuarioByNombre(pNombreUsuario);
-
-            return usuario;
+            return new UsuarioDTO(usuario.Entity.UsuarioId, usuario.Entity.UsuarioNombre);
         }
 
         /// <summary>
