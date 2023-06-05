@@ -2,6 +2,7 @@
 using QuizApp.Dominio.Util;
 using QuizApp.UI;
 using QuizApp.IO;
+using Quizzify.IO;
 
 namespace QuizApp.Facade
 {
@@ -11,11 +12,13 @@ namespace QuizApp.Facade
         /// <summary>
         /// Inicia la sesion de juego, comenzando el contador
         /// </summary>
-        public void IniciarSesion()
+        public void IniciarTiempo()
         {
             iSesion.IniciarContador();
         }
-
+        /// <summary>
+        /// Detiene el contador
+        /// </summary>
         public void FinalizarTiempo()
         {
             iSesion.FinalizarContador();
@@ -24,7 +27,7 @@ namespace QuizApp.Facade
         /// <summary>
         /// Guarda la sesion de juego
         /// </summary>
-        public SesionDTO GuardarSesion(string pNombreUsuario, List<PreguntaYRespuesta> pPregResElegidas)
+        public SesionDTO GuardarSesion(string pNombreUsuario, List<PreguntaYRespuestaDTO> pPregResElegidas)
         {
 
             // Obtiene el dto
@@ -48,8 +51,22 @@ namespace QuizApp.Facade
 
             // Si existe, lo convierte a tipo Usuario
             Usuario usuario = new Usuario(usuarioDto.iId, usuarioDto.iNombre);
+            List<PreguntaYRespuesta> elecciones = new List<PreguntaYRespuesta>();
 
-            iSesion.CalcularPuntaje(pPregResElegidas, usuario);
+            foreach (var el in pPregResElegidas)
+            {
+                var pregunta = new Pregunta(
+                        el.iPregunta.iPregunta,
+                        new Categoria(Contexto.iInstancia.iPreguntaStorage.GetCategoriaIdByNombre(el.iPregunta.iCategoriaNombre), el.iPregunta.iCategoriaNombre),
+                        new Dificultad(Contexto.iInstancia.iPreguntaStorage.GetDificultadIdByNombre(el.iPregunta.iDificultadNombre), el.iPregunta.iDificultadNombre),
+                        el.iPregunta.iCorrecta,
+                        el.iPregunta.iIncorrectaList                    
+                    );
+
+                elecciones.Add(new PreguntaYRespuesta(pregunta, el.iRespuesta));
+            }
+
+            iSesion.CalcularPuntaje(elecciones, usuario);
 
             try
             {

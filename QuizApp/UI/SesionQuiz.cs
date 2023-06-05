@@ -1,6 +1,8 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Dominio.Util;
 using QuizApp.Facade;
+using QuizApp.IO;
+using Quizzify.IO;
 using System.Data;
 using System.Diagnostics;
 
@@ -13,11 +15,11 @@ namespace QuizApp.UI
         private Stopwatch iStopwatch = new Stopwatch();
 
         private string iNombreUsuario;
-        private List<Pregunta> iPreguntas;
+        private List<PreguntaDTO> iPreguntas;
 
-        private Dictionary<Pregunta, GroupBox> iGrupoPregRes = new Dictionary<Pregunta, GroupBox>();
+        private Dictionary<PreguntaDTO, GroupBox> iGrupoPregRes = new Dictionary<PreguntaDTO, GroupBox>();
 
-        public SesionQuiz(string pNombreUsuario, List<Pregunta> pPreguntas)
+        public SesionQuiz(string pNombreUsuario, List<PreguntaDTO> pPreguntas)
         {
             InitializeComponent();
 
@@ -37,18 +39,18 @@ namespace QuizApp.UI
             for (int i = 0; i < iPreguntas.Count; i++)
             {
                 // Guardo la pregunta temporalmente
-                Pregunta preg = iPreguntas[i];
+                PreguntaDTO preg = iPreguntas[i];
 
                 // Renderizar group box que contiene la pregunta y sus respuestas
                 GroupBox grupoRespuestas = new GroupBox();
                 grupoRespuestas.Location = new Point(20, nextGroupY);
                 grupoRespuestas.Width = 500;
-                grupoRespuestas.Text = preg.Nombre;
+                grupoRespuestas.Text = preg.iPregunta;
 
 
                 // Desordenar las respuestas
                 Random random = new Random();
-                var respuestasDesordenadas = preg.Incorrecta.Append(preg.Correcta).OrderBy(x => random.Next()).ToArray();
+                var respuestasDesordenadas = preg.iIncorrectaList.Append(preg.iCorrecta).OrderBy(x => random.Next()).ToArray();
 
                 // Chequear si tiene mas de dos respuestas setear la altura del groupbox
                 if (respuestasDesordenadas.Length > 2) { grupoRespuestas.Height = 190; } else { grupoRespuestas.Height = 110; }
@@ -77,7 +79,7 @@ namespace QuizApp.UI
             // Comienza el cronometro visual
             iStopwatch.Start();
             // Comienza el contador del dominio
-            iSesionFacade.IniciarSesion();
+            iSesionFacade.IniciarTiempo();
         }
 
         private void BotonFinalizar_Click(object sender, EventArgs e)
@@ -85,7 +87,7 @@ namespace QuizApp.UI
             // Cambia el cursor mientras espera
             Cursor.Current = Cursors.WaitCursor;
 
-            List<PreguntaYRespuesta> pregResElegidas = new List<PreguntaYRespuesta>();
+            List<PreguntaYRespuestaDTO> pregResElegidas = new List<PreguntaYRespuestaDTO>();
 
             // Fija el texto del radio button seleccionado para esa pregunta
             for (int i = 0; i < iGrupoPregRes.Count; i++)
@@ -101,7 +103,7 @@ namespace QuizApp.UI
                     return;
                 }
 
-                PreguntaYRespuesta pregRes = new PreguntaYRespuesta(iGrupoPregRes.ElementAt(i).Key, checkedRadio.Text);
+                PreguntaYRespuestaDTO pregRes = new PreguntaYRespuestaDTO(iGrupoPregRes.ElementAt(i).Key, checkedRadio.Text);
                 pregResElegidas.Add(pregRes);
             }
 

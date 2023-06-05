@@ -10,22 +10,16 @@ namespace QuizApp.Facade
         /// Obtiene la lista de usuarios existente
         /// </summary>
         /// <returns></returns>
-        public List<Usuario> GetUsuarios()
+        public List<UsuarioDTO> GetUsuarios()
         {
             try
             {
                 // Obtiene los dto
                 List<UsuarioDTO> usuariosDTO = Contexto.iInstancia.iUsuarioStorage.GetUsuarios();
-                List<Usuario> usuarios = new List<Usuario>();
-
-                foreach (var item in usuariosDTO)
-                {
-                    usuarios.Add(new Usuario(item.iId, item.iNombre));
-                }
 
                 Bitacora.Log($"Operation: Get users list\nState: Success");
 
-                return usuarios;
+                return usuariosDTO;
             }
             catch (Exception ex)
             {

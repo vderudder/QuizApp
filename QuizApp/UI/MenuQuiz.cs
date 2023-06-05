@@ -1,5 +1,6 @@
 ﻿using QuizApp.Dominio;
 using QuizApp.Facade;
+using QuizApp.IO;
 using QuizApp.UI;
 
 namespace QuizApp.UI
@@ -12,10 +13,10 @@ namespace QuizApp.UI
 
         private string iNombreUsuario;
 
-        private List<Pregunta> iPreguntas;
-        private List<Categoria> iCategorias;
-        private List<Dificultad> iDificultades;
-        private List<Usuario> iUsuarios;
+        private List<PreguntaDTO> iPreguntas;
+        private List<CategoriaDTO> iCategorias;
+        private List<DificultadDTO> iDificultades;
+        private List<UsuarioDTO> iUsuarios;
 
         public MenuQuiz()
         {
@@ -42,20 +43,20 @@ namespace QuizApp.UI
                     // Agrega a la lista del comboBox los elementos de la lista de categorias
                     for (int i = 0; i < iCategorias.Count; i++)
                     {
-                        categoriaList.Items.Add(iCategorias[i].Nombre);
+                        categoriaList.Items.Add(iCategorias[i].iCategoria);
                     }
 
                     // Agrega a la lista del comboBox los elementos de la lista de dificultades
                     for (int i = 0; i < iDificultades.Count; i++)
                     {
                         // Mostrar la dificultad de una mejor manera (con la primera letra en mayuscula)
-                        dificultadList.Items.Add(iDificultades[i].Nombre[0].ToString().ToUpper() + iDificultades[i].Nombre.Substring(1));
+                        dificultadList.Items.Add(iDificultades[i].iDificultad[0].ToString().ToUpper() + iDificultades[i].iDificultad.Substring(1));
                     }
 
                     // Agrega a la lista del comboBox los elementos de la lista de usuarios
                     for (int i = 0; i < iUsuarios.Count; i++)
                     {
-                        usuarioList.Items.Add(iUsuarios[i].NombreUsuario);
+                        usuarioList.Items.Add(iUsuarios[i].iNombre);
                     }
                 }
 
