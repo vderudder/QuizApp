@@ -1,7 +1,7 @@
-﻿using QuizApp.Excepcion;
+﻿using Quizzify.Excepcion;
 using QuizApp.UI;
 
-namespace QuizApp.Facade
+namespace Quizzify.Facade
 {
     internal class AdminFacade
     {
@@ -14,7 +14,7 @@ namespace QuizApp.Facade
         {
             try
             {
-                var preguntas = await Contexto.iInstancia.iAdminStorage.GetPreguntas(pUrl);
+                var preguntas = await Contexto.iInstancia.iPreguntaStorageExterno.GetPreguntas(pUrl);
 
                 await Contexto.iInstancia.iPreguntaStorage.GuardarPreguntas(preguntas);
 

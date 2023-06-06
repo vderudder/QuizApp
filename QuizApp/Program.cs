@@ -1,6 +1,7 @@
-using QuizApp.Facade;
-using QuizApp.Storage.DBStorage;
+using Quizzify.Facade;
+using Quizzify.Storage.DBStorage;
 using QuizApp.UI;
+using Quizzify.Storage.ExternalStorage;
 
 namespace QuizApp
 {
@@ -18,7 +19,7 @@ namespace QuizApp
             }
 
             // Se inicializa las fachadas y storages
-            Contexto.Iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaDBStorage(), new UsuarioDBStorage(), new SesionDBStorage(), new AdminStorage());
+            Contexto.Iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaDBStorage(), new UsuarioDBStorage(), new SesionDBStorage(), new OpenTDBPreguntaStorage());
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
