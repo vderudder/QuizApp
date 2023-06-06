@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizApp.Excepcion
+namespace Quizzify.Excepcion
 {
     internal class NoResultException : Exception
     {

@@ -1,8 +1,8 @@
-﻿using QuizApp.Storage.DBStorage;
+﻿using Quizzify.Storage.DBStorage;
 using QuizApp.UI;
-using QuizApp.IO;
+using Quizzify.IO;
 
-namespace QuizApp.Facade
+namespace Quizzify.Facade
 {
     internal class PreguntaFacade
     {

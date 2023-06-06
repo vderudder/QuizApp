@@ -1,7 +1,4 @@
-﻿using QuizApp.Dominio;
-using QuizApp.Dominio.Util;
-using QuizApp.Facade;
-using QuizApp.IO;
+﻿using Quizzify.Facade;
 using Quizzify.IO;
 using System.Data;
 using System.Diagnostics;

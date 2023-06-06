@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizApp.IO
+namespace Quizzify.IO
 {
     internal class DificultadDTO
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
-namespace QuizApp.DB
+namespace Quizzify.DB
 {
     public partial class QuizContext : DbContext
     {

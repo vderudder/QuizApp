@@ -1,10 +1,9 @@
-﻿using QuizApp.Dominio;
-using QuizApp.Dominio.Util;
+﻿using Quizzify.Dominio;
+using Quizzify.Dominio.Util;
 using QuizApp.UI;
-using QuizApp.IO;
 using Quizzify.IO;
 
-namespace QuizApp.Facade
+namespace Quizzify.Facade
 {
     internal class SesionFacade
     {

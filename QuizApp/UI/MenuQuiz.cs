@@ -1,7 +1,5 @@
-﻿using QuizApp.Dominio;
-using QuizApp.Facade;
-using QuizApp.IO;
-using QuizApp.UI;
+﻿using Quizzify.Facade;
+using Quizzify.IO;
 
 namespace QuizApp.UI
 {

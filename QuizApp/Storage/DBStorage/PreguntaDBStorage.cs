@@ -1,8 +1,8 @@
 ﻿using QuizApp.UI;
-using QuizApp.IO;
+using Quizzify.IO;
 using Quizzify.Storage;
 
-namespace QuizApp.Storage.DBStorage
+namespace Quizzify.Storage.DBStorage
 {
     internal class PreguntaDBStorage : IPreguntaStorage
     {

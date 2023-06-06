@@ -1,13 +1,7 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using QuizApp.Dominio.Util;
-using System;
-using System.Collections.Generic;
+﻿using Quizzify.Dominio.Util;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace QuizApp.Dominio
+namespace Quizzify.Dominio
 {
     /// <summary>
     /// Clase para persistir las sesiones de juego

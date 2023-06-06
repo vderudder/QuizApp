@@ -1,8 +1,7 @@
-﻿using QuizApp.Dominio;
-using QuizApp.UI;
-using QuizApp.IO;
+﻿using QuizApp.UI;
+using Quizzify.IO;
 
-namespace QuizApp.Facade
+namespace Quizzify.Facade
 {
     internal class UsuarioFacade
     {

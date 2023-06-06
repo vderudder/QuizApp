@@ -1,5 +1,5 @@
-﻿using QuizApp.Facade;
-using QuizApp.IO;
+﻿using Quizzify.Facade;
+using Quizzify.IO;
 
 namespace QuizApp.UI
 {

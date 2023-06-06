@@ -1,4 +1,4 @@
-﻿using QuizApp.IO;
+﻿using Quizzify.IO;
 
 namespace QuizApp.UI
 {

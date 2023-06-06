@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizApp.Dominio.Util
+namespace Quizzify.Dominio.Util
 {
     /// <summary>
     /// Clase para los pares pregunta y respuesta

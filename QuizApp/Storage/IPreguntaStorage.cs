@@ -1,10 +1,5 @@
-﻿using QuizApp.IO;
-using QuizApp.Storage.DBStorage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Quizzify.IO;
+using Quizzify.Storage.DBStorage;
 
 namespace Quizzify.Storage
 {

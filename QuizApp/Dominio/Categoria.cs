@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizApp.Dominio
+namespace Quizzify.Dominio
 {
     /// <summary>
     /// Clase para persistir las categorias de la trivia
