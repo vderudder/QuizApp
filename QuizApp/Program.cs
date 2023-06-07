@@ -3,6 +3,8 @@ using Quizzify.Storage.DBStorage;
 using QuizApp.UI;
 using Quizzify.Storage.ExternalStorage;
 
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
+
 namespace QuizApp
 {
     internal static class Program
