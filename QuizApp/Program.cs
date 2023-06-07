@@ -2,6 +2,7 @@ using Quizzify.Facade;
 using Quizzify.Storage.DBStorage;
 using QuizApp.UI;
 using Quizzify.Storage.ExternalStorage;
+using Quizzify.Externo;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
@@ -16,7 +17,7 @@ namespace QuizApp
         static void Main()
         {
             // Se inicializa las fachadas y storages
-            Contexto.Iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaDBStorage(), new UsuarioDBStorage(), new SesionDBStorage(), new OpenTDBPreguntaStorage());
+            Contexto.Iniciar(new PreguntaFacade(), new UsuarioFacade(), new SesionFacade(), new AdminFacade(), new PreguntaDBStorage(), new UsuarioDBStorage(), new SesionDBStorage(), new OpenTDBPreguntaStorage(), new LogicaOTDB());
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 

@@ -108,11 +108,13 @@ namespace QuizApp.UI
             iStopwatch.Stop();
             // Detiene el contador de dominio
             iSesionFacade.FinalizarTiempo();
+            // Calcula el puntaje 
+            iSesionFacade.CalcularPuntaje(pregResElegidas);
 
             try
             {
-                // Se finaliza la sesion, calcula el puntaje
-                var sesionActual = iSesionFacade.GuardarSesion(iNombreUsuario, pregResElegidas);
+                // Guarda la sesion en BD
+                var sesionActual = iSesionFacade.GuardarSesion(iNombreUsuario);
 
                 // Cierra la ventana actual
                 this.Hide();

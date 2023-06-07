@@ -1,5 +1,4 @@
 ﻿using Quizzify.Dominio;
-using Quizzify.Dominio.Util;
 using QuizApp.UI;
 using Quizzify.IO;
 using log4net;
@@ -27,9 +26,18 @@ namespace Quizzify.Facade
         }
 
         /// <summary>
+        /// Calcula el puntaje
+        /// </summary>
+        /// <param name="pPregResElegidas"> Elecciones de respuestas de usuario</param>
+        public void CalcularPuntaje(List<PreguntaYRespuestaDTO> pPregResElegidas)
+        {
+            iSesion.Puntaje = Contexto.iInstancia.iLogicaExterna.CalcularPuntaje(pPregResElegidas, iSesion.Tiempo);
+        }
+
+        /// <summary>
         /// Guarda la sesion de juego
         /// </summary>
-        public SesionDTO GuardarSesion(string pNombreUsuario, List<PreguntaYRespuestaDTO> pPregResElegidas)
+        public SesionDTO GuardarSesion(string pNombreUsuario)
         {
 
             // Obtiene el dto
@@ -53,22 +61,6 @@ namespace Quizzify.Facade
 
             // Si existe, lo convierte a tipo Usuario
             Usuario usuario = new Usuario(usuarioDto.iId, usuarioDto.iNombre);
-            List<PreguntaYRespuesta> elecciones = new List<PreguntaYRespuesta>();
-
-            foreach (var el in pPregResElegidas)
-            {
-                var pregunta = new Pregunta(
-                        el.iPregunta.iPregunta,
-                        new Categoria(Contexto.iInstancia.iPreguntaStorage.GetCategoriaIdByNombre(el.iPregunta.iCategoriaNombre), el.iPregunta.iCategoriaNombre),
-                        new Dificultad(Contexto.iInstancia.iPreguntaStorage.GetDificultadIdByNombre(el.iPregunta.iDificultadNombre), el.iPregunta.iDificultadNombre),
-                        el.iPregunta.iCorrecta,
-                        el.iPregunta.iIncorrectaList                    
-                    );
-
-                elecciones.Add(new PreguntaYRespuesta(pregunta, el.iRespuesta));
-            }
-
-            iSesion.CalcularPuntaje(elecciones, usuario);
 
             try
             {

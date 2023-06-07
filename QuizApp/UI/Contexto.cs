@@ -1,4 +1,5 @@
 ﻿using Quizzify.DB;
+using Quizzify.Externo;
 using Quizzify.Facade;
 using Quizzify.Storage;
 
@@ -13,9 +14,9 @@ namespace QuizApp.UI
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 
-        public static void Iniciar(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, IPreguntaStorage pPreguntaStorage, IUsuarioStorage pUsuarioStorage, ISesionStorage pSesionStorage, IPreguntaStorageExterno pPreguntaStorageExterno)
+        public static void Iniciar(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, IPreguntaStorage pPreguntaStorage, IUsuarioStorage pUsuarioStorage, ISesionStorage pSesionStorage, IPreguntaStorageExterno pPreguntaStorageExterno, ILogicaExterna pLogicaExterna)
         {
-            iInstancia = new Contexto(pPreguntaFacade, pUsuarioFacade, pSesionFacade, pAdminFacade, pPreguntaStorage, pUsuarioStorage, pSesionStorage, pPreguntaStorageExterno);
+            iInstancia = new Contexto(pPreguntaFacade, pUsuarioFacade, pSesionFacade, pAdminFacade, pPreguntaStorage, pUsuarioStorage, pSesionStorage, pPreguntaStorageExterno, pLogicaExterna);
 
             iServicioBD = new QuizContext();
         }
@@ -28,8 +29,9 @@ namespace QuizApp.UI
         public IUsuarioStorage iUsuarioStorage;
         public ISesionStorage iSesionStorage;
         public IPreguntaStorageExterno iPreguntaStorageExterno;
+        public ILogicaExterna iLogicaExterna;
 
-        private Contexto(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, IPreguntaStorage pPreguntaStorage, IUsuarioStorage pUsuarioStorage, ISesionStorage pSesionStorage, IPreguntaStorageExterno pPreguntaStorageExterno)
+        private Contexto(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, IPreguntaStorage pPreguntaStorage, IUsuarioStorage pUsuarioStorage, ISesionStorage pSesionStorage, IPreguntaStorageExterno pPreguntaStorageExterno, ILogicaExterna pLogicaExterna)
         {
             iPreguntaFacade = pPreguntaFacade;
             iUsuarioFacade = pUsuarioFacade;
@@ -39,6 +41,7 @@ namespace QuizApp.UI
             iUsuarioStorage = pUsuarioStorage;
             iSesionStorage = pSesionStorage;
             iPreguntaStorageExterno = pPreguntaStorageExterno;
+            iLogicaExterna = pLogicaExterna;
         }
     }
 }
