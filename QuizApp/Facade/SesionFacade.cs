@@ -2,11 +2,14 @@
 using Quizzify.Dominio.Util;
 using QuizApp.UI;
 using Quizzify.IO;
+using log4net;
 
 namespace Quizzify.Facade
 {
     internal class SesionFacade
     {
+        private static ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         private Sesion iSesion = new Sesion();
         /// <summary>
         /// Inicia la sesion de juego, comenzando el contador
@@ -38,12 +41,12 @@ namespace Quizzify.Facade
                 try
                 {
                     usuarioDto = Contexto.iInstancia.iUsuarioStorage.CreateUsuario(pNombreUsuario);
-                    Bitacora.Log($"Operation: User saved to DB\nState: Success");
+                    logger.Info("Operation: User saved to DB");
 
                 }
                 catch (Exception ex)
                 {
-                    Bitacora.Log($"Operation: User saved to DB\nState: Error\nMessage: {ex.Message}");
+                    logger.Error($"Operation: User saved to DB - Message: {ex.Message}");
                     throw;
                 }
             }
@@ -71,14 +74,15 @@ namespace Quizzify.Facade
             {
                 // Crea la sesion
                 var sesionDTO = Contexto.iInstancia.iSesionStorage.CreateSesion(usuarioDto.iId, iSesion.Puntaje, iSesion.Tiempo, DateTime.Now);
-                Bitacora.Log($"Operation: Game session saved to DB\nState: Success");
+                logger.Info("Operation: Game session saved to DB");
+
 
                 return sesionDTO;
 
             }
             catch (Exception ex)
             {
-                Bitacora.Log($"Operation: Game session saved to DB\nState: Error\nMessage: {ex.Message}");
+                logger.Error($"Operation: Game session saved to DB - Message: {ex.Message}");
                 throw;
             }
             
@@ -95,14 +99,18 @@ namespace Quizzify.Facade
                 // Obtiene el ranking de sesiones
                 List<SesionDTO> sesionesList = Contexto.iInstancia.iSesionStorage.GetSesionesByPuntaje();
 
-                if (sesionesList.Count > 0) { Bitacora.Log("Operation: Get Ranking\nState: Success"); }
-                else { Bitacora.Log("Operation: Get Ranking\nState: Error\nMessage: There are no sessions to show"); }
+                if (sesionesList.Count > 0) { 
+                    logger.Info("Operation: Get Ranking");
+                }
+                else {
+                    logger.Warn("Operation: Get Ranking - Message: There are no sessions to show");
+                }
 
                 return sesionesList;
             }
             catch (Exception ex)
             {
-                Bitacora.Log($"Operation: Get Ranking\nState: Error\nMessage: {ex.Message}");
+                logger.Error($"Operation: Get Ranking - Message: {ex.Message}");
                 throw;
             }
             

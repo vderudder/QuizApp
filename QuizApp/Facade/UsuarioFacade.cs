@@ -1,10 +1,13 @@
-﻿using QuizApp.UI;
+﻿using log4net;
+using QuizApp.UI;
 using Quizzify.IO;
 
 namespace Quizzify.Facade
 {
     internal class UsuarioFacade
     {
+        private static ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// Obtiene la lista de usuarios existente
         /// </summary>
@@ -16,13 +19,13 @@ namespace Quizzify.Facade
                 // Obtiene los dto
                 List<UsuarioDTO> usuariosDTO = Contexto.iInstancia.iUsuarioStorage.GetUsuarios();
 
-                Bitacora.Log($"Operation: Get users list\nState: Success");
+                logger.Info("Operation: Get users list");
 
                 return usuariosDTO;
             }
             catch (Exception ex)
             {
-                Bitacora.Log($"Operation: Get users list\nState: Error\nMessage: {ex.Message}");
+                logger.Error($"Operation: Get users list - Message: {ex.Message}");
                 throw;
             }
             

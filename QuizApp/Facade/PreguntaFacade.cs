@@ -1,11 +1,13 @@
 ﻿using Quizzify.Storage.DBStorage;
 using QuizApp.UI;
 using Quizzify.IO;
+using log4net;
 
 namespace Quizzify.Facade
 {
     internal class PreguntaFacade
     {
+        private static ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Obtiene la lista de preguntas seleccionada
@@ -21,11 +23,13 @@ namespace Quizzify.Facade
                 // Obtiene los dto
                 List<PreguntaDTO> preguntaDTOs = Contexto.iInstancia.iPreguntaStorage.GetPreguntasByFiltro(filtro);
 
+                logger.Info("Operation: Get filtered question list");
+
                 return preguntaDTOs;
             }
             catch (Exception ex)
             {
-                Bitacora.Log($"Operation: Get filtered question list\nState: Error\nMessage: {ex.Message}");
+                logger.Error($"Operation: Get filtered question list - Message: {ex.Message}");
                 throw;
             }          
 
@@ -42,14 +46,14 @@ namespace Quizzify.Facade
             {
                 List<CategoriaDTO> categoriasDTO = Contexto.iInstancia.iPreguntaStorage.GetCategorias();
 
-                if (categoriasDTO.Count == 0) { Bitacora.Log("Operation: Get categories list\nState: Error\nMessage: There are no categories"); }
-                else { Bitacora.Log("Operation: Get categories list\nState: Success"); }
+                if (categoriasDTO.Count == 0) { logger.Warn("Operation: Get categories list - Message: There are no categories"); }
+                else { logger.Info("Operation: Get categories list"); }
 
                 return categoriasDTO;
             }
             catch (Exception ex)
             {
-                Bitacora.Log($"Operation: Get categories list\nState: Error\nMessage: {ex.Message}");
+                logger.Error($"Operation: Get categories list - Message: {ex.Message}");
                 throw;
             }
             
@@ -65,14 +69,14 @@ namespace Quizzify.Facade
             {
                 List<DificultadDTO> dificultadesDTO = Contexto.iInstancia.iPreguntaStorage.GetDificultades();
 
-                if (dificultadesDTO.Count == 0) { Bitacora.Log("Operation: Get difficulties list\nState: Error\nMessage: There are no difficulties"); }
-                else { Bitacora.Log("Operation: Get difficulties list\nState: Success"); }
+                if (dificultadesDTO.Count == 0) { logger.Warn("Operation: Get difficulties list - Message: There are no difficulties"); }
+                else { logger.Info("Operation: Get difficulties list"); }
 
                 return dificultadesDTO;
             }
             catch (Exception ex)
             {
-                Bitacora.Log($"Operation: Get difficulties list\nState: Error\nMessage: {ex.Message}");
+                logger.Error($"Operation: Get difficulties list - Message: {ex.Message}");
                 throw;
             }
             
