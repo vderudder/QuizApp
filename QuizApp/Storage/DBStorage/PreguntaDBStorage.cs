@@ -4,6 +4,9 @@ using Quizzify.Storage;
 
 namespace Quizzify.Storage.DBStorage
 {
+    /// <summary>
+    /// Corresponde al Storage de preguntas usando DB relacional
+    /// </summary>
     internal class PreguntaDBStorage : IPreguntaStorage
     {
         /// <summary>
@@ -29,6 +32,11 @@ namespace Quizzify.Storage.DBStorage
 
         }
 
+        /// <summary>
+        /// Guarda las preguntas en la DB
+        /// </summary>
+        /// <param name="pPreguntas"></param>
+        /// <returns></returns>
         public Task GuardarPreguntas(List<PreguntaDTO> pPreguntas)
         {
             foreach (var p in pPreguntas)
@@ -95,6 +103,11 @@ namespace Quizzify.Storage.DBStorage
             return dificultadesDTO;
         }
 
+        /// <summary>
+        /// Obtiene el id de categoria segun el nombre
+        /// </summary>
+        /// <param name="pNombre"></param>
+        /// <returns></returns>
         public string? GetCategoriaIdByNombre(string pNombre)
         {
             var cat = Contexto.iServicioBD.Categorias.Where(c => c.CategoriaNombre == pNombre).SingleOrDefault();
@@ -109,6 +122,11 @@ namespace Quizzify.Storage.DBStorage
             }
                 
         }
+        /// <summary>
+        /// Obtiene el id de dificultad segun el nombre
+        /// </summary>
+        /// <param name="pNombre"></param>
+        /// <returns></returns>
         public string? GetDificultadIdByNombre(string pNombre)
         {
             var dif = Contexto.iServicioBD.Dificultades.Where(d => d.DificultadNombre == pNombre).SingleOrDefault();
@@ -124,6 +142,11 @@ namespace Quizzify.Storage.DBStorage
             
         }
 
+        /// <summary>
+        /// Chequea si existe la pregunta dada
+        /// </summary>
+        /// <param name="pPregunta"></param>
+        /// <returns></returns>
         public bool ExistePregunta(string pPregunta)
         {
             return Contexto.iServicioBD.Preguntas.Any(p => p.PreguntaNombre == pPregunta);
@@ -131,6 +154,9 @@ namespace Quizzify.Storage.DBStorage
 
     }
 
+    /// <summary>
+    /// Representa el filtro que se va a utilizar para filtrar las preguntas de una sesion de juego por comenzar
+    /// </summary>
     internal class PreguntaFiltro
     {
         // Atributos

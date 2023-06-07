@@ -11,7 +11,7 @@ namespace Quizzify.Facade
 
         private Sesion iSesion = new Sesion();
         /// <summary>
-        /// Inicia la sesion de juego, comenzando el contador
+        /// Inicia el contador
         /// </summary>
         public void IniciarTiempo()
         {

@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Quizzify.Storage.DBStorage
 {
+    /// <summary>
+    /// Corresponde al Storage de sesiones usando DB relacional
+    /// </summary>
     internal class SesionDBStorage : ISesionStorage
     {
         /// <summary>

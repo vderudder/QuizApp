@@ -15,6 +15,12 @@ namespace Quizzify.Externo
     /// </summary>
     internal class LogicaOTDB : ILogicaExterna
     {
+        /// <summary>
+        /// Calcula el puntaje de una sesion
+        /// </summary>
+        /// <param name="pElecciones">Elecciones del usuario</param>
+        /// <param name="pTiempo">Tiempo insumido</param>
+        /// <returns>Devuelve el valor del puntaje</returns>
         public double CalcularPuntaje(List<PreguntaYRespuestaDTO> pElecciones, double pTiempo)
         {
             List<PreguntaYRespuesta> elecciones = new List<PreguntaYRespuesta>();

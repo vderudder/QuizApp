@@ -4,6 +4,9 @@ using Quizzify.Storage;
 
 namespace Quizzify.Storage.DBStorage
 {
+    /// <summary>
+    /// Corresponde al Storage de preguntas usando DB relacional
+    /// </summary>
     internal class UsuarioDBStorage : IUsuarioStorage
     {
         /// <summary>

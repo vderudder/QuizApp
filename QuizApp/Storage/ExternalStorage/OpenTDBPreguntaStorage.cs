@@ -4,6 +4,9 @@ using Quizzify.IO;
 
 namespace Quizzify.Storage.ExternalStorage
 {
+    /// <summary>
+    /// Corresponde al storage de preguntas obtenidas usando OTDB API
+    /// </summary>
     internal class OpenTDBPreguntaStorage : IPreguntaStorageExterno
     {
         public async Task<List<PreguntaDTO>> GetPreguntas(string pUrl)

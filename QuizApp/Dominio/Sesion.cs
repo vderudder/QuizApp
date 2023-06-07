@@ -42,13 +42,16 @@ namespace Quizzify.Dominio
         // Metodos
 
         /// <summary>
-        /// Inicia la sesion de juego, comenzando el contador de tiempo
+        /// Inicia el contador de tiempo
         /// </summary>
         public void IniciarContador()
         {
             iStopwatch.Start();
         }
 
+        /// <summary>
+        /// Finaliza el contador de tiempo
+        /// </summary>
         public void FinalizarContador()
         {
             iStopwatch.Stop();
