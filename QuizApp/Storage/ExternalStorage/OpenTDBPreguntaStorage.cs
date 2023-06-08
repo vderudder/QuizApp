@@ -5,7 +5,9 @@ using Quizzify.IO;
 namespace Quizzify.Storage.ExternalStorage
 {
     /// <summary>
-    /// Corresponde al storage de preguntas obtenidas usando OTDB API
+    /// Corresponde al storage de preguntas obtenidas usando OTDB API.
+    /// Si se quiere usar otra API, se debe agregar otra clase que extienda de IPreguntaStorageExterno
+    /// y que implemente su propio metodo de obtencion
     /// </summary>
     internal class OpenTDBPreguntaStorage : IPreguntaStorageExterno
     {

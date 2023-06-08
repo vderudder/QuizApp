@@ -10,6 +10,15 @@ namespace Quizzify.Storage.DBStorage
     internal class PreguntaDBStorage : IPreguntaStorage
     {
         /// <summary>
+        /// Obtiene la lista de nombres de origenes
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetOrigenes()
+        {
+            return Contexto.iServicioBD.Origenes.Select(o => o.OrigenNombre).Distinct().ToList();
+        }
+
+        /// <summary>
         /// Obtiene los DTO de las preguntas con el filtro correspondiente
         /// </summary>
         /// <param name="pFiltro"></param>

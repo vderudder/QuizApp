@@ -10,6 +10,15 @@ namespace Quizzify.Facade
         private static ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
+        /// Obtiene la lista de origenes de datos
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetOrigenes()
+        {
+            return Contexto.iInstancia.iPreguntaStorage.GetOrigenes();
+        }
+
+        /// <summary>
         /// Obtiene la lista de preguntas seleccionada
         /// </summary>
         /// <returns></returns>

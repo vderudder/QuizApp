@@ -1,4 +1,4 @@
-using QuizApp.UI;
+using Quizzify.UI;
 using System.Diagnostics;
 
 namespace QuizApp
@@ -27,8 +27,18 @@ namespace QuizApp
 
         private void botonAdministrar_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new UI.AdministrarQuiz().Show();
+
+            try
+            {
+                new ElegirOrigenDatos().Show();
+                this.Hide();
+            }
+            catch (Exception)
+            {
+                // Si sale mal vuelve al menu inicio
+                this.Show();
+            }
+
         }
 
         private void botonRanking_Click(object sender, EventArgs e)

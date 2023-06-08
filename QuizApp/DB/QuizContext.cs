@@ -5,6 +5,7 @@ namespace Quizzify.DB
 {
     public partial class QuizContext : DbContext
     {
+        public virtual DbSet<Origen> Origenes { get; set; }
         public virtual DbSet<Dificultad> Dificultades { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<Pregunta> Preguntas { get; set; }
@@ -20,7 +21,14 @@ namespace Quizzify.DB
             }
         }
 
-        public class Usuario
+        public class Origen
+        {
+            public string OrigenId { get; set; }
+            public string OrigenNombre { get; set; }
+            
+        }
+
+            public class Usuario
         {
             public string UsuarioId { get; set; }
             public string UsuarioNombre { get; set; }
@@ -48,9 +56,11 @@ namespace Quizzify.DB
             public string[] PreguntaIncorrectas { get; set; }
             public string CategoriaId { get; set; }
             public string DificultadId { get; set; }
+            public string OrigenId { get; set; }
 
             public Categoria Categoria { get; set; }
             public Dificultad Dificultad { get; set; }
+            public Origen Origen { get; set; }
 
         }
 

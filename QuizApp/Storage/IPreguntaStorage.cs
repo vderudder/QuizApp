@@ -9,6 +9,11 @@ namespace Quizzify.Storage
     internal interface IPreguntaStorage
     {
         /// <summary>
+        /// Obtiene la lista de origenes
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetOrigenes();
+        /// <summary>
         /// Obtiene preguntas segun un filtro dado
         /// </summary>
         /// <param name="pFiltro">Filtro de pregunta segun categoria, dificultad y cantidad de preguntas</param>
