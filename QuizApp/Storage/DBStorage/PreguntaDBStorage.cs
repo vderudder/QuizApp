@@ -1,6 +1,4 @@
-﻿using QuizApp.UI;
-using Quizzify.IO;
-using Quizzify.Storage;
+﻿using Quizzify.IO;
 
 namespace Quizzify.Storage.DBStorage
 {
@@ -15,7 +13,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public List<string> GetOrigenes()
         {
-            return Contexto.iServicioBD.Origenes.Select(o => o.OrigenNombre).Distinct().ToList();
+            return ContextoDB.Instancia.ServicioBD.Origenes.Select(o => o.OrigenNombre).Distinct().ToList();
         }
 
         /// <summary>
@@ -26,7 +24,7 @@ namespace Quizzify.Storage.DBStorage
         public List<PreguntaDTO> GetPreguntasByFiltro(PreguntaFiltro pFiltro)
         {
             // Filtrar por categoria y dificultad
-            var preguntasByCategoriaDificultad = Contexto.iServicioBD.Preguntas.Where(p => p.Dificultad.DificultadNombre == pFiltro.iDificultad && p.Categoria.CategoriaNombre == pFiltro.iCategoria).ToList();
+            var preguntasByCategoriaDificultad = ContextoDB.Instancia.ServicioBD.Preguntas.Where(p => p.Dificultad.DificultadNombre == pFiltro.iDificultad && p.Categoria.CategoriaNombre == pFiltro.iCategoria).ToList();
 
             // Desordenar y tomar la cantidad del filtro
             var preguntasFiltradasContext = preguntasByCategoriaDificultad.OrderBy(elem => Guid.NewGuid()).ToList().Take(pFiltro.iCantidad).ToList();
@@ -53,8 +51,8 @@ namespace Quizzify.Storage.DBStorage
                 var categoriaId = GetCategoriaIdByNombre(p.iCategoriaNombre);
                 if (categoriaId == null)
                 {
-                    var categoriaContext = Contexto.iServicioBD.Categorias.Add(new DB.QuizContext.Categoria() { CategoriaId = Guid.NewGuid().ToString(), CategoriaNombre = p.iCategoriaNombre });
-                    Contexto.iServicioBD.SaveChanges();
+                    var categoriaContext = ContextoDB.Instancia.ServicioBD.Categorias.Add(new DB.QuizContext.Categoria() { CategoriaId = Guid.NewGuid().ToString(), CategoriaNombre = p.iCategoriaNombre });
+                    ContextoDB.Instancia.ServicioBD.SaveChanges();
 
                     categoriaId = categoriaContext.Entity.CategoriaId;
                 }
@@ -62,16 +60,16 @@ namespace Quizzify.Storage.DBStorage
                 var dificultadId = GetDificultadIdByNombre(p.iDificultadNombre);
                 if (dificultadId == null)
                 {
-                    var dificultadContext = Contexto.iServicioBD.Dificultades.Add(new DB.QuizContext.Dificultad() { DificultadId = Guid.NewGuid().ToString(), DificultadNombre = p.iDificultadNombre });
-                    Contexto.iServicioBD.SaveChanges();
+                    var dificultadContext = ContextoDB.Instancia.ServicioBD.Dificultades.Add(new DB.QuizContext.Dificultad() { DificultadId = Guid.NewGuid().ToString(), DificultadNombre = p.iDificultadNombre });
+                    ContextoDB.Instancia.ServicioBD.SaveChanges();
 
                     dificultadId = dificultadContext.Entity.DificultadId;
                 }
 
                 if (!ExistePregunta(p.iPregunta))
                 {
-                    Contexto.iServicioBD.Preguntas.Add(new DB.QuizContext.Pregunta() { PreguntaId = Guid.NewGuid().ToString(), PreguntaNombre = p.iPregunta, PreguntaCorrecta = p.iCorrecta, PreguntaIncorrectas = p.iIncorrectaList.ToArray(), CategoriaId = categoriaId, DificultadId = dificultadId });
-                    Contexto.iServicioBD.SaveChanges();
+                    ContextoDB.Instancia.ServicioBD.Preguntas.Add(new DB.QuizContext.Pregunta() { PreguntaId = Guid.NewGuid().ToString(), PreguntaNombre = p.iPregunta, PreguntaCorrecta = p.iCorrecta, PreguntaIncorrectas = p.iIncorrectaList.ToArray(), CategoriaId = categoriaId, DificultadId = dificultadId });
+                    ContextoDB.Instancia.ServicioBD.SaveChanges();
                 }                       
             };
 
@@ -84,7 +82,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public List<CategoriaDTO> GetCategorias()
         {
-            var categoriasContext = Contexto.iServicioBD.Categorias.ToList();
+            var categoriasContext = ContextoDB.Instancia.ServicioBD.Categorias.ToList();
             var categoriasDTO = new List<CategoriaDTO>();
 
             foreach (var item in categoriasContext)
@@ -101,7 +99,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public List<DificultadDTO> GetDificultades()
         {
-            var dificultadesContext = Contexto.iServicioBD.Dificultades.ToList();
+            var dificultadesContext = ContextoDB.Instancia.ServicioBD.Dificultades.ToList();
             var dificultadesDTO = new List<DificultadDTO>();
 
             foreach (var item in dificultadesContext)
@@ -119,7 +117,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public string? GetCategoriaIdByNombre(string pNombre)
         {
-            var cat = Contexto.iServicioBD.Categorias.Where(c => c.CategoriaNombre == pNombre).SingleOrDefault();
+            var cat = ContextoDB.Instancia.ServicioBD.Categorias.Where(c => c.CategoriaNombre == pNombre).SingleOrDefault();
 
             if (cat == null)
             {
@@ -138,7 +136,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public string? GetDificultadIdByNombre(string pNombre)
         {
-            var dif = Contexto.iServicioBD.Dificultades.Where(d => d.DificultadNombre == pNombre).SingleOrDefault();
+            var dif = ContextoDB.Instancia.ServicioBD.Dificultades.Where(d => d.DificultadNombre == pNombre).SingleOrDefault();
 
             if (dif == null)
             {
@@ -158,7 +156,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public bool ExistePregunta(string pPregunta)
         {
-            return Contexto.iServicioBD.Preguntas.Any(p => p.PreguntaNombre == pPregunta);
+            return ContextoDB.Instancia.ServicioBD.Preguntas.Any(p => p.PreguntaNombre == pPregunta);
         }
 
     }

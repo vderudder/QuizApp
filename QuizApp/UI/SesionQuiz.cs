@@ -7,7 +7,7 @@ namespace QuizApp.UI
 {
     internal partial class SesionQuiz : Form
     {
-        private SesionFacade iSesionFacade = Contexto.iInstancia.iSesionFacade;
+        private SesionFacade iSesionFacade = Contexto.Instancia.SesionFacade;
 
         private Stopwatch iStopwatch = new Stopwatch();
 

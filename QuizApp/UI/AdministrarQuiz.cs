@@ -27,7 +27,7 @@ namespace QuizApp.UI
                     try
                     {
 
-                        await Contexto.iInstancia.iAdminFacade.GuardarPreguntas(urlInput.Text);
+                        await Contexto.Instancia.AdminFacade.GuardarPreguntas(urlInput.Text);
                         Cursor.Current = Cursors.WaitCursor;
 
 

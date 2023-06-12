@@ -31,7 +31,7 @@ namespace Quizzify.Facade
         /// <param name="pPregResElegidas"> Elecciones de respuestas de usuario</param>
         public void CalcularPuntaje(List<PreguntaYRespuestaDTO> pPregResElegidas)
         {
-            iSesion.Puntaje = Contexto.iInstancia.iLogicaExterna.CalcularPuntaje(pPregResElegidas, iSesion.Tiempo);
+            iSesion.Puntaje = Contexto.Instancia.LogicaExterna.CalcularPuntaje(pPregResElegidas, iSesion.Tiempo);
         }
 
         /// <summary>
@@ -41,14 +41,14 @@ namespace Quizzify.Facade
         {
 
             // Obtiene el dto
-            var usuarioDto = Contexto.iInstancia.iUsuarioStorage.GetUsuarioByNombre(pNombreUsuario);
+            var usuarioDto = Contexto.Instancia.UsuarioStorage.GetUsuarioByNombre(pNombreUsuario);
 
             // Si no existe, entonces crea el usuario
             if (usuarioDto == null)
             {
                 try
                 {
-                    usuarioDto = Contexto.iInstancia.iUsuarioStorage.CreateUsuario(pNombreUsuario);
+                    usuarioDto = Contexto.Instancia.UsuarioStorage.CreateUsuario(pNombreUsuario);
                     logger.Info("Operation: User saved to DB");
 
                 }
@@ -65,7 +65,7 @@ namespace Quizzify.Facade
             try
             {
                 // Crea la sesion
-                var sesionDTO = Contexto.iInstancia.iSesionStorage.CreateSesion(usuarioDto.iId, iSesion.Puntaje, iSesion.Tiempo, DateTime.Now);
+                var sesionDTO = Contexto.Instancia.SesionStorage.CreateSesion(usuarioDto.iId, iSesion.Puntaje, iSesion.Tiempo, DateTime.Now);
                 logger.Info("Operation: Game session saved to DB");
 
 
@@ -89,7 +89,7 @@ namespace Quizzify.Facade
             try
             {
                 // Obtiene el ranking de sesiones
-                List<SesionDTO> sesionesList = Contexto.iInstancia.iSesionStorage.GetSesionesByPuntaje();
+                List<SesionDTO> sesionesList = Contexto.Instancia.SesionStorage.GetSesionesByPuntaje();
 
                 if (sesionesList.Count > 0) { 
                     logger.Info("Operation: Get Ranking");

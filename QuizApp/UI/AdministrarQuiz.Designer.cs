@@ -53,9 +53,9 @@
             subtituloLabel.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
             subtituloLabel.Location = new Point(82, 88);
             subtituloLabel.Name = "subtituloLabel";
-            subtituloLabel.Size = new Size(372, 15);
+            subtituloLabel.Size = new Size(302, 15);
             subtituloLabel.TabIndex = 1;
-            subtituloLabel.Text = "Enter the URL address given by OpenTDB for the selected question set";
+            subtituloLabel.Text = "Enter the URL address given for the selected question set";
             // 
             // urlInput
             // 

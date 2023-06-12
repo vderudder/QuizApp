@@ -17,7 +17,7 @@ namespace Quizzify.Facade
             try
             {
                 // Obtiene los dto
-                List<UsuarioDTO> usuariosDTO = Contexto.iInstancia.iUsuarioStorage.GetUsuarios();
+                List<UsuarioDTO> usuariosDTO = Contexto.Instancia.UsuarioStorage.GetUsuarios();
 
                 logger.Info("Operation: Get users list");
 

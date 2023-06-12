@@ -1,6 +1,4 @@
-﻿using QuizApp.UI;
-using Quizzify.IO;
-using Quizzify.Storage;
+﻿using Quizzify.IO;
 
 namespace Quizzify.Storage.DBStorage
 {
@@ -16,7 +14,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public UsuarioDTO? GetUsuarioByNombre(string pNombre)
         {
-            var usuario = Contexto.iServicioBD.Usuarios.Where(u => u.UsuarioNombre == pNombre).SingleOrDefault();
+            var usuario = ContextoDB.Instancia.ServicioBD.Usuarios.Where(u => u.UsuarioNombre == pNombre).SingleOrDefault();
 
             if (usuario == null)
             {
@@ -37,8 +35,8 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public UsuarioDTO CreateUsuario(string pNombreUsuario)
         {
-            var usuario = Contexto.iServicioBD.Usuarios.Add(new DB.QuizContext.Usuario { UsuarioId = Guid.NewGuid().ToString(), UsuarioNombre = pNombreUsuario });
-            Contexto.iServicioBD.SaveChanges();
+            var usuario = ContextoDB.Instancia.ServicioBD.Usuarios.Add(new DB.QuizContext.Usuario { UsuarioId = Guid.NewGuid().ToString(), UsuarioNombre = pNombreUsuario });
+            ContextoDB.Instancia.ServicioBD.SaveChanges();
 
             return new UsuarioDTO(usuario.Entity.UsuarioId, usuario.Entity.UsuarioNombre);
         }
@@ -49,7 +47,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public List<UsuarioDTO> GetUsuarios()
         {
-            var usuariosContext = Contexto.iServicioBD.Usuarios.ToList();
+            var usuariosContext = ContextoDB.Instancia.ServicioBD.Usuarios.ToList();
             var usuariosDTO = new List<UsuarioDTO>();
 
             foreach (var item in usuariosContext)
@@ -67,7 +65,7 @@ namespace Quizzify.Storage.DBStorage
         /// <returns></returns>
         public UsuarioDTO? GetUsuarioById(string pId)
         {
-            var usuario = Contexto.iServicioBD.Usuarios.First(u => u.UsuarioId == pId);
+            var usuario = ContextoDB.Instancia.ServicioBD.Usuarios.First(u => u.UsuarioId == pId);
             var usuarioDTO = new UsuarioDTO(usuario.UsuarioId, usuario.UsuarioNombre);
 
             return usuarioDTO;

@@ -6,8 +6,8 @@ namespace QuizApp.UI
     public partial class MenuQuiz : Form
     {
 
-        private PreguntaFacade iPreguntaFacade = Contexto.iInstancia.iPreguntaFacade;
-        private UsuarioFacade iUsuarioFacade = Contexto.iInstancia.iUsuarioFacade;
+        private PreguntaFacade iPreguntaFacade = Contexto.Instancia.PreguntaFacade;
+        private UsuarioFacade iUsuarioFacade = Contexto.Instancia.UsuarioFacade;
 
         private string iNombreUsuario;
 

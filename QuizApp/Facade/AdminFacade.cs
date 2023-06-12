@@ -17,9 +17,9 @@ namespace Quizzify.Facade
         {
             try
             {
-                var preguntas = await Contexto.iInstancia.iPreguntaStorageExterno.GetPreguntas(pUrl);
+                var preguntas = await Contexto.Instancia.PreguntaStorageExterno.GetPreguntas(pUrl);
 
-                await Contexto.iInstancia.iPreguntaStorage.GuardarPreguntas(preguntas);
+                await Contexto.Instancia.PreguntaStorage.GuardarPreguntas(preguntas);
 
                 logger.Info("Operation: Questions saved to DB");
 

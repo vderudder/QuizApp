@@ -29,8 +29,8 @@ namespace Quizzify.Externo
             {
                 var pregunta = new Pregunta(
                         el.iPregunta.iPregunta,
-                        new Categoria(Contexto.iInstancia.iPreguntaStorage.GetCategoriaIdByNombre(el.iPregunta.iCategoriaNombre), el.iPregunta.iCategoriaNombre),
-                        new Dificultad(Contexto.iInstancia.iPreguntaStorage.GetDificultadIdByNombre(el.iPregunta.iDificultadNombre), el.iPregunta.iDificultadNombre),
+                        new Categoria(Contexto.Instancia.PreguntaStorage.GetCategoriaIdByNombre(el.iPregunta.iCategoriaNombre), el.iPregunta.iCategoriaNombre),
+                        new Dificultad(Contexto.Instancia.PreguntaStorage.GetDificultadIdByNombre(el.iPregunta.iDificultadNombre), el.iPregunta.iDificultadNombre),
                         el.iPregunta.iCorrecta,
                         el.iPregunta.iIncorrectaList
                     );

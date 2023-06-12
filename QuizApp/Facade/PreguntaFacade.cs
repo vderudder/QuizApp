@@ -15,7 +15,7 @@ namespace Quizzify.Facade
         /// <returns></returns>
         public List<string> GetOrigenes()
         {
-            return Contexto.iInstancia.iPreguntaStorage.GetOrigenes();
+            return Contexto.Instancia.PreguntaStorage.GetOrigenes();
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Quizzify.Facade
             try
             {
                 // Obtiene los dto
-                List<PreguntaDTO> preguntaDTOs = Contexto.iInstancia.iPreguntaStorage.GetPreguntasByFiltro(filtro);
+                List<PreguntaDTO> preguntaDTOs = Contexto.Instancia.PreguntaStorage.GetPreguntasByFiltro(filtro);
 
                 logger.Info("Operation: Get filtered question list");
 
@@ -53,7 +53,7 @@ namespace Quizzify.Facade
         {
             try
             {
-                List<CategoriaDTO> categoriasDTO = Contexto.iInstancia.iPreguntaStorage.GetCategorias();
+                List<CategoriaDTO> categoriasDTO = Contexto.Instancia.PreguntaStorage.GetCategorias();
 
                 if (categoriasDTO.Count == 0) { logger.Warn("Operation: Get categories list - Message: There are no categories"); }
                 else { logger.Info("Operation: Get categories list"); }
@@ -76,7 +76,7 @@ namespace Quizzify.Facade
         {
             try
             {
-                List<DificultadDTO> dificultadesDTO = Contexto.iInstancia.iPreguntaStorage.GetDificultades();
+                List<DificultadDTO> dificultadesDTO = Contexto.Instancia.PreguntaStorage.GetDificultades();
 
                 if (dificultadesDTO.Count == 0) { logger.Warn("Operation: Get difficulties list - Message: There are no difficulties"); }
                 else { logger.Info("Operation: Get difficulties list"); }

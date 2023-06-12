@@ -5,7 +5,7 @@ namespace QuizApp.UI
 {
     public partial class RankingQuiz : Form
     {
-        private SesionFacade iSesionFacade = Contexto.iInstancia.iSesionFacade;
+        private SesionFacade iSesionFacade = Contexto.Instancia.SesionFacade;
         private List<SesionDTO> iRanking = new List<SesionDTO>();
 
         public RankingQuiz()
