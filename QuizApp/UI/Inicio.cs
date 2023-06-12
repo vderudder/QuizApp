@@ -1,3 +1,5 @@
+using QuizApp.UI;
+using Quizzify.Facade;
 using Quizzify.UI;
 using System.Diagnostics;
 
@@ -5,6 +7,8 @@ namespace QuizApp
 {
     public partial class Inicio : Form
     {
+        private PreguntaFacade iPreguntaFacade = Contexto.Instancia.PreguntaFacade;
+
         public Inicio()
         {
             InitializeComponent();
@@ -14,8 +18,18 @@ namespace QuizApp
         {
             try
             {
-                new UI.MenuQuiz().Show();
-                this.Hide();
+                // Se fija la cantidad de fuentes de datos, como solo es OTDB va a abrir directamente el menu de juego, pero si hubiera mas fuentes, te da a elegir
+                if(iPreguntaFacade.GetOrigenes().Count > 1)
+                {
+                    new ElegirOrigenDatos(false).Show();
+                    this.Hide();
+                }
+                else
+                {
+                    new UI.MenuQuiz().Show();
+                    this.Hide();
+                }
+                               
 
             }
             catch (Exception)
@@ -30,7 +44,7 @@ namespace QuizApp
 
             try
             {
-                new ElegirOrigenDatos().Show();
+                new ElegirOrigenDatos(true).Show();
                 this.Hide();
             }
             catch (Exception)

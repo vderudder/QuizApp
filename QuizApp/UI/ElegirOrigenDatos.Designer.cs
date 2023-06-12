@@ -29,20 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ElegirOrigenDatos));
-            subtitleLabel = new Label();
             tituloLabel = new Label();
             origenList = new ComboBox();
             botonContinuar = new Button();
+            label1 = new Label();
             SuspendLayout();
-            // 
-            // subtitleLabel
-            // 
-            subtitleLabel.AutoSize = true;
-            subtitleLabel.Location = new Point(184, 103);
-            subtitleLabel.Name = "subtitleLabel";
-            subtitleLabel.Size = new Size(111, 15);
-            subtitleLabel.TabIndex = 1;
-            subtitleLabel.Text = "Select a data source";
             // 
             // tituloLabel
             // 
@@ -58,7 +49,7 @@
             // origenList
             // 
             origenList.FormattingEnabled = true;
-            origenList.Location = new Point(168, 133);
+            origenList.Location = new Point(172, 138);
             origenList.Name = "origenList";
             origenList.Size = new Size(144, 23);
             origenList.TabIndex = 3;
@@ -71,23 +62,32 @@
             botonContinuar.FlatStyle = FlatStyle.Flat;
             botonContinuar.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             botonContinuar.ForeColor = Color.White;
-            botonContinuar.Location = new Point(198, 194);
+            botonContinuar.Location = new Point(187, 198);
             botonContinuar.Name = "botonContinuar";
-            botonContinuar.Size = new Size(97, 44);
+            botonContinuar.Size = new Size(111, 44);
             botonContinuar.TabIndex = 4;
             botonContinuar.Text = "Continue";
             botonContinuar.UseVisualStyleBackColor = false;
             botonContinuar.Click += botonContinuar_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(187, 104);
+            label1.Name = "label1";
+            label1.Size = new Size(111, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Select a data source";
             // 
             // ElegirOrigenDatos
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(493, 270);
+            Controls.Add(label1);
             Controls.Add(botonContinuar);
             Controls.Add(origenList);
             Controls.Add(tituloLabel);
-            Controls.Add(subtitleLabel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
@@ -100,9 +100,9 @@
         }
 
         #endregion
-        private Label subtitleLabel;
         private Label tituloLabel;
         private ComboBox origenList;
         private Button botonContinuar;
+        private Label label1;
     }
 }

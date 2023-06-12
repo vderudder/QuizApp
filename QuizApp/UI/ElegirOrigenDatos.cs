@@ -1,6 +1,8 @@
 ﻿using QuizApp;
 using QuizApp.UI;
+using Quizzify.Externo;
 using Quizzify.Facade;
+using Quizzify.Storage.ExternalStorage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,14 +17,17 @@ namespace Quizzify.UI
 {
     public partial class ElegirOrigenDatos : Form
     {
-        private PreguntaFacade iPreguntaFacade = Contexto.iInstancia.iPreguntaFacade;
+        private PreguntaFacade iPreguntaFacade = Contexto.Instancia.PreguntaFacade;
 
         private List<string> iOrigenes;
         private string iOrigenActual;
+        private bool esAdmin;
 
-        public ElegirOrigenDatos()
+        public ElegirOrigenDatos(bool esAdmin)
         {
             InitializeComponent();
+
+            this.esAdmin = esAdmin;
 
             try
             {
@@ -32,6 +37,7 @@ namespace Quizzify.UI
 
                 // Se obtienen los origenes
                 iOrigenes = iPreguntaFacade.GetOrigenes();
+
 
                 if (iOrigenes.Count == 0)
                 {
@@ -46,6 +52,8 @@ namespace Quizzify.UI
                     {
                         origenList.Items.Add(iOrigenes[i]);
                     }
+
+                    origenList.SelectedItem = iOrigenes[0];
 
                 }
             }
@@ -73,17 +81,46 @@ namespace Quizzify.UI
 
         private void botonContinuar_Click(object sender, EventArgs e)
         {
-
+            if (this.esAdmin)
+            {
+            }
             // Fija si se seleccionaron todas las opciones
             if (origenList.SelectedIndex >= 0)
             {
                 // Tomar el origen seleccionado de la lista
                 iOrigenActual = origenList.Text;
 
-                new AdministrarQuiz().Show();
+                // Ventana de admin
+                if (esAdmin)
+                {
+                    // Setear el uso de storage y logica especifico, en caso de agregar mas origenes usar otros checks o un switch
+                    if (iOrigenActual == "otdb")
+                    {
+                        Contexto.Instancia.PreguntaStorageExterno = new OpenTDBPreguntaStorage();
 
-                // Cerrar la ventana
-                this.Hide();
+                        Contexto.Instancia.LogicaExterna = new LogicaOTDB();
+                    }
+
+                    new AdministrarQuiz().Show();
+
+                    // Cerrar la ventana
+                    this.Hide();
+                }
+
+                // Ventana de juego
+                else
+                {
+                    // Setear el uso de logica especifico, en caso de agregar mas origenes usar otros checks o un switch
+                    if (iOrigenActual == "otdb")
+                    {
+                        Contexto.Instancia.LogicaExterna = new LogicaOTDB();
+                    }
+
+                    new MenuQuiz().Show();
+
+                    // Cerrar la ventana
+                    this.Hide();
+                }
 
             }
             // Faltan campos por seleccionar
