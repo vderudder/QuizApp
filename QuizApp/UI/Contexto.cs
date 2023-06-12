@@ -7,41 +7,76 @@ namespace QuizApp.UI
 {
     internal class Contexto
     {
-        // Desactivado Warning de que puede ser null, porque lo vamos a inicializar cuando se inicie el Program
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public static Contexto iInstancia;
-        public static QuizContext iServicioBD;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        
+        private static Contexto iInstancia;
 
+        private PreguntaFacade iPreguntaFacade;
+        private UsuarioFacade iUsuarioFacade;
+        private SesionFacade iSesionFacade;
+        private AdminFacade iAdminFacade;
+        private IPreguntaStorage iPreguntaStorage;
+        private IUsuarioStorage iUsuarioStorage;
+        private ISesionStorage iSesionStorage;
+        private IPreguntaStorageExterno iPreguntaStorageExterno;
+        private ILogicaExterna iLogicaExterna;
 
-        public static void Iniciar(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, IPreguntaStorage pPreguntaStorage, IUsuarioStorage pUsuarioStorage, ISesionStorage pSesionStorage, IPreguntaStorageExterno pPreguntaStorageExterno, ILogicaExterna pLogicaExterna)
+        public static Contexto Instancia
         {
-            iInstancia = new Contexto(pPreguntaFacade, pUsuarioFacade, pSesionFacade, pAdminFacade, pPreguntaStorage, pUsuarioStorage, pSesionStorage, pPreguntaStorageExterno, pLogicaExterna);
-
-            iServicioBD = new QuizContext();
+            get { return iInstancia; }
+            set { iInstancia = value; }
         }
 
-        public PreguntaFacade iPreguntaFacade;
-        public UsuarioFacade iUsuarioFacade;
-        public SesionFacade iSesionFacade;
-        public AdminFacade iAdminFacade;
-        public IPreguntaStorage iPreguntaStorage;
-        public IUsuarioStorage iUsuarioStorage;
-        public ISesionStorage iSesionStorage;
-        public IPreguntaStorageExterno iPreguntaStorageExterno;
-        public ILogicaExterna iLogicaExterna;
-
-        private Contexto(PreguntaFacade pPreguntaFacade, UsuarioFacade pUsuarioFacade, SesionFacade pSesionFacade, AdminFacade pAdminFacade, IPreguntaStorage pPreguntaStorage, IUsuarioStorage pUsuarioStorage, ISesionStorage pSesionStorage, IPreguntaStorageExterno pPreguntaStorageExterno, ILogicaExterna pLogicaExterna)
+        public PreguntaFacade PreguntaFacade
         {
-            iPreguntaFacade = pPreguntaFacade;
-            iUsuarioFacade = pUsuarioFacade;
-            iSesionFacade = pSesionFacade;
-            iAdminFacade = pAdminFacade;
-            iPreguntaStorage = pPreguntaStorage;
-            iUsuarioStorage = pUsuarioStorage;
-            iSesionStorage = pSesionStorage;
-            iPreguntaStorageExterno = pPreguntaStorageExterno;
-            iLogicaExterna = pLogicaExterna;
+            get { return iPreguntaFacade; }
+            set { iPreguntaFacade = value; }
+        }
+
+        public UsuarioFacade UsuarioFacade
+        {
+            get { return iUsuarioFacade; }
+            set { iUsuarioFacade = value; }
+        }
+
+        public SesionFacade SesionFacade
+        {
+            get { return iSesionFacade; }
+            set { iSesionFacade = value;}
+        }
+
+        public AdminFacade AdminFacade
+        {
+            get { return iAdminFacade; }
+            set { iAdminFacade = value; }
+        }
+        public IPreguntaStorage PreguntaStorage
+        {
+            get { return iPreguntaStorage; }
+            set { iPreguntaStorage = value; }
+        }
+
+        public IUsuarioStorage UsuarioStorage
+        {
+            get { return iUsuarioStorage; }
+            set { iUsuarioStorage = value; }
+        }
+
+        public ISesionStorage SesionStorage
+        {
+            get { return iSesionStorage; }
+            set { iSesionStorage = value; }
+        }
+        
+        public IPreguntaStorageExterno PreguntaStorageExterno
+        {
+            get { return iPreguntaStorageExterno; }
+            set { iPreguntaStorageExterno = value; }
+        }
+
+        public ILogicaExterna LogicaExterna
+        {
+            get { return iLogicaExterna; }
+            set { iLogicaExterna = value; }
         }
     }
 }
