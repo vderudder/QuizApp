@@ -18,15 +18,16 @@ namespace QuizApp
         {
             try
             {
-                // Se fija la cantidad de fuentes de datos, como solo es OTDB va a abrir directamente el menu de juego, pero si hubiera mas fuentes, te da a elegir
+                // Se fija la cantidad de fuentes de datos, y salta ventana para elegir
                 if(iPreguntaFacade.GetOrigenes().Count > 1)
                 {
                     new ElegirOrigenDatos(false).Show();
                     this.Hide();
                 }
+                // Como solo se tiene de origen a OTDB va a abrir directamente el menu de juego
                 else
                 {
-                    new UI.MenuQuiz().Show();
+                    new UI.MenuQuiz("otdb").Show();
                     this.Hide();
                 }
                                

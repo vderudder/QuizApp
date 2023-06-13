@@ -4,9 +4,12 @@ namespace QuizApp.UI
 {
     public partial class AdministrarQuiz : Form
     {
-        public AdministrarQuiz()
+        private string iOrigen;
+        public AdministrarQuiz(string pOrigen)
         {
             InitializeComponent();
+
+            iOrigen = pOrigen;
 
             // Centrar titulos
             tituloLabel.Location = new Point(this.Location.X + this.Width / 2 - tituloLabel.Width / 2, 40);
@@ -27,7 +30,7 @@ namespace QuizApp.UI
                     try
                     {
 
-                        await Contexto.Instancia.AdminFacade.GuardarPreguntas(urlInput.Text);
+                        await Contexto.Instancia.AdminFacade.GuardarPreguntas(urlInput.Text, iOrigen);
                         Cursor.Current = Cursors.WaitCursor;
 
 

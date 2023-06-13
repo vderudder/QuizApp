@@ -16,7 +16,7 @@ namespace QuizApp.UI
         private List<DificultadDTO> iDificultades;
         private List<UsuarioDTO> iUsuarios;
 
-        public MenuQuiz()
+        public MenuQuiz(string pOrigen)
         {
             InitializeComponent();
 
@@ -24,11 +24,14 @@ namespace QuizApp.UI
             {
                 // Cambia el cursor mientras espera
                 Cursor.Current = Cursors.WaitCursor;
-                // Obtiene las categorias y dificultades
-                iCategorias = iPreguntaFacade.GetCategorias();
-                iDificultades = iPreguntaFacade.GetDificultades();
+
                 // Obtiene los usuarios
                 iUsuarios = iUsuarioFacade.GetUsuarios();
+
+                // Obtiene las categorias y dificultades segun el origen
+                iCategorias = iPreguntaFacade.GetCategoriasByOrigen(pOrigen);
+                iDificultades = iPreguntaFacade.GetDificultadesByOrigen(pOrigen);
+                
 
                 if (iCategorias.Count == 0 || iDificultades.Count == 0)
                 {

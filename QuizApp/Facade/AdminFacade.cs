@@ -12,14 +12,15 @@ namespace Quizzify.Facade
         /// Guarda las preguntas
         /// </summary>
         /// <param name="pUrl"></param>
+        /// <param name="pOrigen"></param>
         /// <returns></returns>
-        public async Task GuardarPreguntas(string pUrl)
+        public async Task GuardarPreguntas(string pUrl, string pOrigen)
         {
             try
             {
                 var preguntas = await Contexto.Instancia.PreguntaStorageExterno.GetPreguntas(pUrl);
 
-                await Contexto.Instancia.PreguntaStorage.GuardarPreguntas(preguntas);
+                await Contexto.Instancia.PreguntaStorage.GuardarPreguntas(preguntas, pOrigen);
 
                 logger.Info("Operation: Questions saved to DB");
 

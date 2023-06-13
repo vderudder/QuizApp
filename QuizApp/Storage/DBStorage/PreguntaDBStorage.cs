@@ -44,8 +44,10 @@ namespace Quizzify.Storage.DBStorage
         /// </summary>
         /// <param name="pPreguntas"></param>
         /// <returns></returns>
-        public Task GuardarPreguntas(List<PreguntaDTO> pPreguntas)
+        public Task GuardarPreguntas(List<PreguntaDTO> pPreguntas, string pOrigen)
         {
+            var origenId = GetOrigenIdByNombre(pOrigen);
+
             foreach (var p in pPreguntas)
             {
                 var categoriaId = GetCategoriaIdByNombre(p.iCategoriaNombre);
@@ -68,7 +70,7 @@ namespace Quizzify.Storage.DBStorage
 
                 if (!ExistePregunta(p.iPregunta))
                 {
-                    ContextoDB.Instancia.ServicioBD.Preguntas.Add(new DB.QuizContext.Pregunta() { PreguntaId = Guid.NewGuid().ToString(), PreguntaNombre = p.iPregunta, PreguntaCorrecta = p.iCorrecta, PreguntaIncorrectas = p.iIncorrectaList.ToArray(), CategoriaId = categoriaId, DificultadId = dificultadId });
+                    ContextoDB.Instancia.ServicioBD.Preguntas.Add(new DB.QuizContext.Pregunta() { PreguntaId = Guid.NewGuid().ToString(), PreguntaNombre = p.iPregunta, PreguntaCorrecta = p.iCorrecta, PreguntaIncorrectas = p.iIncorrectaList.ToArray(), CategoriaId = categoriaId, DificultadId = dificultadId, OrigenId = origenId });
                     ContextoDB.Instancia.ServicioBD.SaveChanges();
                 }                       
             };
@@ -80,14 +82,17 @@ namespace Quizzify.Storage.DBStorage
         /// Obtiene las categorias
         /// </summary>
         /// <returns></returns>
-        public List<CategoriaDTO> GetCategorias()
+        public List<CategoriaDTO> GetCategoriasByOrigen(string pOrigen)
         {
-            var categoriasContext = ContextoDB.Instancia.ServicioBD.Categorias.ToList();
+            var id = GetOrigenIdByNombre(pOrigen);
+
+            var categoriasIdList = ContextoDB.Instancia.ServicioBD.Preguntas.Where(p => p.OrigenId == id).Select(p => p.CategoriaId).ToList().Distinct();
+
             var categoriasDTO = new List<CategoriaDTO>();
 
-            foreach (var item in categoriasContext)
+            foreach (var item in categoriasIdList)
             {
-                categoriasDTO.Add(new CategoriaDTO(item.CategoriaId, item.CategoriaNombre));
+                categoriasDTO.Add(new CategoriaDTO(item, ContextoDB.Instancia.ServicioBD.Categorias.Where(c => c.CategoriaId == item).SingleOrDefault().CategoriaNombre));
             }
 
             return categoriasDTO;
@@ -97,14 +102,17 @@ namespace Quizzify.Storage.DBStorage
         /// Obtiene las dificultades
         /// </summary>
         /// <returns></returns>
-        public List<DificultadDTO> GetDificultades()
+        public List<DificultadDTO> GetDificultadesByOrigen(string pOrigen)
         {
-            var dificultadesContext = ContextoDB.Instancia.ServicioBD.Dificultades.ToList();
+            var id = GetOrigenIdByNombre(pOrigen);
+
+            var dificultadesIdList = ContextoDB.Instancia.ServicioBD.Preguntas.Where(p => p.OrigenId == id).Select(p => p.DificultadId).ToList().Distinct();
+
             var dificultadesDTO = new List<DificultadDTO>();
 
-            foreach (var item in dificultadesContext)
+            foreach (var item in dificultadesIdList)
             {
-                dificultadesDTO.Add(new DificultadDTO(item.DificultadId, item.DificultadNombre));
+                dificultadesDTO.Add(new DificultadDTO(item, ContextoDB.Instancia.ServicioBD.Dificultades.Where(d => d.DificultadId == item).SingleOrDefault().DificultadNombre));
             }
 
             return dificultadesDTO;
@@ -157,6 +165,25 @@ namespace Quizzify.Storage.DBStorage
         public bool ExistePregunta(string pPregunta)
         {
             return ContextoDB.Instancia.ServicioBD.Preguntas.Any(p => p.PreguntaNombre == pPregunta);
+        }
+
+        /// <summary>
+        /// Obtiene el id de origen segun nombre dado
+        /// </summary>
+        /// <param name="pNombre"></param>
+        /// <returns></returns>
+        public string? GetOrigenIdByNombre(string pNombre)
+        {
+            var origen = ContextoDB.Instancia.ServicioBD.Origenes.Where(o => o.OrigenNombre == pNombre).SingleOrDefault();
+
+            if (origen == null)
+            {
+                return null;
+            }
+            else
+            {
+                return origen.OrigenId;
+            }
         }
 
     }

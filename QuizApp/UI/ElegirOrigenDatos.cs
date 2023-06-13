@@ -47,6 +47,13 @@ namespace Quizzify.UI
                 }
                 else
                 {
+
+                    if (!esAdmin)
+                    {
+                        tituloLabel.Text = "Quizzify's Play Menu";
+                        tituloLabel.Location = new Point(this.Location.X + this.Width / 2 - tituloLabel.Width / 2, 40);
+
+                    }
                     // Agrega a la lista del comboBox los elementos de la lista de origenes
                     for (int i = 0; i < iOrigenes.Count; i++)
                     {
@@ -66,13 +73,6 @@ namespace Quizzify.UI
             }
         }
 
-        private void otdbButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new AdministrarQuiz().Show();
-
-        }
-
         private void ElegirOrigenDatos_FormClosed(object sender, FormClosedEventArgs e)
         {
             new Inicio().Show();
@@ -81,9 +81,6 @@ namespace Quizzify.UI
 
         private void botonContinuar_Click(object sender, EventArgs e)
         {
-            if (this.esAdmin)
-            {
-            }
             // Fija si se seleccionaron todas las opciones
             if (origenList.SelectedIndex >= 0)
             {
@@ -101,7 +98,7 @@ namespace Quizzify.UI
                         Contexto.Instancia.LogicaExterna = new LogicaOTDB();
                     }
 
-                    new AdministrarQuiz().Show();
+                    new AdministrarQuiz(iOrigenActual).Show();
 
                     // Cerrar la ventana
                     this.Hide();
@@ -116,7 +113,7 @@ namespace Quizzify.UI
                         Contexto.Instancia.LogicaExterna = new LogicaOTDB();
                     }
 
-                    new MenuQuiz().Show();
+                    new MenuQuiz(iOrigenActual).Show();
 
                     // Cerrar la ventana
                     this.Hide();

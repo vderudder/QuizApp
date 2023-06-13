@@ -49,11 +49,11 @@ namespace Quizzify.Facade
         /// Obtiene la lista de categorias existente
         /// </summary>
         /// <returns></returns>
-        public List<CategoriaDTO> GetCategorias()
+        public List<CategoriaDTO> GetCategoriasByOrigen(string pOrigen)
         {
             try
             {
-                List<CategoriaDTO> categoriasDTO = Contexto.Instancia.PreguntaStorage.GetCategorias();
+                List<CategoriaDTO> categoriasDTO = Contexto.Instancia.PreguntaStorage.GetCategoriasByOrigen(pOrigen);
 
                 if (categoriasDTO.Count == 0) { logger.Warn("Operation: Get categories list - Message: There are no categories"); }
                 else { logger.Info("Operation: Get categories list"); }
@@ -72,11 +72,11 @@ namespace Quizzify.Facade
         /// Obtiene la lista de dificultades existente
         /// </summary>
         /// <returns></returns>
-        public List<DificultadDTO> GetDificultades()
+        public List<DificultadDTO> GetDificultadesByOrigen(string pOrigen)
         {
             try
             {
-                List<DificultadDTO> dificultadesDTO = Contexto.Instancia.PreguntaStorage.GetDificultades();
+                List<DificultadDTO> dificultadesDTO = Contexto.Instancia.PreguntaStorage.GetDificultadesByOrigen(pOrigen);
 
                 if (dificultadesDTO.Count == 0) { logger.Warn("Operation: Get difficulties list - Message: There are no difficulties"); }
                 else { logger.Info("Operation: Get difficulties list"); }
