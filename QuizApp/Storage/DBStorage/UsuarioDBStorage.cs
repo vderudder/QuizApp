@@ -1,5 +1,4 @@
-﻿using Quizzify.IO;
-
+﻿
 namespace Quizzify.Storage.DBStorage
 {
     /// <summary>
@@ -12,7 +11,7 @@ namespace Quizzify.Storage.DBStorage
         /// </summary>
         /// <param name="pNombre"></param>
         /// <returns></returns>
-        public UsuarioDTO? GetUsuarioByNombre(string pNombre)
+        public Dominio.Usuario? GetUsuarioByNombre(string pNombre)
         {
             var usuario = ContextoDB.Instancia.ServicioBD.Usuarios.Where(u => u.UsuarioNombre == pNombre).SingleOrDefault();
 
@@ -22,10 +21,8 @@ namespace Quizzify.Storage.DBStorage
             }
             else
             {
-                return new UsuarioDTO(usuario.UsuarioId, usuario.UsuarioNombre);
+                return DB.QuizContext.Usuario.DAOToEntity(usuario);
             }
-
-
         }
 
         /// <summary>
@@ -33,43 +30,25 @@ namespace Quizzify.Storage.DBStorage
         /// </summary>
         /// <param name="pNombreUsuario"></param>
         /// <returns></returns>
-        public UsuarioDTO CreateUsuario(string pNombreUsuario)
+        public Dominio.Usuario CreateUsuario(string pNombreUsuario)
         {
             var usuario = ContextoDB.Instancia.ServicioBD.Usuarios.Add(new DB.QuizContext.Usuario { UsuarioId = Guid.NewGuid().ToString(), UsuarioNombre = pNombreUsuario });
             ContextoDB.Instancia.ServicioBD.SaveChanges();
 
-            return new UsuarioDTO(usuario.Entity.UsuarioId, usuario.Entity.UsuarioNombre);
+            return DB.QuizContext.Usuario.DAOToEntity(usuario.Entity);
         }
 
         /// <summary>
         /// Obtiene todos los nombres de usuarios
         /// </summary>
         /// <returns></returns>
-        public List<UsuarioDTO> GetUsuarios()
+        public List<Dominio.Usuario> GetUsuarios()
         {
-            var usuariosContext = ContextoDB.Instancia.ServicioBD.Usuarios.ToList();
-            var usuariosDTO = new List<UsuarioDTO>();
+            var usuariosList = ContextoDB.Instancia.ServicioBD.Usuarios.ToList();
 
-            foreach (var item in usuariosContext)
-            {
-                usuariosDTO.Add(new UsuarioDTO(item.UsuarioId, item.UsuarioNombre));
-            }
-
-            return usuariosDTO;
+            return usuariosList.Select(DB.QuizContext.Usuario.DAOToEntity).ToList();
         }
 
-        /// <summary>
-        /// Obtiene el usuario por id
-        /// </summary>
-        /// <param name="pId"></param>
-        /// <returns></returns>
-        public UsuarioDTO? GetUsuarioById(string pId)
-        {
-            var usuario = ContextoDB.Instancia.ServicioBD.Usuarios.First(u => u.UsuarioId == pId);
-            var usuarioDTO = new UsuarioDTO(usuario.UsuarioId, usuario.UsuarioNombre);
-
-            return usuarioDTO;
-
-        }
+       
     }
 }

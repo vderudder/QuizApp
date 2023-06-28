@@ -40,14 +40,10 @@ namespace Quizzify.Storage.ExternalStorage
             for (int i = 0; i < response.Results.Length; i++)
             {
                 var preg = response.Results[i];
-                List<string> incorrectas = new();
 
-                foreach (var item in preg.Incorrect_answers)
-                {
-                    incorrectas.Add(HttpUtility.HtmlDecode(item));
-                }
+                var incorrectas = preg.Incorrect_answers.ToList().Select(i => HttpUtility.HtmlDecode(i)).ToList();
 
-                var preguntaDTO = new PreguntaDTO(HttpUtility.HtmlDecode(preg.Question), preg.Difficulty, preg.Category, HttpUtility.HtmlDecode(preg.Correct_answer), incorrectas);
+                var preguntaDTO = new PreguntaDTO { Nombre = HttpUtility.HtmlDecode(preg.Question), Dificultad = new DificultadDTO { Nombre = preg.Difficulty }, Categoria = new CategoriaDTO { Nombre = preg.Category }, Correcta = HttpUtility.HtmlDecode(preg.Correct_answer), Incorrectas = incorrectas };
                 preguntas.Add(preguntaDTO);
             }
 

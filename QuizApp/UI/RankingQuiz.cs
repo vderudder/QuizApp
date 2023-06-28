@@ -75,10 +75,10 @@ namespace QuizApp.UI
                     else
                     {
                         puestoLabel.Text = row.ToString();
-                        usuarioLabel.Text = iRanking[row - 1].iUsuarioNombre;
-                        puntajeLabel.Text = iRanking[row - 1].iPuntaje.ToString("0.##");
-                        tiempoLabel.Text = iRanking[row - 1].iTiempo.ToString("0.##"); ;
-                        fechaLabel.Text = iRanking[row - 1].iFecha.ToString("d");
+                        usuarioLabel.Text = iRanking[row - 1].Usuario.Nombre;
+                        puntajeLabel.Text = iRanking[row - 1].Puntaje.ToString("0.##");
+                        tiempoLabel.Text = iRanking[row - 1].Tiempo.ToString("0.##"); ;
+                        fechaLabel.Text = iRanking[row - 1].Fecha.ToString("d");
 
                         puestoLabel.ForeColor = Color.FromArgb(38, 70, 83);
                         usuarioLabel.ForeColor = Color.FromArgb(38, 70, 83);

@@ -1,4 +1,4 @@
-﻿using Quizzify.IO;
+﻿using Quizzify.Dominio;
 
 namespace Quizzify.Storage
 {
@@ -12,23 +12,18 @@ namespace Quizzify.Storage
         /// </summary>
         /// <param name="pNombre"></param>
         /// <returns></returns>
-        public UsuarioDTO? GetUsuarioByNombre(string pNombre);
+        public Usuario? GetUsuarioByNombre(string pNombre);
         /// <summary>
         /// Crear un nuevo usuario
         /// </summary>
         /// <param name="pNombreUsuario"></param>
         /// <returns></returns>
-        public UsuarioDTO CreateUsuario(string pNombreUsuario);
+        public Usuario CreateUsuario(string pNombreUsuario);
         /// <summary>
         /// Obtener todos los usuarios
         /// </summary>
         /// <returns></returns>
-        public List<UsuarioDTO> GetUsuarios();
-        /// <summary>
-        /// Obtener un usuario por id de usuario
-        /// </summary>
-        /// <param name="pId"></param>
-        /// <returns></returns>
-        public UsuarioDTO? GetUsuarioById(string pId);
+        public List<Usuario> GetUsuarios();
+       
     }
 }

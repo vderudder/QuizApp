@@ -1,5 +1,4 @@
-﻿using Quizzify.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Quizzify.Storage.DBStorage
 {
@@ -16,33 +15,23 @@ namespace Quizzify.Storage.DBStorage
         /// <param name="pTiempo">El tiempo insumido de la sesion</param>
         /// <param name="pFecha">La fecha que se realizo la sesion</param>
         /// <returns></returns>
-        public SesionDTO CreateSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
+        public Dominio.Sesion CreateSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha)
         {
-            ContextoDB.Instancia.ServicioBD.Sesiones.Add(new DB.QuizContext.Sesion() { SesionId = Guid.NewGuid().ToString(), SesionFecha = pFecha, SesionTiempo = pTiempo, SesionPuntaje = pPuntaje, UsuarioId = pUsuarioId });
+            var sesionContext = ContextoDB.Instancia.ServicioBD.Sesiones.Add(new DB.QuizContext.Sesion() { SesionId = Guid.NewGuid().ToString(), SesionFecha = pFecha, SesionTiempo = pTiempo, SesionPuntaje = pPuntaje, UsuarioId = pUsuarioId });
             ContextoDB.Instancia.ServicioBD.SaveChanges();
 
-            return new SesionDTO { iPuntaje = pPuntaje, iTiempo = pTiempo, iFecha = pFecha };
-
+            return DB.QuizContext.Sesion.DAOToEntity(sesionContext.Entity);
         }
 
         /// <summary>
         /// Obtiene las sesiones ordenadas por puntaje de mayor a menor, tomando solo las primeras 20
         /// </summary>
         /// <returns></returns>
-        public List<SesionDTO> GetSesionesByPuntaje()
+        public List<Dominio.Sesion> GetSesionesByPuntaje()
         {
-
             var sesiones = ContextoDB.Instancia.ServicioBD.Sesiones.Include(s => s.Usuario).OrderByDescending(ses => ses.SesionPuntaje).Take(20).ToList();
 
-            List<SesionDTO> sesionesDTO = new List<SesionDTO>();
-
-            foreach (var item in sesiones)
-            {
-                var sesionDTO = new SesionDTO { iId = item.SesionId, iUsuarioId = item.UsuarioId, iUsuarioNombre = item.Usuario.UsuarioNombre, iPuntaje = item.SesionPuntaje, iTiempo = item.SesionTiempo, iFecha = item.SesionFecha };
-                sesionesDTO.Add(sesionDTO);
-            };
-
-            return sesionesDTO;
+            return sesiones.Select(DB.QuizContext.Sesion.DAOToEntity).ToList();
         }
 
     }

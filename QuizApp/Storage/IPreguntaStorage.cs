@@ -1,4 +1,5 @@
-﻿using Quizzify.IO;
+﻿using Quizzify.Dominio;
+using Quizzify.IO;
 using Quizzify.Storage.DBStorage;
 
 namespace Quizzify.Storage
@@ -18,7 +19,7 @@ namespace Quizzify.Storage
         /// </summary>
         /// <param name="pFiltro">Filtro de pregunta segun categoria, dificultad y cantidad de preguntas</param>
         /// <returns></returns>
-        public List<PreguntaDTO> GetPreguntasByFiltro(PreguntaFiltro pFiltro);
+        public List<Pregunta> GetPreguntasByFiltro(PreguntaFiltro pFiltro);
         /// <summary>
         /// Guarda las preguntas asociadas al origen dado
         /// </summary>
@@ -30,12 +31,12 @@ namespace Quizzify.Storage
         /// Obtiene todas las categorias
         /// </summary>
         /// <returns></returns>
-        public List<CategoriaDTO> GetCategoriasByOrigen(string pOrigen);
+        public List<Categoria> GetCategoriasByOrigen(string pOrigen);
         /// <summary>
         /// Obtiene todas las dificultades
         /// </summary>
         /// <returns></returns>
-        public List<DificultadDTO> GetDificultadesByOrigen(string pOrigen);
+        public List<Dificultad> GetDificultadesByOrigen(string pOrigen);
         /// <summary>
         /// Obtiene el id de categoria segun el nombre dado
         /// </summary>

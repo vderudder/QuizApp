@@ -1,4 +1,5 @@
-﻿using Quizzify.IO;
+﻿using Quizzify.Dominio;
+using Quizzify.IO;
 
 namespace Quizzify.Storage
 {
@@ -15,12 +16,12 @@ namespace Quizzify.Storage
         /// <param name="pTiempo">Tiempo insumido en la sesion</param>
         /// <param name="pFecha">Fecha de la sesion</param>
         /// <returns></returns>
-        public SesionDTO CreateSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha);
+        public Sesion CreateSesion(string pUsuarioId, double pPuntaje, double pTiempo, DateTime pFecha);
         /// <summary>
         /// Obtiene sesiones segun el puntaje
         /// </summary>
         /// <returns></returns>
-        public List<SesionDTO> GetSesionesByPuntaje();
+        public List<Sesion> GetSesionesByPuntaje();
 
     }
 }

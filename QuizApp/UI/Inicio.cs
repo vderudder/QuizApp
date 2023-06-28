@@ -1,4 +1,5 @@
 using QuizApp.UI;
+using Quizzify.Externo;
 using Quizzify.Facade;
 using Quizzify.UI;
 using System.Diagnostics;
@@ -27,6 +28,7 @@ namespace QuizApp
                 // Como solo se tiene de origen a OTDB va a abrir directamente el menu de juego
                 else
                 {
+                    Contexto.Instancia.LogicaExterna = new LogicaOTDB();
                     new UI.MenuQuiz("otdb").Show();
                     this.Hide();
                 }

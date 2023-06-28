@@ -42,12 +42,12 @@ namespace QuizApp.UI
                 GroupBox grupoRespuestas = new GroupBox();
                 grupoRespuestas.Location = new Point(20, nextGroupY);
                 grupoRespuestas.Width = 500;
-                grupoRespuestas.Text = preg.iPregunta;
+                grupoRespuestas.Text = preg.Nombre;
 
 
                 // Desordenar las respuestas
                 Random random = new Random();
-                var respuestasDesordenadas = preg.iIncorrectaList.Append(preg.iCorrecta).OrderBy(x => random.Next()).ToArray();
+                var respuestasDesordenadas = preg.Incorrectas.Append(preg.Correcta).OrderBy(x => random.Next()).ToArray();
 
                 // Chequear si tiene mas de dos respuestas setear la altura del groupbox
                 if (respuestasDesordenadas.Length > 2) { grupoRespuestas.Height = 190; } else { grupoRespuestas.Height = 110; }
@@ -100,16 +100,16 @@ namespace QuizApp.UI
                     return;
                 }
 
-                PreguntaYRespuestaDTO pregRes = new PreguntaYRespuestaDTO(iGrupoPregRes.ElementAt(i).Key, checkedRadio.Text);
+                PreguntaYRespuestaDTO pregRes = new PreguntaYRespuestaDTO { Pregunta = iGrupoPregRes.ElementAt(i).Key, Respuesta = checkedRadio.Text };
                 pregResElegidas.Add(pregRes);
             }
 
             // Detiene el cronometro
             iStopwatch.Stop();
             // Detiene el contador de dominio
-            iSesionFacade.FinalizarTiempo();
+            var pTiempo = iSesionFacade.FinalizarTiempo();
             // Calcula el puntaje 
-            iSesionFacade.CalcularPuntaje(pregResElegidas);
+            iSesionFacade.CalcularPuntaje(pregResElegidas, pTiempo);
 
             try
             {
