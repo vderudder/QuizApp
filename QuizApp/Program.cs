@@ -1,6 +1,9 @@
 using Quizzify.Storage.DBStorage;
 using QuizApp.UI;
 using Quizzify.DB;
+using Mapster;
+using System.Reflection;
+using Quizzify.IO;
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
@@ -14,6 +17,11 @@ namespace QuizApp
         [STAThread]
         static void Main()
         {
+            // Inicializar configuraciones de mapper
+            var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
+            Assembly applicationAssembly = typeof(BaseDTO<,>).Assembly;
+            typeAdapterConfig.Scan(applicationAssembly);
+
             // Se inicializa las fachadas y storages
             var contexto = new Contexto { PreguntaFacade = new(), UsuarioFacade = new(), SesionFacade = new(), AdminFacade = new(), PreguntaStorage = new PreguntaDBStorage(), UsuarioStorage = new UsuarioDBStorage(), SesionStorage = new SesionDBStorage() }; 
             Contexto.Instancia = contexto;
