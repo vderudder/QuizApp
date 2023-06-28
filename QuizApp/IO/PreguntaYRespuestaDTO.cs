@@ -1,14 +1,13 @@
-﻿namespace Quizzify.IO
-{
-    internal class PreguntaYRespuestaDTO
-    {
-        public PreguntaDTO iPregunta;
-        public string iRespuesta;
+﻿using Quizzify.Dominio.Util;
 
-        public PreguntaYRespuestaDTO(PreguntaDTO iPregunta, string iRespuesta)
-        {
-            this.iPregunta = iPregunta;
-            this.iRespuesta = iRespuesta;
-        }
+namespace Quizzify.IO
+{
+    /// <summary>
+    /// Clase DTO de PreguntaYRespuesta
+    /// </summary>
+    internal class PreguntaYRespuestaDTO : BaseDTO<PreguntaYRespuestaDTO, PreguntaYRespuesta>
+    {
+        public PreguntaDTO Pregunta { get; set; }
+        public string Respuesta { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quizzify.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace Quizzify.IO
 {
-    internal class DificultadDTO
+    /// <summary>
+    /// Clase DTO de Dificultad
+    /// </summary>
+    public class DificultadDTO : BaseDTO<DificultadDTO, Dificultad>
     {
         // Atributos
-        public string iId;
-        public string iDificultad;
+        public string Id { get; set; }
+        public string Nombre { get; set; }
+        public int Factor { get; set; }
 
-        public DificultadDTO(string pId, string pDificultad)
-        {
-            iId = pId;
-            iDificultad = pDificultad;
-        }
     }
 }

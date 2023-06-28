@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 namespace Quizzify.IO
 {
     /// <summary>
-    /// Clase DTO de Usuario
+    /// Clase DTO de Origen
     /// </summary>
-    public class UsuarioDTO : BaseDTO<UsuarioDTO, Usuario>
+    internal class OrigenDTO : BaseDTO<OrigenDTO, Origen>
     {
         public string Id { get; set; }
         public string Nombre { get; set; }
-
     }
 }

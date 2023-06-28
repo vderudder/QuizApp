@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quizzify.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,26 @@ using System.Threading.Tasks;
 
 namespace Quizzify.IO
 {
-    public class SesionDTO
+    /// <summary>
+    /// Clase DTO de Sesion
+    /// </summary>
+    public class SesionDTO : BaseDTO<SesionDTO, Sesion>
     {
-        public string iId;
-        public string iUsuarioId;
-        public string iUsuarioNombre;
-        public double iPuntaje;
-        public double iTiempo;
-        public DateTime iFecha;
+        public string Id { get; set; }
+        public DateTime Fecha { get; set; }
+        public double Tiempo { get; set; }
+        public double Puntaje { get; set; }
+        public UsuarioDTO Usuario { get; set; }
+
+        public override void AddCustomMappings()
+        {
+            SetCustomMappings()
+                .Map(dest => dest.Usuario, src => src.Usuario);
+
+            SetCustomMappingsInverse()
+                .Map(dest => dest.Usuario, src => src.Usuario);
+
+
+        }
     }
 }
