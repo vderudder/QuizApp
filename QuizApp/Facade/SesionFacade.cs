@@ -20,18 +20,18 @@ namespace Quizzify.Facade
         /// <summary>
         /// Detiene el contador
         /// </summary>
-        public void FinalizarTiempo()
+        public double FinalizarTiempo()
         {
-            iSesion.FinalizarContador();
+            return iSesion.FinalizarContador();
         }
 
         /// <summary>
         /// Calcula el puntaje
         /// </summary>
         /// <param name="pPregResElegidas"> Elecciones de respuestas de usuario</param>
-        public void CalcularPuntaje(List<PreguntaYRespuestaDTO> pPregResElegidas)
+        public void CalcularPuntaje(List<PreguntaYRespuestaDTO> pPregResElegidas, double pTiempo)
         {
-            iSesion.Puntaje = Contexto.Instancia.LogicaExterna.CalcularPuntaje(pPregResElegidas, iSesion.Tiempo);
+            iSesion.Puntaje = Contexto.Instancia.LogicaExterna.CalcularPuntaje(pPregResElegidas, pTiempo);
         }
 
         /// <summary>
@@ -39,16 +39,14 @@ namespace Quizzify.Facade
         /// </summary>
         public SesionDTO GuardarSesion(string pNombreUsuario)
         {
-
-            // Obtiene el dto
-            var usuarioDto = Contexto.Instancia.UsuarioStorage.GetUsuarioByNombre(pNombreUsuario);
+            var usuario = Contexto.Instancia.UsuarioStorage.GetUsuarioByNombre(pNombreUsuario);
 
             // Si no existe, entonces crea el usuario
-            if (usuarioDto == null)
+            if (usuario == null)
             {
                 try
                 {
-                    usuarioDto = Contexto.Instancia.UsuarioStorage.CreateUsuario(pNombreUsuario);
+                    usuario = Contexto.Instancia.UsuarioStorage.CreateUsuario(pNombreUsuario);
                     logger.Info("Operation: User saved to DB");
 
                 }
@@ -59,17 +57,14 @@ namespace Quizzify.Facade
                 }
             }
 
-            // Si existe, lo convierte a tipo Usuario
-            Usuario usuario = new Usuario(usuarioDto.iId, usuarioDto.iNombre);
-
             try
             {
                 // Crea la sesion
-                var sesionDTO = Contexto.Instancia.SesionStorage.CreateSesion(usuarioDto.iId, iSesion.Puntaje, iSesion.Tiempo, DateTime.Now);
+                var sesion = Contexto.Instancia.SesionStorage.CreateSesion(usuario.Id, iSesion.Puntaje, iSesion.Tiempo, DateTime.Now);
                 logger.Info("Operation: Game session saved to DB");
 
 
-                return sesionDTO;
+                return SesionDTO.ToDto(sesion);
 
             }
             catch (Exception ex)
@@ -89,7 +84,7 @@ namespace Quizzify.Facade
             try
             {
                 // Obtiene el ranking de sesiones
-                List<SesionDTO> sesionesList = Contexto.Instancia.SesionStorage.GetSesionesByPuntaje();
+                var sesionesList = Contexto.Instancia.SesionStorage.GetSesionesByPuntaje();
 
                 if (sesionesList.Count > 0) { 
                     logger.Info("Operation: Get Ranking");
@@ -98,7 +93,7 @@ namespace Quizzify.Facade
                     logger.Warn("Operation: Get Ranking - Message: There are no sessions to show");
                 }
 
-                return sesionesList;
+                return sesionesList.Select(SesionDTO.ToDto).ToList();
             }
             catch (Exception ex)
             {

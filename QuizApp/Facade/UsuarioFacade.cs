@@ -16,12 +16,11 @@ namespace Quizzify.Facade
         {
             try
             {
-                // Obtiene los dto
-                List<UsuarioDTO> usuariosDTO = Contexto.Instancia.UsuarioStorage.GetUsuarios();
+                var usuarios = Contexto.Instancia.UsuarioStorage.GetUsuarios();
 
                 logger.Info("Operation: Get users list");
 
-                return usuariosDTO;
+                return usuarios.Select(UsuarioDTO.ToDto).ToList();
             }
             catch (Exception ex)
             {

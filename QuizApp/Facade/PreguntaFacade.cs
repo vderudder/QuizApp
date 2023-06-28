@@ -25,16 +25,15 @@ namespace Quizzify.Facade
         public List<PreguntaDTO> GetPreguntas(string pDificultadNombre, string pCategoriaNombre, int pCantidadPreg)
         {
             // Crea el filtro segun los parametros pasados
-            PreguntaFiltro filtro = new PreguntaFiltro(pDificultadNombre, pCategoriaNombre, pCantidadPreg);
+            PreguntaFiltro filtro = new PreguntaFiltro { Dificultad = pDificultadNombre, Categoria = pCategoriaNombre, Cantidad = pCantidadPreg };
 
             try
             {
-                // Obtiene los dto
-                List<PreguntaDTO> preguntaDTOs = Contexto.Instancia.PreguntaStorage.GetPreguntasByFiltro(filtro);
+                var preguntas = Contexto.Instancia.PreguntaStorage.GetPreguntasByFiltro(filtro);
 
                 logger.Info("Operation: Get filtered question list");
 
-                return preguntaDTOs;
+                return preguntas.Select(PreguntaDTO.ToDto).ToList();
             }
             catch (Exception ex)
             {
@@ -53,12 +52,12 @@ namespace Quizzify.Facade
         {
             try
             {
-                List<CategoriaDTO> categoriasDTO = Contexto.Instancia.PreguntaStorage.GetCategoriasByOrigen(pOrigen);
+                var categorias = Contexto.Instancia.PreguntaStorage.GetCategoriasByOrigen(pOrigen);
 
-                if (categoriasDTO.Count == 0) { logger.Warn("Operation: Get categories list - Message: There are no categories"); }
+                if (categorias.Count == 0) { logger.Warn("Operation: Get categories list - Message: There are no categories"); }
                 else { logger.Info("Operation: Get categories list"); }
 
-                return categoriasDTO;
+                return categorias.Select(CategoriaDTO.ToDto).ToList();
             }
             catch (Exception ex)
             {
@@ -76,12 +75,12 @@ namespace Quizzify.Facade
         {
             try
             {
-                List<DificultadDTO> dificultadesDTO = Contexto.Instancia.PreguntaStorage.GetDificultadesByOrigen(pOrigen);
+                var dificultades = Contexto.Instancia.PreguntaStorage.GetDificultadesByOrigen(pOrigen);
 
-                if (dificultadesDTO.Count == 0) { logger.Warn("Operation: Get difficulties list - Message: There are no difficulties"); }
+                if (dificultades.Count == 0) { logger.Warn("Operation: Get difficulties list - Message: There are no difficulties"); }
                 else { logger.Info("Operation: Get difficulties list"); }
 
-                return dificultadesDTO;
+                return dificultades.Select(DificultadDTO.ToDto).ToList();
             }
             catch (Exception ex)
             {

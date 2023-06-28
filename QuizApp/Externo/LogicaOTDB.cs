@@ -27,28 +27,20 @@ namespace Quizzify.Externo
 
             foreach (var el in pElecciones)
             {
-                var pregunta = new Pregunta(
-                        el.iPregunta.iPregunta,
-                        new Categoria(Contexto.Instancia.PreguntaStorage.GetCategoriaIdByNombre(el.iPregunta.iCategoriaNombre), el.iPregunta.iCategoriaNombre),
-                        new Dificultad(Contexto.Instancia.PreguntaStorage.GetDificultadIdByNombre(el.iPregunta.iDificultadNombre), el.iPregunta.iDificultadNombre),
-                        el.iPregunta.iCorrecta,
-                        el.iPregunta.iIncorrectaList
-                    );
-
-                elecciones.Add(new PreguntaYRespuesta(pregunta, el.iRespuesta));
+                elecciones.Add(PreguntaYRespuestaDTO.ToEntity(el));
             }
 
 
             int cantCorrectas = 0;
             int cantPreguntas = elecciones.Count();
-            int factorDificultad = elecciones[0].iPregunta.Dificultad.Factor;
+            int factorDificultad = elecciones[0].Pregunta.Dificultad.Factor;
             double tiempo = pTiempo / cantPreguntas;
             int factorTiempo = 0;
 
             // Se fija cuales son las respuestas correctas
             foreach (var eleccion in elecciones)
             {
-                if (eleccion.iPregunta.EsRespuestaCorrecta(eleccion.iRespuesta))
+                if (eleccion.Pregunta.EsRespuestaCorrecta(eleccion.Respuesta))
                 {
                     cantCorrectas++;
                 }
