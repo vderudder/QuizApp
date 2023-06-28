@@ -9,21 +9,10 @@ namespace Quizzify.Dominio
     /// <summary>
     /// Clase para persistir info del usuario
     /// </summary>
-    internal class Usuario
+    public class Usuario
     {
-        // Atributos
-        private string iId;
-        private string iNombreUsuario;
+        public string Id { get; set; }
+        public string Nombre { get; set; }
 
-        // Propiedades
-        public string Id => iId;
-        public string NombreUsuario => iNombreUsuario;
-
-        // Constructor
-        public Usuario(string pId, string pNombreUsuario)
-        {
-            iId = pId;
-            iNombreUsuario = pNombreUsuario;
-        }
     }
 }

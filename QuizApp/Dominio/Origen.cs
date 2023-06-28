@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace Quizzify.Dominio
 {
-    internal class Origen
+    /// <summary>
+    /// Clase para persistir el origen de las preguntas
+    /// </summary>
+    public class Origen
     {
-        // Atributos
-        private string iId;
-        private string iNombre;
+        public string Id { get; set; }
+        public string Nombre { get; set; }
 
-        //Propiedades
-        public string Id => iId;
-        public string Nombre => iNombre;
 
-       
     }
 }

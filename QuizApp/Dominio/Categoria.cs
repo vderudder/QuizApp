@@ -9,21 +9,10 @@ namespace Quizzify.Dominio
     /// <summary>
     /// Clase para persistir las categorias de la trivia
     /// </summary>
-    internal class Categoria
+    public class Categoria
     {
-        // Atributos
-        private string iId;
-        private string iNombre;
+        public string Id { get; set; }
+        public string Nombre { get; set; }
 
-        //Propiedades
-        public string Id => iId;
-        public string Nombre => iNombre;
-
-        // Constructor
-        public Categoria(string pId, string pNombre)
-        {
-            iId = pId;
-            iNombre = pNombre;
-        }
     }
 }

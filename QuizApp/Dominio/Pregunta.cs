@@ -9,37 +9,20 @@ namespace Quizzify.Dominio
     /// <summary>
     /// Clase para persistir las preguntas de la trivia
     /// </summary>
-    internal class Pregunta
-    {
-        // Atributos
-        private string iNombre;
-        private Categoria iCategoria;
-        private Dificultad iDificultad;
-        private string iCorrecta;
-        private IList<string> iIncorrecta;
+    public class Pregunta
+    { 
+        public string Id { get; set; }
+        public string Nombre { get; set; }
+        public string Correcta { get; set; }
+        public IList<string> Incorrectas { get; set; }
+        public Categoria Categoria { get; set; }
+        public Dificultad Dificultad { get; set; }
+        public Origen Origen { get; set; }
 
-        //Propiedades
-        public string Nombre => iNombre;
-        public Categoria Categoria => iCategoria;
-        public Dificultad Dificultad => iDificultad;
-        public string Correcta => iCorrecta;
-        public IList<string> Incorrecta => iIncorrecta;
-
-        // Constructor
-        public Pregunta(string pNombre, Categoria pCategoria, Dificultad pDificultad, string pCorrecta, List<string> pIncorrecta)
-        {
-            iNombre = pNombre;
-            iCategoria = pCategoria;
-            iDificultad = pDificultad;
-            iCorrecta = pCorrecta;
-            iIncorrecta = pIncorrecta;
-        }
-
-        // Metodos
 
         public bool EsRespuestaCorrecta(string pRespuesta)
         {
-            return iCorrecta == pRespuesta;
+            return Correcta == pRespuesta;
         }
     }
 }

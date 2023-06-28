@@ -6,40 +6,15 @@ namespace Quizzify.Dominio
     /// <summary>
     /// Clase para persistir las sesiones de juego
     /// </summary>
-    internal class Sesion
+    public class Sesion
     {
-        // Atributos
-        private string? iId;
-        private DateTime iFecha;
-        private double iTiempo;
-        private double iPuntaje;
-        private Usuario iUsuario;
-        private List<PreguntaYRespuesta> iEleccionesUsuario;
+        public string Id { get; set; }
+        public DateTime Fecha { get; set; }
+        public double Tiempo { get; set; }
+        public double Puntaje { get; set; }
+        public Usuario Usuario { get; set; }    
 
-        private Stopwatch iStopwatch = new Stopwatch();
-
-        // Propiedades
-        public string? Id => iId;
-        public DateTime Fecha => iFecha;
-        public double Puntaje
-        {
-            get { return iPuntaje; }
-            set { iPuntaje = value; }
-
-        }
-        public double Tiempo => iTiempo;
-        public Usuario Usuario => iUsuario;
-        public List<PreguntaYRespuesta> EleccionesUsuario
-        {
-            get { return iEleccionesUsuario; }
-            set { iEleccionesUsuario = value; }
-
-        }
-
-        // Constructor
-        public Sesion() { }
-
-        // Metodos
+        private Stopwatch iStopwatch = new Stopwatch();    
 
         /// <summary>
         /// Inicia el contador de tiempo
@@ -52,10 +27,11 @@ namespace Quizzify.Dominio
         /// <summary>
         /// Finaliza el contador de tiempo
         /// </summary>
-        public void FinalizarContador()
+        public double FinalizarContador()
         {
             iStopwatch.Stop();
-            iTiempo = iStopwatch.Elapsed.TotalSeconds;
+            Tiempo = iStopwatch.Elapsed.TotalSeconds;
+            return Tiempo;
         }
 
        

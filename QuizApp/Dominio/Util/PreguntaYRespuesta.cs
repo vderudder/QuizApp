@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Quizzify.Dominio.Util
 {
     /// <summary>
     /// Clase para los pares pregunta y respuesta
     /// </summary>
-    internal class PreguntaYRespuesta
+    public class PreguntaYRespuesta
     {
-        public Pregunta iPregunta;
-        public string iRespuesta;
+        public Pregunta Pregunta { get; set; }
+        public string Respuesta { get; set; }
 
-        public PreguntaYRespuesta(Pregunta iPregunta, string iRespuesta)
-        {
-            this.iPregunta = iPregunta;
-            this.iRespuesta = iRespuesta;
-        }
     }
 }
