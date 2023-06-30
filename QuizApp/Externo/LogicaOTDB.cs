@@ -13,7 +13,7 @@ namespace Quizzify.Externo
     /// <summary>
     /// Logica que corresponde exclusivamente a OTDB
     /// </summary>
-    internal class LogicaOTDB : ILogicaExterna
+    public class LogicaOTDB : ILogicaExterna
     {
         /// <summary>
         /// Calcula el puntaje de una sesion

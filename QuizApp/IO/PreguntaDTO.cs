@@ -10,7 +10,7 @@ namespace Quizzify.IO
     /// <summary>
     /// Clase DTO de Pregunta
     /// </summary>
-    internal class PreguntaDTO : BaseDTO<PreguntaDTO, Pregunta>
+    public class PreguntaDTO : BaseDTO<PreguntaDTO, Pregunta>
     {
         // Atributos
         public string Id { get; set; }
