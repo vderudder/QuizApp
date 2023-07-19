@@ -17,28 +17,17 @@ namespace Quizzify.Facade
         {
             iSesion.IniciarContador();
         }
-        /// <summary>
-        /// Detiene el contador
-        /// </summary>
-        public double FinalizarTiempo()
-        {
-            return iSesion.FinalizarContador();
-        }
 
         /// <summary>
-        /// Calcula el puntaje
+        /// Detiene el tiempo, calcula el puntaje y guarda la sesion de juego
         /// </summary>
-        /// <param name="pPregResElegidas"> Elecciones de respuestas de usuario</param>
-        public void CalcularPuntaje(List<PreguntaYRespuestaDTO> pPregResElegidas, double pTiempo)
+        public SesionDTO FinalizarSesion(List<PreguntaYRespuestaDTO> pPregResElegidas, string pNombreUsuario)
         {
-            iSesion.Puntaje = Contexto.Instancia.LogicaExterna.CalcularPuntaje(pPregResElegidas, pTiempo);
-        }
-
-        /// <summary>
-        /// Guarda la sesion de juego
-        /// </summary>
-        public SesionDTO GuardarSesion(string pNombreUsuario)
-        {
+            // Detiene el contador de dominio
+            var tiempo = iSesion.FinalizarContador();
+            // Calcula el puntaje
+            iSesion.Puntaje = Contexto.Instancia.LogicaExterna.CalcularPuntaje(pPregResElegidas, tiempo);
+            // Obtiene usuario
             var usuario = Contexto.Instancia.UsuarioStorage.GetUsuarioByNombre(pNombreUsuario);
 
             // Si no existe, entonces crea el usuario
